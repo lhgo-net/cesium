@@ -15,7 +15,34 @@ onMounted(() => {
     fullscreenButton: false,   // 全屏
     vrButton: false,  // VR
   })
-  viewer._cesiumWidget._creditContainer.style.display = "none";
+  viewer._cesiumWidget._creditContainer.style.display = "none"
+
+  const subdomains = ['0', '1', '2', '3', '4', '5', '6', '7']
+  const key = '529511cd2893d40b0f9fdfdf6c8aa493'
+  const providerImage = new Cesium.WebMapTileServiceImageryProvider({
+    url: `http://t0.tianditu.gov.cn/img_c/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=img&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=${key}`,
+    layer: 'tdtImgLayer',
+    subdomains: subdomains,
+    style: 'default',
+    format: 'image/jpeg',
+    tileMatrixSetID: 'default028mm',
+    // tileMatrixLabels : ['default028mm:0', 'default028mm:1', 'default028mm:2' ...],
+    maximumLevel: 19,
+  })
+  const providerLabel = new Cesium.WebMapTileServiceImageryProvider({
+    url: `http://t0.tianditu.gov.cn/cia_c/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default.jpg?tk=${key}`,
+    layer: 'tdtImgLabel',
+    subdomains: subdomains,
+    style: 'default',
+    format: 'image/jpeg',
+    tileMatrixSetID: 'default028mm',
+    // tileMatrixLabels : ['default028mm:0', 'default028mm:1', 'default028mm:2' ...],
+    maximumLevel: 19,
+  })
+  const imageryLayer = new Cesium.ImageryLayer(providerImage)
+  const imageryLabel = new Cesium.ImageryLayer(providerLabel)
+  viewer.imageryLayers.addImageryProvider(imageryLayer)
+  viewer.imageryLayers.addImageryProvider(imageryLabel)
 })
 
 </script>
