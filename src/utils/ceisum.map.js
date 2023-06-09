@@ -42,4 +42,5 @@ export function provider(viewer, obj) {
     })
   )
   viewer.imageryLayers.add(providerImage)
+  return providerImage
 }
