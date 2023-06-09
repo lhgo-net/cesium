@@ -5,8 +5,8 @@ import { TDT_IMAGE } from './config/default'
 
 const store = reactive({})
 
-function onChangeImage(key) {
-  provider(store.viewer, key)
+function onChangeImage(obj) {
+  provider(store.viewer, obj)
   // viewer.imageryLayers.get(0).show = false
 }
 
@@ -21,7 +21,7 @@ onMounted(() => {
 <template>
   <div>
     <div class="tools">
-      <div v-for="item in TDT_IMAGE" :key="item.key" @click="onChangeImage(item.key)">{{ item.name }}</div>
+      <div v-for="item in TDT_IMAGE" :key="item.key" @click="onChangeImage(item)">{{ item.name }}</div>
     </div>
     <div id="cesiumContainer"></div>
 

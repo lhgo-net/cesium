@@ -20,12 +20,18 @@ export function map(id) {
   viewer._cesiumWidget._creditContainer.style.display = "none"
   return viewer
 }
+//矢量
+// "http://t0.tianditu.com/vec_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=vec&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk="
+// 影像
+// "http://t0.tianditu.com/img_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=img&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=",
+// 地形
+// "http://t0.tianditu.com/ter_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=ter&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk="
 
-export function provider(viewer, type) {
+export function provider(viewer, obj) {
   const providerImage = new Cesium.ImageryLayer(
     new Cesium.WebMapTileServiceImageryProvider({
-      url: `http://{s}.tianditu.com/${type}/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=img&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=${TDT_TOKEN}`,
-      layer: "img_w",	//WMTS请求的层名称
+      url: `http://{s}.tianditu.com/${obj.key}_${obj.type}/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=${obj.key}&tileMatrixSet=${obj.type}&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=${TDT_TOKEN}`,
+      layer: obj.key,	//WMTS请求的层名称
       style: "default",//WMTS请求的样式名称
       format: "tiles",//MIME类型，用于从服务器检索图像
       format: "image/jpeg",
