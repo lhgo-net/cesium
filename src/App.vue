@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height:100%">
     <div class="tools">
       <v-sheet :width="230" class="pa-4">
         <v-radio-group v-model="store.mode" @update:modelValue="onMode" inline>
@@ -87,9 +87,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.container {
-  height: 100vh;
-  width: 100vw;
+#container {
+  height: 100%;
+  width: 100%;
 }
 
 .tools {
