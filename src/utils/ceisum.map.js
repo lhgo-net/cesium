@@ -4,7 +4,8 @@ import { CESIUM_TOKEN, TDT_SUBBDOMAINS, TDT_TOKEN } from '../config/default'
 
 
 export function map(id) {
-  // Cesium.Ion.defaultAccessToken = CESIUM_TOKEN
+  Cesium.Ion.defaultAccessToken = CESIUM_TOKEN
+  Cesium.Camera.DEFAULT_VIEW_RECTANGLE = Cesium.Rectangle.fromDegrees(90, -20, 110, 90);
   const viewer = new Cesium.Viewer(id, {
     geocoder: false,   // 位置查找工具
     homeButton: false,  // 视角返回初始位置
@@ -17,7 +18,10 @@ export function map(id) {
     vrButton: false,  // VR
     terrainProvider: Cesium.createWorldTerrain()
   })
+  window.Cesium = Cesium
   viewer._cesiumWidget._creditContainer.style.display = "none"
+  // 修改homeButton的默认返回位置
+
   return viewer
 }
 //矢量
@@ -28,9 +32,10 @@ export function map(id) {
 // "http://t0.tianditu.com/ter_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=ter&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk="
 
 export function provider(viewer, obj) {
+  const arr = obj.key.split("_")
   const providerImage = new Cesium.ImageryLayer(
     new Cesium.WebMapTileServiceImageryProvider({
-      url: `http://{s}.tianditu.com/${obj.key}_${obj.type}/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=${obj.key}&tileMatrixSet=${obj.type}&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=${TDT_TOKEN}`,
+      url: `http://{s}.tianditu.com/${obj.key}/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=${arr[0]}&tileMatrixSet=${arr[1]}&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default.jpg&tk=${TDT_TOKEN}`,
       layer: obj.key,	//WMTS请求的层名称
       style: "default",//WMTS请求的样式名称
       format: "tiles",//MIME类型，用于从服务器检索图像
@@ -43,4 +48,13 @@ export function provider(viewer, obj) {
   )
   viewer.imageryLayers.add(providerImage)
   return providerImage
+}
+
+
+export function SceneMode(viewer, val) {
+  if (val == '2D') {
+    viewer.scene.mode = Cesium.SceneMode.SCENE2D
+  } else {
+    viewer.scene.mode = Cesium.SceneMode.SCENE3D
+  }
 }

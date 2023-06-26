@@ -9,7 +9,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      // 'cesium': path.resolve(__dirname, cesiumSource)
+      '@': path.resolve(__dirname, './src')
     }
   },
   optimizeDeps: {
