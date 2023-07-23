@@ -9,10 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mdi/font": "^7.2.96",
     "cesium": "^1.106.1",
     "copy-webpack-plugin": "^11.0.0",
     "kriging": "^0.1.12",
+    "moment": "^2.29.4",
     "vue": "^3.2.47",
+    "vue-router": "^4.2.4",
     "vuetify": "^3.3.3"
   },
   "devDependencies": {

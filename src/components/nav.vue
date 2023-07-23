@@ -1,0 +1,15 @@
+<template>
+    <div class="nav-container">
+        fdsaf
+    </div>
+</template>
+
+<style scoped>
+.nav-container{
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+    height: 64px;
+    background-image: linear-gradient(to top,  rgba(63, 111, 150, 0.8), rgba(255, 0, 0, 0)) !important;
+}
+</style>

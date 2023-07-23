@@ -16,9 +16,8 @@ export function map(id) {
     timeline: false,   // 底部时间线
     fullscreenButton: false,   // 全屏
     vrButton: false,  // VR
-    terrainProvider: Cesium.createWorldTerrain()
+    // terrainProvider: Cesium.createWorldTerrain()
   })
-  window.Cesium = Cesium
   viewer._cesiumWidget._creditContainer.style.display = "none"
   // 修改homeButton的默认返回位置
   window.viewer = viewer
