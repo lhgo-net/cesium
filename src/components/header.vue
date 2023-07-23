@@ -1,6 +1,6 @@
 <template>
     <div class="header-container">
-        <v-app-bar density absolute flat color="rgba(0,0,0,0)">
+        <v-app-bar density flat color="rgba(0,0,0,0)">
             <template #title>
                 <h4 class="text">
                     LH数据可视化智能系统
