@@ -28,11 +28,11 @@ defineProps({
 }
 .sider-right{
     right: 0px;
-    background-image: linear-gradient(to left,  rgba(63, 111, 150, 0.8), rgba(255, 0, 0, 0)) !important;
+    background-image: linear-gradient(to left,  rgba(41, 182, 246, 0.8), rgba(255, 0, 0, 0)) !important;
 }
 .sider-left{
     left: 0px;
-    background-image: linear-gradient(to right,  rgba(63, 111, 150, 0.8), rgba(255, 0, 0, 0)) !important;
+    background-image: linear-gradient(to right,  rgba(41, 182, 246, 0.8), rgba(255, 0, 0, 0)) !important;
 }
 </style>
 

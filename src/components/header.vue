@@ -3,7 +3,7 @@
         <v-app-bar density flat color="rgba(0,0,0,0)">
             <template #title>
                 <h4 class="text">
-                    LH数据可视化智能系统
+                    世界之眼
                 </h4>
             </template>
 
@@ -36,9 +36,10 @@ onMounted(() => {
 
 </script>
 
-<style scoped>
+<style scoped lang="less">
+@import "~/style/global.less";
 header{
-    background-image: linear-gradient(to bottom,  rgba(63, 111, 150, 1), rgba(255, 0, 0, 0)) !important;
+    background-image: linear-gradient(to bottom,  color, rgba(255, 0, 0, 0)) !important;
 }
 .text{
     color: white;
