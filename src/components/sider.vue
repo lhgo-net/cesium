@@ -1,7 +1,6 @@
 <template>
     <div class="sider-container" :class="[position == 'right' ? 'sider-right' : 'sider-left' ]">
         <slot></slot>
-        <slot name="a"></slot>
     </div>
 </template>
 

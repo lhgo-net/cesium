@@ -1,6 +1,6 @@
 <template>
     <div class="nav-container">
-        fdsaf
+        <slot></slot>
     </div>
 </template>
 

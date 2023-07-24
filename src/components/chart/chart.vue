@@ -25,7 +25,7 @@ function init() {
 
 <style scoped>
 .chart {
-    height: 300px;
+    height: 100%;
     width: 100%;
 }
 </style>
