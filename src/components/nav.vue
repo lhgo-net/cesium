@@ -4,12 +4,13 @@
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="less">
+@import "@/style/global.less";
 .nav-container{
     position: absolute;
     width: 100vw;
     bottom: 0;
     height: 64px;
-    background-image: linear-gradient(to top,  rgba(41, 182, 246, 0.8), rgba(255, 0, 0, 0)) !important;
+    background-image: linear-gradient(to top,  @color, rgba(255, 0, 0, 0)) !important;
 }
 </style>

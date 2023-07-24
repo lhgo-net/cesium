@@ -37,11 +37,12 @@ onMounted(() => {
 </script>
 
 <style scoped lang="less">
-@import "~/style/global.less";
+@import "@/style/global.less";
 header{
-    background-image: linear-gradient(to bottom,  color, rgba(255, 0, 0, 0)) !important;
+    background-image: linear-gradient(to bottom,  @color, rgba(255, 0, 0, 0)) !important;
 }
 .text{
     color: white;
+    text-align: center;
 }
 </style>
