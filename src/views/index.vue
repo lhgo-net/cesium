@@ -1,140 +1,218 @@
 <template>
-    <div class="app-container">
-        <l-header></l-header>
-        <l-sider position="left">
-            <!-- <v-sheet> -->
-            <!-- <div>fsdafsda</div> -->
-            <div class="chart-container">
-                <l-line :option="option" id="chart1"></l-line>
-            </div>
-            <div class="chart-container">
-                <l-line :option="option" id="chart2"></l-line>
-            </div>
-            <div class="chart-container">
-                <l-line :option="option" id="chart3"></l-line>
-            </div>
-            <!-- </v-sheet> -->
-        </l-sider>
-        <l-sider position="right">
-            <div class="chart-container">
-                <l-line :option="option" id="chart4"></l-line>
-            </div>
-            <div class="chart-container">
-                <l-line :option="option" id="chart5"></l-line>
-            </div>
-            <div class="chart-container">
-                <l-line :option="option" id="chart6"></l-line>
-            </div>
-        </l-sider>
-        <l-map></l-map>
-        <l-nav>
-            <div style="color:white;text-align: center;">
-                <ul>
-                    <li>地形观测</li>
-                    <li>建筑模型</li>
-                </ul>
-            </div>
-        </l-nav>
-    </div>
+  <div class="app-container">
+    <l-header></l-header>
+    <l-sider position="left">
+      <!-- <v-sheet> -->
+      <!-- <div>fsdafsda</div> -->
+      <div class="chart-container">
+        <l-line :option="option" id="chart1"></l-line>
+      </div>
+      <div class="chart-container">
+        <l-line :option="option" id="chart2"></l-line>
+      </div>
+      <div class="chart-container">
+        <l-line :option="option" id="chart3"></l-line>
+      </div>
+      <!-- </v-sheet> -->
+    </l-sider>
+    <l-sider position="right">
+      <div class="chart-container">
+        <l-line :option="option" id="chart4"></l-line>
+      </div>
+      <div class="chart-container">
+        <l-line :option="option" id="chart5"></l-line>
+      </div>
+      <div class="chart-container">
+        <l-line :option="option" id="chart6"></l-line>
+      </div>
+    </l-sider>
+    <l-map></l-map>
+    <l-nav>
+      <div style="color:white;text-align: center;">
+        <ul>
+          <li>地形观测</li>
+          <li>建筑模型</li>
+          <li>模拟走行</li>
+        </ul>
+      </div>
+    </l-nav>
+  </div>
 </template>
 
 <script setup>
+import { onMounted, warn } from 'vue'
 import lMap from '@/components/map.vue'
 import lHeader from '@/components/header.vue'
 import lSider from '@/components/sider.vue'
 import lNav from '@/components/nav.vue'
 import lLine from '@/components/chart/chart.vue'
 
-import * as echarts from "echarts"
+import * as echarts from 'echarts'
+
+import gz from '@/assets/json/广州市.json'
+import { provider } from '@/utils/ceisum.map'
+
+onMounted(() => {
+  // provider(viewer, {
+  //   name: '影像底图',
+  //   key: 'img_w',
+  // })
+  createOsmBuildings()
+  start()
+})
 
 const option = {
-    title: {
-        text: '未定义的数据',
-        textStyle: {
-            color: 'white'
-        }
+  title: {
+    text: '未定义的数据',
+    textStyle: {
+      color: 'white',
     },
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'cross',
-            label: {
-                backgroundColor: '#6a7985',
-            },
-        },
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross',
+      label: {
+        backgroundColor: '#6a7985',
+      },
     },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true,
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true,
+  },
+  xAxis: [
+    {
+      type: 'category',
+      boundaryGap: false,
+      axisLabel: {
+        color: 'white',
+      },
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     },
-    xAxis: [
-        {
-            type: 'category',
-            boundaryGap: false,
-            axisLabel: {
-                color: 'white'
-            },
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        },
-    ],
-    yAxis: [
-        {
-            type: 'value',
-            axisLabel: {
-                color: 'white'
-            }
-        },
-    ],
-    series: [
-        {
-            name: 'Email',
-            type: 'line',
-            stack: 'Total',
-            smooth: true,
-            areaStyle: {
-                opacity: 0.8,
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                    {
-                        offset: 0,
-                        color: 'rgb(128, 255, 165)'
-                    },
-                    {
-                        offset: 1,
-                        color: 'rgb(1, 191, 236)'
-                    }
-                ])
-            },
-            emphasis: {
-                focus: 'series',
-            },
-            data: [120, 132, 101, 134, 90, 230, 210],
-        },
-    ],
+  ],
+  yAxis: [
+    {
+      type: 'value',
+      axisLabel: {
+        color: 'white',
+      },
+    },
+  ],
+  series: [
+    {
+      name: 'Email',
+      type: 'line',
+      stack: 'Total',
+      smooth: true,
+      areaStyle: {
+        opacity: 0.8,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgb(128, 255, 165)',
+          },
+          {
+            offset: 1,
+            color: 'rgb(1, 191, 236)',
+          },
+        ]),
+      },
+      emphasis: {
+        focus: 'series',
+      },
+      data: [120, 132, 101, 134, 90, 230, 210],
+    },
+  ],
+}
+
+function flat(arr) {
+  if (Object.prototype.toString.call(arr) != '[object Array]') {
+    return false
+  }
+  let res = []
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] instanceof Array) {
+      res = res.concat(flat(arr[i]))
+    } else {
+      res.push(arr[i])
+    }
+  }
+  return res
+}
+
+async function createOsmBuildings() {
+  const osmBuildingsTileset = await Cesium.createOsmBuildingsAsync()
+  viewer.scene.primitives.add(osmBuildingsTileset)
+}
+
+function start() {
+  console.log(gz)
+  // const promise = Cesium.GeoJsonDataSource.load(gz)
+  // promise.then((dataSources) => {
+  //   viewer.dataSources.add(dataSources)
+  //   viewer.zoomTo(dataSources.entities)
+  // })
+
+  const positionLines = flat(gz.features[0].geometry.coordinates[0])
+  const line = gz.features[0].geometry.coordinates[0]
+  const maximumHeights = []
+  const minimumHeights = []
+  for (let i = 0; i < positionLines.length / 2; i++) {
+    // const item = positionLines.length / 2[i]
+    maximumHeights.push(100000)
+    minimumHeights.push(10000)
+  }
+  console.log(positionLines)
+  viewer.entities.add({
+    name: 'wall',
+    wall: {
+      positions: Cesium.Cartesian3.fromDegreesArray(positionLines),
+      // maximumHeights: maximumHeights,
+      minimumHeights: minimumHeights,
+      material: Cesium.Color.BLUE.withAlpha(0.5),
+      outline: true,
+      outlineColor: Cesium.Color.BLACK,
+    },
+  })
+  // viewer.entities.add({
+  //   name: 'polyline',
+  //   polyline: {
+  //     positions: Cesium.Cartesian3.fromDegreesArray(positionLines),
+  //     width: 10,
+  //     material: new Cesium.PolylineGlowMaterialProperty({
+  //       glowPower: 0.2,
+  //       taperPower: 0.5,
+  //       color: Cesium.Color.CORNFLOWERBLUE,
+  //     }),
+  //   },
+  // })
+  viewer.zoomTo(viewer.entities)
 }
 </script>
 
 <style scoped lang="less">
 .app-container {
-    position: relative;
+  position: relative;
 }
 
 .chart-container {
-    height: 30vh;
+  height: 30vh;
 }
-ul{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    li{
-        list-style: none;
-        padding: 5px;
-    }
+ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  li {
+    list-style: none;
+    padding: 5px;
+  }
 }
 /* .right-container,.left-container{
     position: absolute;

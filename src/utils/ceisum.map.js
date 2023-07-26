@@ -6,6 +6,7 @@ import { CESIUM_TOKEN, TDT_SUBBDOMAINS, TDT_TOKEN } from '../config/default'
 export function map(id) {
   Cesium.Ion.defaultAccessToken = CESIUM_TOKEN
   Cesium.Camera.DEFAULT_VIEW_RECTANGLE = Cesium.Rectangle.fromDegrees(90, -20, 110, 90);
+  window.Cesium = Cesium
   const viewer = new Cesium.Viewer(id, {
     geocoder: false,   // 位置查找工具
     homeButton: false,  // 视角返回初始位置
@@ -16,12 +17,14 @@ export function map(id) {
     timeline: false,   // 底部时间线
     fullscreenButton: false,   // 全屏
     vrButton: false,  // VR
-    // terrainProvider: Cesium.createWorldTerrain()
+    terrainProvider: Cesium.Terrain.fromWorldTerrain()
   })
+
+
   viewer._cesiumWidget._creditContainer.style.display = "none"
   // 修改homeButton的默认返回位置
   window.viewer = viewer
-  window.Cesium = Cesium
+
   return viewer
 }
 //矢量
