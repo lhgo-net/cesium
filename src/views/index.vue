@@ -2,18 +2,20 @@
   <div class="app-container">
     <l-header></l-header>
     <l-sider position="left">
-      <!-- <v-sheet> -->
-      <!-- <div>fsdafsda</div> -->
-      <div class="chart-container">
-        <l-line :option="option" id="chart1"></l-line>
+      <div class="chart-container" v-for="item in list.data" :key="item.name">
+        <v-card color="rgba(0,0,0,0)" border flat>
+          <v-card-title class="text-white text-h6">{{item.name}}</v-card-title>
+          <v-card-text>
+            <v-img aspect-ratio="16/9" cover src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-img>
+          </v-card-text>
+        </v-card>
       </div>
-      <div class="chart-container">
+      <!-- <div class="chart-container">
         <l-line :option="option" id="chart2"></l-line>
       </div>
       <div class="chart-container">
         <l-line :option="option" id="chart3"></l-line>
-      </div>
-      <!-- </v-sheet> -->
+      </div> -->
     </l-sider>
     <l-sider position="right">
       <div class="chart-container">
@@ -28,19 +30,19 @@
     </l-sider>
     <l-map></l-map>
     <l-nav>
-      <div style="color:white;text-align: center;">
+      <!-- <div style="color:white;text-align: center;">
         <ul>
           <li>地形观测</li>
           <li>建筑模型</li>
           <li>模拟走行</li>
         </ul>
-      </div>
+      </div> -->
     </l-nav>
   </div>
 </template>
 
 <script setup>
-import { onMounted, warn } from 'vue'
+import { onMounted, reactive, warn } from 'vue'
 import lMap from '@/components/map.vue'
 import lHeader from '@/components/header.vue'
 import lSider from '@/components/sider.vue'
@@ -52,13 +54,42 @@ import * as echarts from 'echarts'
 import gz from '@/assets/json/广州市.json'
 import { provider } from '@/utils/ceisum.map'
 
-onMounted(() => {
-  // provider(viewer, {
-  //   name: '影像底图',
-  //   key: 'img_w',
-  // })
-  createOsmBuildings()
+const list = reactive({
+  data: [
+    {
+      name: '矢量建筑模型',
+      fun: createOsmBuildings,
+      img: '',
+    },
+    {
+      name: '3D突出城市',
+      fun: '',
+      img: '',
+    },
+    {
+      name: '加载天地图',
+      fun: '',
+      img: '',
+    },
+  ],
+})
+
+onMounted(async () => {
+  provider(viewer, {
+    name: '影像底图',
+    key: 'img_w',
+  })
+  try {
+    const imageryLayer = viewer.imageryLayers.addImageryProvider(await Cesium.IonImageryProvider.fromAssetId(2))
+    await viewer.zoomTo(imageryLayer)
+  } catch (error) {}
+  console.log(viewer)
+  // createOsmBuildings()
   start()
+  // for (let i = 0; i < list.data.length; i++) {
+  //   const item = list.data[i];
+  //   item.fun()
+  // }
 })
 
 const option = {
@@ -165,7 +196,7 @@ function start() {
     maximumHeights.push(100000)
     minimumHeights.push(10000)
   }
-  console.log(positionLines)
+  // console.log(positionLines)
   viewer.entities.add({
     name: 'wall',
     wall: {
