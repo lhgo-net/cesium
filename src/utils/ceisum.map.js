@@ -17,7 +17,7 @@ export function map(id) {
     timeline: false,   // 底部时间线
     fullscreenButton: false,   // 全屏
     vrButton: false,  // VR
-    terrainProvider: Cesium.Terrain.fromWorldTerrain()
+    terrain: Cesium.Terrain.fromWorldTerrain()
   })
 
 

@@ -2,20 +2,18 @@
   <div class="app-container">
     <l-header></l-header>
     <l-sider position="left">
-      <div class="chart-container" v-for="item in list.data" :key="item.name">
+      <div class="chart-container" v-for="item in list.data" :key="item.name" @click="click(item)">
         <v-card color="rgba(0,0,0,0)" border flat>
-          <v-card-title class="text-white text-h6">{{item.name}}</v-card-title>
-          <v-card-text>
-            <v-img aspect-ratio="16/9" cover src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-img>
-          </v-card-text>
+          <v-card-title class="text-white">{{item.name}}</v-card-title>
+          <v-img src="https://cdn.vuetifyjs.com/images/cards/house.jpg"  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="100px" width="300px" cover>
+
+          <v-card-text>{{item.text}}</v-card-text>
+            <!-- <v-card-subtitle class="text-white">{{item.text}}</v-card-subtitle> -->
+          </v-img>
+          <!-- <v-card-title class="text-white text-h6">{{item.name}}</v-card-title> -->
+
         </v-card>
       </div>
-      <!-- <div class="chart-container">
-        <l-line :option="option" id="chart2"></l-line>
-      </div>
-      <div class="chart-container">
-        <l-line :option="option" id="chart3"></l-line>
-      </div> -->
     </l-sider>
     <l-sider position="right">
       <div class="chart-container">
@@ -59,7 +57,7 @@ const list = reactive({
     {
       name: '矢量建筑模型',
       fun: createOsmBuildings,
-      img: '',
+      text: '全球城市矢量建筑模型',
     },
     {
       name: '3D突出城市',
@@ -75,17 +73,17 @@ const list = reactive({
 })
 
 onMounted(async () => {
-  provider(viewer, {
-    name: '影像底图',
-    key: 'img_w',
-  })
+  // provider(viewer, {
+  //   name: '影像底图',
+  //   key: 'img_w',
+  // })
   try {
     const imageryLayer = viewer.imageryLayers.addImageryProvider(await Cesium.IonImageryProvider.fromAssetId(2))
     await viewer.zoomTo(imageryLayer)
   } catch (error) {}
   console.log(viewer)
   // createOsmBuildings()
-  start()
+  // start()
   // for (let i = 0; i < list.data.length; i++) {
   //   const item = list.data[i];
   //   item.fun()
@@ -157,6 +155,11 @@ const option = {
       data: [120, 132, 101, 134, 90, 230, 210],
     },
   ],
+}
+
+function click(item) {
+  console.log(item)
+  item.fun()
 }
 
 function flat(arr) {
