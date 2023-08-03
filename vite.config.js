@@ -27,6 +27,9 @@ export default defineConfig({
     CESIUM_BASE_URL: JSON.stringify('/cesium'),
   },
   server: {
-    host:'0.0.0.0'
+    host: '0.0.0.0',
+    proxy: {
+      '/GISFile': 'http://150.158.144.23',
+    }
   }
 })

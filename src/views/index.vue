@@ -5,9 +5,9 @@
       <div class="chart-container" v-for="item in list.data" :key="item.name" @click="click(item)">
         <v-card color="rgba(0,0,0,0)" border flat>
           <v-card-title class="text-white">{{item.name}}</v-card-title>
-          <v-img src="https://cdn.vuetifyjs.com/images/cards/house.jpg"  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="100px" width="300px" cover>
+          <v-img src="https://cdn.vuetifyjs.com/images/cards/house.jpg" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="220px" cover>
 
-          <v-card-text>{{item.text}}</v-card-text>
+            <v-card-text class="text-white">{{item.text}}</v-card-text>
             <!-- <v-card-subtitle class="text-white">{{item.text}}</v-card-subtitle> -->
           </v-img>
           <!-- <v-card-title class="text-white text-h6">{{item.name}}</v-card-title> -->
@@ -50,7 +50,8 @@ import lLine from '@/components/chart/chart.vue'
 import * as echarts from 'echarts'
 
 import gz from '@/assets/json/广州市.json'
-import { provider } from '@/utils/ceisum.map'
+import { provider,highlighCity } from '@/utils/ceisum.map'
+// import { highlighCity } from '@/utils/event'
 
 const list = reactive({
   data: [
@@ -61,7 +62,7 @@ const list = reactive({
     },
     {
       name: '3D突出城市',
-      fun: '',
+      fun: highlighCity,
       img: '',
     },
     {
@@ -77,10 +78,10 @@ onMounted(async () => {
   //   name: '影像底图',
   //   key: 'img_w',
   // })
-  try {
-    const imageryLayer = viewer.imageryLayers.addImageryProvider(await Cesium.IonImageryProvider.fromAssetId(2))
-    await viewer.zoomTo(imageryLayer)
-  } catch (error) {}
+  // try {
+  //   const imageryLayer = viewer.imageryLayers.addImageryProvider(await Cesium.IonImageryProvider.fromAssetId(2))
+  //   await viewer.zoomTo(imageryLayer)
+  // } catch (error) {}
   console.log(viewer)
   // createOsmBuildings()
   // start()

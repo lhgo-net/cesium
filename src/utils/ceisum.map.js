@@ -1,7 +1,8 @@
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 import * as Cesium from 'cesium'
+import { flat, getColorRamp } from './utils'
 import { CESIUM_TOKEN, TDT_SUBBDOMAINS, TDT_TOKEN } from '../config/default'
-
+import defaultBJ from '../assets/json/xnBJ.json'
 
 export function map(id) {
   Cesium.Ion.defaultAccessToken = CESIUM_TOKEN
@@ -17,7 +18,7 @@ export function map(id) {
     timeline: false,   // 底部时间线
     fullscreenButton: false,   // 全屏
     vrButton: false,  // VR
-    terrain: Cesium.Terrain.fromWorldTerrain()
+    // terrain: Cesium.Terrain.fromWorldTerrain()
   })
 
 
@@ -27,12 +28,6 @@ export function map(id) {
 
   return viewer
 }
-//矢量
-// "http://t0.tianditu.com/vec_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=vec&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk="
-// 影像
-// "http://t0.tianditu.com/img_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=img&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=",
-// 地形
-// "http://t0.tianditu.com/ter_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=ter&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk="
 
 export function provider(viewer, obj) {
   const arr = obj.key.split("_")
@@ -53,11 +48,56 @@ export function provider(viewer, obj) {
   return providerImage
 }
 
-
 export function SceneMode(viewer, val) {
   if (val == '2D') {
     viewer.scene.mode = Cesium.SceneMode.SCENE2D
   } else {
     viewer.scene.mode = Cesium.SceneMode.SCENE3D
   }
+}
+
+
+export function highlighCity(geo) {
+  const globe = viewer.scene.globe
+  globe.translucency.enabled = true
+  globe.globeAloha = 0
+  globe.undergroundColor = undefined
+  globe.translucency.backFaceAlpha = 0
+  globe.baseColor = new Cesium.Color(0, 0, 0, 0)
+  const BJ = geo || defaultBJ
+  const geoJSON = BJ.geometries[0].coordinates[0]
+  const coordinates = flat(geoJSON)
+  const pointList = []
+  const maxHeight = []
+  const minHeight = new Array(coordinates.length / 2).fill(-1000)
+  viewer.imageryLayers.removeAll()
+  viewer.terrainProvider = new Cesium.CesiumTerrainProvider({
+    url: '/GISFile/terrain/xn'
+  })
+  for (let i = 0;i < geoJSON.length;i++) {
+    pointList.push(Cesium.Cartographic.fromDegrees(geoJSON[i][0], geoJSON[i][1]))
+  }
+  const promise = Cesium.sampleTerrainMostDetailed(viewer.terrainProvider, pointList)
+  promise.then(updatedPositions => {
+    console.log(viewer)
+
+    for (let i = 0;i < updatedPositions.length;i++) {
+      maxHeight.push(updatedPositions[i].height)
+    }
+    viewer.imageryLayers.addImageryProvider(new Cesium.UrlTemplateImageryProvider({
+      url: '/GISFile/imageLayer/xn/{z}/{x}/{y}.png'
+    }))
+
+    viewer.entities.add({
+      id: 'wall',
+      wall: {
+        positions: Cesium.Cartesian3.fromDegreesArray(coordinates),
+        maximumHeights: maxHeight,
+        minimumHeights: minHeight,
+        material: getColorRamp('rgb(52,192,214)', 'rgb(15,93,180)')
+      }
+    })
+    viewer.zoomTo(viewer.entities)
+
+  })
 }
