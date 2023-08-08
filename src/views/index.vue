@@ -51,7 +51,7 @@ import * as echarts from 'echarts'
 
 import gz from '@/assets/json/广州市.json'
 import { provider,highlighCity } from '@/utils/ceisum.map'
-// import { highlighCity } from '@/utils/event'
+import { flyLine } from '@/utils/event'
 
 const list = reactive({
   data: [
@@ -74,6 +74,7 @@ const list = reactive({
 })
 
 onMounted(async () => {
+  flyLine() //飞线
   // provider(viewer, {
   //   name: '影像底图',
   //   key: 'img_w',
@@ -197,15 +198,15 @@ function start() {
   const minimumHeights = []
   for (let i = 0; i < positionLines.length / 2; i++) {
     // const item = positionLines.length / 2[i]
-    maximumHeights.push(100000)
-    minimumHeights.push(10000)
+    maximumHeights.push(10000)
+    minimumHeights.push(1000)
   }
   // console.log(positionLines)
   viewer.entities.add({
     name: 'wall',
     wall: {
       positions: Cesium.Cartesian3.fromDegreesArray(positionLines),
-      // maximumHeights: maximumHeights,
+      maximumHeights: maximumHeights,
       minimumHeights: minimumHeights,
       material: Cesium.Color.BLUE.withAlpha(0.5),
       outline: true,
