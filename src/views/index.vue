@@ -75,10 +75,13 @@ const list = reactive({
 
 onMounted(async () => {
   flyLine() //飞线
-  // provider(viewer, {
-  //   name: '影像底图',
-  //   key: 'img_w',
-  // })
+  const imageLayer = provider(viewer, {
+    name: '矢量底图',
+    key: 'vec_w',
+  })
+  imageLayer.hue = 3
+  imageLayer.contrast = -1.2
+  console.log(imageLayer)
   // try {
   //   const imageryLayer = viewer.imageryLayers.addImageryProvider(await Cesium.IonImageryProvider.fromAssetId(2))
   //   await viewer.zoomTo(imageryLayer)
