@@ -51,7 +51,7 @@ import * as echarts from 'echarts'
 
 import gz from '@/assets/json/广州市.json'
 import { provider,highlighCity } from '@/utils/ceisum.map'
-import { flyLine } from '@/utils/event'
+import { flyLine,mockGuizhouPoint,dataSource } from '@/utils/event'
 
 const list = reactive({
   data: [
@@ -74,25 +74,17 @@ const list = reactive({
 })
 
 onMounted(async () => {
-  flyLine() //飞线
+  // flyLine() //飞线
+
   const imageLayer = provider(viewer, {
     name: '矢量底图',
     key: 'vec_w',
   })
   imageLayer.hue = 3
   imageLayer.contrast = -1.2
+  dataSource()
   console.log(imageLayer)
-  // try {
-  //   const imageryLayer = viewer.imageryLayers.addImageryProvider(await Cesium.IonImageryProvider.fromAssetId(2))
-  //   await viewer.zoomTo(imageryLayer)
-  // } catch (error) {}
   console.log(viewer)
-  // createOsmBuildings()
-  // start()
-  // for (let i = 0; i < list.data.length; i++) {
-  //   const item = list.data[i];
-  //   item.fun()
-  // }
 })
 
 const option = {
@@ -163,23 +155,7 @@ const option = {
 }
 
 function click(item) {
-  console.log(item)
   item.fun()
-}
-
-function flat(arr) {
-  if (Object.prototype.toString.call(arr) != '[object Array]') {
-    return false
-  }
-  let res = []
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i] instanceof Array) {
-      res = res.concat(flat(arr[i]))
-    } else {
-      res.push(arr[i])
-    }
-  }
-  return res
 }
 
 async function createOsmBuildings() {
@@ -187,49 +163,6 @@ async function createOsmBuildings() {
   viewer.scene.primitives.add(osmBuildingsTileset)
 }
 
-function start() {
-  console.log(gz)
-  // const promise = Cesium.GeoJsonDataSource.load(gz)
-  // promise.then((dataSources) => {
-  //   viewer.dataSources.add(dataSources)
-  //   viewer.zoomTo(dataSources.entities)
-  // })
-
-  const positionLines = flat(gz.features[0].geometry.coordinates[0])
-  const line = gz.features[0].geometry.coordinates[0]
-  const maximumHeights = []
-  const minimumHeights = []
-  for (let i = 0; i < positionLines.length / 2; i++) {
-    // const item = positionLines.length / 2[i]
-    maximumHeights.push(10000)
-    minimumHeights.push(1000)
-  }
-  // console.log(positionLines)
-  viewer.entities.add({
-    name: 'wall',
-    wall: {
-      positions: Cesium.Cartesian3.fromDegreesArray(positionLines),
-      maximumHeights: maximumHeights,
-      minimumHeights: minimumHeights,
-      material: Cesium.Color.BLUE.withAlpha(0.5),
-      outline: true,
-      outlineColor: Cesium.Color.BLACK,
-    },
-  })
-  // viewer.entities.add({
-  //   name: 'polyline',
-  //   polyline: {
-  //     positions: Cesium.Cartesian3.fromDegreesArray(positionLines),
-  //     width: 10,
-  //     material: new Cesium.PolylineGlowMaterialProperty({
-  //       glowPower: 0.2,
-  //       taperPower: 0.5,
-  //       color: Cesium.Color.CORNFLOWERBLUE,
-  //     }),
-  //   },
-  // })
-  viewer.zoomTo(viewer.entities)
-}
 </script>
 
 <style scoped lang="less">
