@@ -50,7 +50,7 @@ export function mockGuizhouPoint() {
   })
 }
 
-export async function dataSource() {
+export async function clustering() {
   const dataSource = new Cesium.CustomDataSource('myData');
   mockGuizhouPoint().then(res => {
     console.log(res)

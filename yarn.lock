@@ -12,6 +12,25 @@
   resolved "https://registry.npmmirror.com/@babel/parser/-/parser-7.22.10.tgz#e37634f9a12a1716136c44624ef54283cabd3f55"
   integrity sha512-lNbdGsQb9ekfsnjFGhEiF4hfFqGgfOP3H3d27re3n+CGhNuTSUEQdfWk556sTLNTloczcdM5TYF2LhzmDQKyvQ==
 
+"@better-scroll/core@^2.5.1":
+  version "2.5.1"
+  resolved "http://10.10.10.163:8081/repository/npm-group/@better-scroll/core/-/core-2.5.1.tgz#de53f089a2f53f51e58e5042556fe0d3e1655aa9"
+  integrity sha512-koKOuYA55dQ04FJRIVUpMGDr1hbCfWmfX0MGp1hKagkQSWSRpwblqACiwtggVauoj9aaJRJZ9hDsTM4weaavlg==
+  dependencies:
+    "@better-scroll/shared-utils" "^2.5.1"
+
+"@better-scroll/scroll-bar@^2.5.1":
+  version "2.5.1"
+  resolved "http://10.10.10.163:8081/repository/npm-group/@better-scroll/scroll-bar/-/scroll-bar-2.5.1.tgz#89f8aea8f6beec93ecefbf98e0cb9aa51322e62b"
+  integrity sha512-i6r60pWG/ztkFK2j5Gj54I0LJb2jGh5TWJNQBoW0gUkp28B+0JvBFTwZn9tF7beZCBorKR7Hvvu4O9A1TJy94Q==
+  dependencies:
+    "@better-scroll/core" "^2.5.1"
+
+"@better-scroll/shared-utils@^2.5.1":
+  version "2.5.1"
+  resolved "http://10.10.10.163:8081/repository/npm-group/@better-scroll/shared-utils/-/shared-utils-2.5.1.tgz#ed6a1b5713462fa50afd8bb7d172ca218a0b7f2e"
+  integrity sha512-AplkfSjXVYP9LZiD6JsKgmgQJ/mG4uuLmBuwLz8W5OsYc7AYTfN8kw6GqZ5OwCGoXkVhBGyd8NeC4xwYItp0aw==
+
 "@cesium/engine@2.4.1":
   version "2.4.1"
   resolved "http://10.10.10.163:8081/repository/npm-group/@cesium/engine/-/engine-2.4.1.tgz#b9b0395edebff581dbc55b7b9e1929f673dee058"

@@ -24,13 +24,13 @@
     </l-sider> -->
     <l-map></l-map>
     <l-nav>
-      <!-- <div style="color:white;text-align: center;">
+      <div style="color:white;text-align: center;">
         <ul>
           <li>地形观测</li>
           <li>建筑模型</li>
           <li>模拟走行</li>
         </ul>
-      </div> -->
+      </div>
     </l-nav>
   </div>
 </template>
@@ -47,7 +47,7 @@ import * as echarts from 'echarts'
 
 import gz from '@/assets/json/广州市.json'
 import { provider,highlighCity } from '@/utils/ceisum.map'
-import { flyLine,mockGuizhouPoint,dataSource,anlie1 } from '@/utils/event'
+import { flyLine,mockGuizhouPoint,clustering,anlie1 } from '@/utils/event'
 
 const list = reactive({
   data: [
@@ -80,13 +80,14 @@ onMounted(async () => {
     name: '矢量标记',
     key: 'cva_w',
   })
+  createOsmBuildings()
   imageLayer.hue = 3
   imageLayer.contrast = -1.2
   imageLayer1.hue = 3
   imageLayer1.contrast = -1.2
 
-  dataSource()
-  anlie1()
+  // clustering()
+  // anlie1()
   console.log(imageLayer)
   console.log(viewer)
 })

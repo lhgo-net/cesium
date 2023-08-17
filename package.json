@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@better-scroll/scroll-bar": "^2.5.1",
     "@mdi/font": "^7.2.96",
     "@turf/turf": "^6.5.0",
     "cesium": "1.106",
