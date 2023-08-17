@@ -1,6 +1,8 @@
 import gz from '@/assets/json/广州市.json'
-import { flat } from './utils'
+import guizhou from '@/assets/json/贵阳市.json'
+import { flat, getColorRamp } from './utils'
 import Mock from 'mockjs'
+import * as turf from '@turf/turf'
 
 export function flyLine() {
   const lineArr = flat(gz.features[0].geometry.coordinates[0]) //所有点位
@@ -12,7 +14,7 @@ export function flyLine() {
   viewer.entities.add({
     polyline: {
       positions: new Cesium.CallbackProperty(function (time, result) {
-        // if (lineArr.length == 0) {
+        // if (length == 0) {
         //   lineArr = [...arr]
         //   console.log('over')
         // }
@@ -34,11 +36,12 @@ export function flyLine() {
 export function mockGuizhouPoint() {
 
   return new Promise((resolve, reject) => {
+    //  [106.125092, 26.183396, 107.279166, 27.357802]
     const data = Mock.mock({
-      'data|5000-10000': [
+      'data|100-500': [
         {
-          'lat|103.36-109.35': 0,
-          'lon|24.37-29.13': 0,
+          'lat|106.125092-107.279166': 0,
+          'lon|26.183396-27.357802': 0,
           'value|0-300': 0,
         }
       ]
@@ -54,21 +57,23 @@ export async function dataSource() {
     for (let i = 0;i < res.data.length;i++) {
       const item = res.data[i]
       dataSource.entities.add({
-        position: Cesium.Cartesian3.fromDegrees(item['lat.35'], item['lon.13']),
+        position: Cesium.Cartesian3.fromDegrees(item['lat.279166'], item['lon.357802']),
         point: {
           show: true,
-          pixelSize: 2,
+          pixelSize: 10,
+          depthTestAgainstTerrain: true,
+          heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
           color: Cesium.Color.RED
         },
         label: {
-          text: item.value,
+          text: item.value.toString(),
           font: 'bold 15px Microsoft YaHei',
           // 竖直对齐方式
           verticalOrigin: Cesium.VerticalOrigin.CENTER,
           // 水平对齐方式
           horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
           // 偏移量
-          pixelOffset: new Cesium.Cartesian2(15, 0),
+          // pixelOffset: new Cesium.Cartesian2(15, 0),
         }
       })
     }
@@ -78,21 +83,22 @@ export async function dataSource() {
     dataSource.entities.values.forEach(entity => {
       // entity.position._value.z += 50.0;
       // 使用大小为64*64的icon，缩小展示poi
-      entity.billboard = {
-        image: '/img/icon-favo.png',
-        width: 32,
-        height: 32,
-      };
-      entity.label = {
-        text: 'POI',
-        font: 'bold 15px Microsoft YaHei',
-        // 竖直对齐方式
-        verticalOrigin: Cesium.VerticalOrigin.CENTER,
-        // 水平对齐方式
-        horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
-        // 偏移量
-        pixelOffset: new Cesium.Cartesian2(15, 0),
-      }
+      // entity.billboard = {
+      //   image: '/img/icon-favo.png',
+      //   width: 32,
+      //   height: 32,
+      // };
+      // console.log(entity)
+      // entity.label = {
+      //   text: 'POI',
+      //   font: 'bold 15px Microsoft YaHei',
+      //   // 竖直对齐方式
+      //   verticalOrigin: Cesium.VerticalOrigin.CENTER,
+      //   // 水平对齐方式
+      //   horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+      //   // 偏移量
+      //   pixelOffset: new Cesium.Cartesian2(15, 0),
+      // }
     })
     dataSource.clustering.clusterEvent.addEventListener(function (clusteredEntities, cluster) {
       // 关闭自带的显示聚合数量的标签
@@ -122,13 +128,14 @@ export async function dataSource() {
     })
     viewer && viewer.dataSources.add(dataSource);
   })
+  viewer.zoomTo(viewer.entities)
 }
 
 export function combineIconAndLabel(url, label, size) {
   // 创建画布对象
   let canvas = document.createElement('canvas');
-  canvas.width = size;
-  canvas.height = size;
+  canvas.width = size * 4;
+  canvas.height = size * 4;
   let ctx = canvas.getContext("2d");
 
   let promise = new Cesium.Resource.fetchImage(url).then(image => {
@@ -150,4 +157,26 @@ export function combineIconAndLabel(url, label, size) {
     return canvas;
   });
   return promise
+}
+
+export function anlie1() {
+  const lineArr = flat(guizhou.features[0].geometry.coordinates[0])
+  // const box = turf.bbox(guizhou.features[0])
+  // console.log(box)
+  // mockGuizhouPoint().then(res => {
+  //   console.log(res)
+  // })
+  const minimumHeights = []
+  const length = lineArr.length / 2
+  for (let index = 0; index < length; index++) {
+    minimumHeights.push(10000)
+  }
+  const wall = viewer.entities.add({
+    name: 'wall',
+    wall: {
+      positions: Cesium.Cartesian3.fromDegreesArray(lineArr),
+      minimumHeights: minimumHeights,
+      material: getColorRamp('rgb(15,93,180)', 'rgba(52,192,214,0.5)')
+    }
+  })
 }

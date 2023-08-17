@@ -1,7 +1,8 @@
-export const TDT_TOKEN = '7a47a0fc5008f167eed134ef12125221'
+export const TDT_TOKEN = 'c2699ec577d969ef423f4c620e43c8ff' //c2699ec577d969ef423f4c620e43c8ff 7a47a0fc5008f167eed134ef12125221
 export const TDT_SUBBDOMAINS = ['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7']
 export const CESIUM_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhYWM4MzJjMS1kZGNkLTRjOTItYTY0Yy0yOTc0MmU1NWNjMGYiLCJpZCI6Njc4NTksImlhdCI6MTY5MDc3MTY0MH0.JfeaZ0xaAz-2qBIdRp6G6ogqCfl4q-cAVu_cvxEEdsU'
-export const TDT_IMAGE = [
+// 墨卡托投影
+export const TDT_IMAGE_W = [
   {
     name: '矢量底图',
     key: 'vec_w',
@@ -15,7 +16,8 @@ export const TDT_IMAGE = [
     key: 'ter_w',
   },
 ]
-export const TDT_Annotation = [
+// 墨卡托投影
+export const TDT_Annotation_W = [
   {
     name: '矢量注记',
     key: 'cva_w'
@@ -27,6 +29,36 @@ export const TDT_Annotation = [
   {
     name: '地形注记',
     key: 'cta_w'
+  },
+]
+// 经纬度投影
+export const TDT_IMAGE_C = [
+  {
+    name: '矢量底图',
+    key: 'vec_c',
+  },
+  {
+    name: '影像底图',
+    key: 'img_c',
+  },
+  {
+    name: '地形晕渲',
+    key: 'ter_c',
+  },
+]
+// 经纬度投影
+export const TDT_Annotation_C = [
+  {
+    name: '矢量注记',
+    key: 'cva_c'
+  },
+  {
+    name: '影像注记',
+    key: 'cia_c'
+  },
+  {
+    name: '地形注记',
+    key: 'cta_c'
   },
 ]
 export const geoCode = [

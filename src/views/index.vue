@@ -1,21 +1,17 @@
 <template>
   <div class="app-container">
     <l-header></l-header>
-    <l-sider position="left">
+    <!-- <l-sider position="left">
       <div class="chart-container" v-for="item in list.data" :key="item.name" @click="click(item)">
         <v-card color="rgba(0,0,0,0)" border flat>
           <v-card-title class="text-white">{{item.name}}</v-card-title>
           <v-img src="https://cdn.vuetifyjs.com/images/cards/house.jpg" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="220px" cover>
-
             <v-card-text class="text-white">{{item.text}}</v-card-text>
-            <!-- <v-card-subtitle class="text-white">{{item.text}}</v-card-subtitle> -->
           </v-img>
-          <!-- <v-card-title class="text-white text-h6">{{item.name}}</v-card-title> -->
-
         </v-card>
       </div>
-    </l-sider>
-    <l-sider position="right">
+    </l-sider> -->
+    <!-- <l-sider position="right">
       <div class="chart-container">
         <l-line :option="option" id="chart4"></l-line>
       </div>
@@ -25,7 +21,7 @@
       <div class="chart-container">
         <l-line :option="option" id="chart6"></l-line>
       </div>
-    </l-sider>
+    </l-sider> -->
     <l-map></l-map>
     <l-nav>
       <!-- <div style="color:white;text-align: center;">
@@ -51,7 +47,7 @@ import * as echarts from 'echarts'
 
 import gz from '@/assets/json/广州市.json'
 import { provider,highlighCity } from '@/utils/ceisum.map'
-import { flyLine,mockGuizhouPoint,dataSource } from '@/utils/event'
+import { flyLine,mockGuizhouPoint,dataSource,anlie1 } from '@/utils/event'
 
 const list = reactive({
   data: [
@@ -80,9 +76,17 @@ onMounted(async () => {
     name: '矢量底图',
     key: 'vec_w',
   })
+  const imageLayer1 = provider(viewer, {
+    name: '矢量标记',
+    key: 'cva_w',
+  })
   imageLayer.hue = 3
   imageLayer.contrast = -1.2
+  imageLayer1.hue = 3
+  imageLayer1.contrast = -1.2
+
   dataSource()
+  anlie1()
   console.log(imageLayer)
   console.log(viewer)
 })
