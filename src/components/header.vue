@@ -3,7 +3,7 @@
         <v-app-bar density flat color="rgba(0,0,0,0)">
             <template #title>
                 <h4 class="text">
-                    世界之眼
+                    <!-- 世界之眼 -->
                 </h4>
             </template>
 

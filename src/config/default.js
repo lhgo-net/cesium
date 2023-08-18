@@ -1,4 +1,4 @@
-export const TDT_TOKEN = 'c2699ec577d969ef423f4c620e43c8ff' //c2699ec577d969ef423f4c620e43c8ff 7a47a0fc5008f167eed134ef12125221
+export const TDT_TOKEN = '7a47a0fc5008f167eed134ef12125221' //c2699ec577d969ef423f4c620e43c8ff 7a47a0fc5008f167eed134ef12125221
 export const TDT_SUBBDOMAINS = ['t0', 't1', 't2', 't3', 't4', 't5', 't6', 't7']
 export const CESIUM_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhYWM4MzJjMS1kZGNkLTRjOTItYTY0Yy0yOTc0MmU1NWNjMGYiLCJpZCI6Njc4NTksImlhdCI6MTY5MDc3MTY0MH0.JfeaZ0xaAz-2qBIdRp6G6ogqCfl4q-cAVu_cvxEEdsU'
 // 墨卡托投影

@@ -2,8 +2,8 @@
   <div class="horizontal-scrollbar-container nav-container">
     <div class="scroll-wrapper" ref="scroll">
       <div class="scroll-content" style="color:white">
-        <!-- <slot></slot> -->
-        <div class="scroll-item" v-for="index in 100" :key="index">{{index}}</div>
+        <slot></slot>
+        <!-- <div class="scroll-item" v-for="index in 100" :key="index">{{index}}</div> -->
       </div>
     </div>
   </div>
