@@ -1,8 +1,12 @@
-import { createApp } from 'vue'
+import {
+  createApp
+} from 'vue'
 import App from './App.vue'
 
 import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
+import {
+  createVuetify
+} from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css'
@@ -27,7 +31,11 @@ const myCustomLightTheme = {
 const vuetify = createVuetify({
   components,
   directives,
+  theme: {
+    defaultTheme: 'dark'
+  },
   defaults: {
+
     // VSheet: {
     //   style: [{ coloo: '#ffffff', backgroundColor:'rgba(42, 42, 42, 0.8)'}]
     // },

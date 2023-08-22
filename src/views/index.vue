@@ -47,6 +47,10 @@ onMounted(async () => {
 
 })
 
+function onClick(item){
+  router.push(item.path)
+}
+
 </script>
 
 <style scoped lang="less">

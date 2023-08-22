@@ -108,7 +108,7 @@ export async function clustering() {
       cluster.billboard.width = 72;
       cluster.billboard.height = 72;
       if (clusteredEntities.length > 1000) {
-        cluster.billboard.image = combineIconAndLabel('/img/aqi-g0.png',20,30)
+        cluster.billboard.image = combineIconAndLabel('/img/aqi-g0.png', 20, 30)
       }
       if (clusteredEntities.length > 2000) {
         cluster.billboard.image = combineIconAndLabel('/img/aqi-g1.png', 20, 30)
@@ -168,7 +168,7 @@ export function anlie1() {
   // })
   const minimumHeights = []
   const length = lineArr.length / 2
-  for (let index = 0; index < length; index++) {
+  for (let index = 0;index < length;index++) {
     minimumHeights.push(10000)
   }
   const wall = viewer.entities.add({
