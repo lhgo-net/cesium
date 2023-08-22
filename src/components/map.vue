@@ -1,13 +1,13 @@
 <template>
-    <div id="map"></div>
+  <div id="map"></div>
 </template>
 
 <script setup>
-import { onMounted, reactive } from "vue";
-import { map, provider, SceneMode } from "@/utils/ceisum.map";
+import { onMounted } from 'vue'
+import { map } from '@/utils/ceisum.map'
 
 onMounted(() => {
-    window.viewer = map("map")
+  window.viewer = map('map')
 })
 
 </script>

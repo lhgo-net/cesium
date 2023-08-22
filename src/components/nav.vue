@@ -1,6 +1,6 @@
 <template>
   <div class="horizontal-scrollbar-container nav-container">
-    <div class="scroll-wrapper" ref="scroll">
+    <div ref="scroll" class="scroll-wrapper">
       <div class="scroll-content" style="color:white">
         <slot></slot>
         <!-- <div class="scroll-item" v-for="index in 100" :key="index">{{index}}</div> -->
@@ -10,17 +10,18 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import BScroll from '@better-scroll/core'
 import Scrollbar from '@better-scroll/scroll-bar'
 BScroll.use(Scrollbar)
+const scroll = ref()
 
 onMounted(() => {
   initScroll()
 })
 
 function initScroll() {
-  new BScroll('.scroll-wrapper', {
+  scroll.value = new BScroll('.scroll-wrapper', {
     scrollX: true,
     scrollY: false,
     click: true,
@@ -29,8 +30,8 @@ function initScroll() {
       fade: false,
       interactive: true,
       scrollbarTrackClickable: true,
-      scrollbarTrackOffsetType: 'clickedPoint', // can use 'step'
-    },
+      scrollbarTrackOffsetType: 'clickedPoint' // can use 'step'
+    }
   })
 }
 </script>

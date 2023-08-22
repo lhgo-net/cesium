@@ -1,122 +1,33 @@
-/**
- * 参考文档
- * 【eslint英文文档】https://eslint.org/docs/user-guide/configuring
- * 【eslint中文文档】http://eslint.cn/docs/rules/true
- */
-
-/**
- * eslint有三种使用方式
- * 【1】js代码中通过注释的方式使用
- * 【2】通过webpack的eslintConfig字段设置，eslint会自动搜索项目的package.json文件中的配置
- * 【3】通过配置文件的方式使用，配置文件有多种文件方式，如JavaScript、JSON 或者 YAML等
- */
-
-/**
- * 文件忽略
- * 【】让eslint跳过特定文件的检测
- * 【】通过当前工作目录下 「.eslintignore」 文件进行设置
- *  其使用的是Glob路径书写方式，与「.gitignore」的使用方法相同
- * 【】也可以在 package.json 文件中，通过 eslintIgnore 参数进行设置
- */
-
-/**
- * 文件内局部设置
- * 【】eslint可以具体文件中设置特定代码的规则，常用于跳过某条语句的检测。
- * 【】注销全部规则，在代码前新建一行，添加注销 /* eslint-disable *\/  。如果没有恢复设置的语句，则下列全部代码都会跳过检测。
- * 【】恢复eslint，在代码前新建一行，添加注销 /* eslint-enable *\/
- * 【】指定忽略的规则，/* eslint-disable no-alert, no-console *\/
- * 【】在特定行禁用，// eslint-disable-line
- * 【】在下一行禁用，// eslint-disable-next-line
- */
-
 module.exports = {
-  /**
-   * 根目录标识
-   * http://eslint.cn/docs/user-guide/configuring#using-configuration-files
-   * http://eslint.cn/docs/user-guide/configuring#configuration-cascading-and-hierarchy
-   * 【】标识当前配置文件为最底层的文件，无需往更上一级的文件目录中进行搜索
-   * 【】默认eslint的配置文件搜索方式是，从目标文件夹进行搜索，遍历内部每一个文件夹，找到配置文件并层叠使用。再跳出本项目，往祖先文件夹进行遍历
-   * 【】注意「~/.eslintrc」的意义，「~」是指linux上的家目录，「~/.eslintrc」是指家目录下的eslint配置文件，用于私人开发者，用于整个电脑全局约束的。这个配置通过本配置项root去设置，设置了root,eslint检测时将不会再往上搜索
-   * 【】eslint的生效规则是就近使用，越近的配置项优先级越高，覆盖其他配置项。如一个项目中，可以在不同文件夹中都添加配置文件，这些规则将重叠组合生效
-   */
   root: true, // 标识当前配置文件为eslint的根配置文件，让其停止在父级目录中继续寻找。
-  /**
-   * 运行环境
-   * http://eslint.cn/docs/user-guide/configuring#specifying-environments
-   * 【】一个环境定义了一组预定义的全局变量
-   * 【】获得了特定环境的全局定义，就不会认为是开发定义的，跳过对其的定义检测。否则会被认为改变量未定义
-   * 【】常见的运行环境有以下这些，更多的可查看官网
-   * browser - 浏览器环境中的全局变量。
-   * node - Node.js 全局变量和 Node.js 作用域。
-   * es6 - 启用除了 modules 以外的所有 ECMAScript 6 特性（该选项会自动设置 ecmaVersion 解析器选项为 6）。
-   * amd - 将 require() 和 define() 定义为像 amd 一样的全局变量。
-   * commonjs - CommonJS 全局变量和 CommonJS 作用域 (用于 Browserify/WebPack 打包的只在浏览器中运行的代码)。
-   * jquery - jQuery 全局变量。
-   * mongo - MongoDB 全局变量。
-   * worker - Web Workers 全局变量。
-   * serviceworker - Service Worker 全局变量。
-   */
   env: {
     browser: true, // 浏览器环境
     node: true,
     jquery: true
   },
-  /**
-   * 全局变量
-   * http://eslint.cn/docs/user-guide/configuring#specifying-globals
-   * 【】定义额外的全局，开发者自定义的全局变量，让其跳过no-undef 规则
-   * 【】key值就是额外添加的全局变量
-   * 【】value值用于标识该变量能否被重写，类似于const的作用。true为允许变量被重写
-   * 【】注意：要启用no-global-assign规则来禁止对只读的全局变量进行修改。
-   */
   globals: {
-    T: true,
-    d3: false
+    viewer: true,
+    Cesium: true
   },
-  /**
-   * 规则继承
-   * http://eslint.cn/docs/user-guide/configuring#extending-configuration-files
-   *【】可继承的方式有以下几种
-   *【】eslint内置推荐规则，就只有一个，即「eslint:recommended」
-   *【】可共享的配置， 是一个 npm 包，它输出一个配置对象。即通过npm安装到node_module中
-   *  可共享的配置可以省略包名的前缀 eslint-config-，即实际设置安装的包名是 eslint-config-airbnb-base
-   *【】从插件中获取的规则，书写规则为 「plugin:插件包名/配置名」，其中插件报名也是可以忽略「eslint-plugin-」前缀。如'plugin:vue/essential'
-   *【】从配置文件中继承，即继承另外的一个配置文件，如'./node_modules/coding-standard/eslintDefaults.js'
-   */
   extends: [
     'plugin:vue/essential', // 额外添加的规则可查看 https://vuejs.github.io/eslint-plugin-vue/rules/
     '@vue/standard' // https://github.com/standard/eslint-config-standard
   ],
-  /**
-   * 自定义规则
-   * http://eslint.cn/docs/user-guide/configuring#configuring-rules
-   * 【】基本使用方式
-   * "off" 或者0 关闭规则
-   * "warn" 或者1 将规则打开为警告（不影响退出代码）
-   * "error" 或者2 将规则打开为错误（触发时退出代码为1）
-   * 如：'no-restricted-syntax': 0, // 表示关闭该规则
-   * 【】如果某项规则，有额外的选项，可以通过数组进行传递，而数组的第一位必须是错误级别。如0,1,2
-   * 如 'semi': ['error', 'never'], never就是额外的配置项
-   */
   rules: {
+    'vue/multi-word-component-names': 'off',
+    'no-irregular-whitespace': 'off',
+    'eol-last': 0,
     quotes: [1, 'single'], // 引号类型 `` "" ''
     'space-before-function-paren': 0,
     'no-console': 'off',
     'no-debugger': 'off',
     // 禁止条件表达式中出现赋值操作符
     'no-cond-assign': 2,
-    'camelcase': 2,
+    // 'camelcase': 2,
     'vue/camelcase': 2,
-    //  Vue: Base (Enabling Correct ESLint Parsing)
-    // 允许在 <template> 中使用 eslint-disable, eslint-enable, eslint-disable-line, eslint-disable-next-line 等指令
-    // 如可以用 `<!-- eslint-disable-next-line vue/max-attributes-per-line -->` 来控制某一行的规则
-    // https://eslint.vuejs.org/rules/comment-directive.html
-    'vue/comment-directive': 2,
+    'vue/comment-directive': 'off',
     // 在 jsx 中不允许使用未定义的变量
     'vue/jsx-uses-vars': 2,
-    /**
-     * Vue: Priority A: Essential (Error Prevention)
-     */
     // 不允许在 `computed` 中使用异步方法，如果确实有需求，请使用此插件：https://github.com/foxbenjaminfox/vue-async-computed
     'vue/no-async-in-computed-properties': 2,
 
@@ -139,58 +50,11 @@ module.exports = {
     ],
 
     // 忽略解析 <template> 时的语法报错
-    'vue/no-parsing-error': [
-      2,
-      // 配置项非常多，主要与 HTML 相关，默认都是 false，即不忽略报错
-      {
-        'abrupt-closing-of-empty-comment': false,
-        'absence-of-digits-in-numeric-character-reference': false,
-        'cdata-in-html-content': false,
-        'character-reference-outside-unicode-range': false,
-        'control-character-in-input-stream': false,
-        'control-character-reference': false,
-        'eof-before-tag-name': false,
-        'eof-in-cdata': false,
-        'eof-in-comment': false,
-        'eof-in-tag': false,
-        'incorrectly-closed-comment': false,
-        'incorrectly-opened-comment': false,
-        'invalid-first-character-of-tag-name': false,
-        'missing-attribute-value': false,
-        'missing-end-tag-name': false,
-        'missing-semicolon-after-character-reference': false,
-        'missing-whitespace-between-attributes': false,
-        'nested-comment': false,
-        'noncharacter-character-reference': false,
-        'noncharacter-in-input-stream': false,
-        'null-character-reference': false,
-        'surrogate-character-reference': false,
-        'surrogate-in-input-stream': false,
-        'unexpected-character-in-attribute-name': false,
-        'unexpected-character-in-unquoted-attribute-value': false,
-        'unexpected-equals-sign-before-attribute-name': false,
-        'unexpected-null-character': false,
-        'unexpected-question-mark-instead-of-tag-name': false,
-        'unexpected-solidus-in-tag': false,
-        'unknown-named-character-reference': false,
-        'end-tag-with-attributes': false,
-        'duplicate-attribute': false,
-        'end-tag-with-trailing-solidus': false,
-        'non-void-html-element-start-tag-with-trailing-solidus': false,
-        'x-invalid-end-tag': false,
-        'x-invalid-namespace': false
-      }
-    ],
+    'vue/no-parsing-error': ['off'],
 
     // 不允许覆盖掉 Vue 内部的方法/属性，比如 `$el`, `$on`, `$nextTick` ...
     'vue/no-reserved-keys': [
       2
-      // {
-      //   // 除了默认的 Vue 方法/属性外，其他不允许被覆盖的 key
-      //   "reserved": [],
-      //   // 除了默认的 group 外，其他要检查的 key
-      //   "groups": [],
-      // },
     ],
 
     // 不允许可共享的 `data` 字段，即 `data` 字段只能是函数，不能是对象
@@ -366,10 +230,6 @@ module.exports = {
     // 3. 值不能为空，如：`<div v-text></div>`
     'vue/valid-v-text': 2,
 
-    /**
-     * Vue: Priority B: Strongly Recommended (Improving Readability)
-     */
-
     // 模板属性使用连字符（减号），还是使用小驼峰形式
     'vue/attribute-hyphenation': [
       2,
@@ -475,9 +335,9 @@ module.exports = {
         // 针对多行标签
         multiline: {
           // 多行标签最多每行多少个属性
-          max: 1,
+          max: 1
           // 与属性名同行的标签是否独立算一行
-          allowFirstLine: false
+          // allowFirstLine: false
         }
       }
     ],
@@ -504,13 +364,7 @@ module.exports = {
     ],
 
     // 组件 `name` 值的风格
-    'vue/name-property-casing': [
-      2,
-      // camelCase: 小驼峰
-      // PascalCase: 大驼峰
-      // kebab-case: 连字符形式
-      'PascalCase'
-    ],
+    // 'vue/name-property-casing': ['error', 'PascalCase' | 'kebab-case'],
 
     // 检查标签中是否有多余的空格
     'vue/no-multi-spaces': [
@@ -571,10 +425,6 @@ module.exports = {
       // longform: 详细方案，如：`<div v-on:foo="bar"></div>`
       'shorthand'
     ],
-
-    /**
-     * Vue: Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
-     */
 
     // HTML 中属性的顺序
     // 参考：https://vuejs.org/v2/style-guide/#Element-attribute-order-recommended
@@ -645,10 +495,6 @@ module.exports = {
       'never'
     ],
 
-    /**
-     * Vue: Uncategorized
-     */
-
     // 检查数组中括号前后是否要加空格
     // 此配置与 ESLint 的 array-bracket-spacing 规则一致，但它会检查 `<template>` 中的代码
     'vue/array-bracket-spacing': [2, 'never'],
@@ -679,13 +525,13 @@ module.exports = {
 
     // 使用驼峰形式表示变量时，一些细节配置
     // 此配置与 ESLint 的 camelcase 规则一致，但它会检查 `<template>` 中的代码
-    'vue/camelcase': [
-      2,
-      {
-        properties: 'always',
-        ignoreDestructuring: true
-      }
-    ],
+    // 'vue/camelcase': [
+    //   2,
+    //   {
+    //     properties: 'always',
+    //     ignoreDestructuring: true
+    //   }
+    // ],
 
     // 对象和数组最后一个 value 后是否加逗号
     // 此配置与 ESLint 的 comma-dangle 规则一致，但它会检查 `<template>` 中的代码
@@ -800,14 +646,6 @@ module.exports = {
       'never'
     ]
   },
-  /**
-   * 插件
-   * http://eslint.cn/docs/user-guide/configuring#configuring-plugins
-   * 【】插件同样需要在node_module中下载
-   * 【】注意插件名忽略了「eslint-plugin-」前缀，所以在package.json中，对应的项目名是「eslint-plugin-vue」
-   * 【】插件的作用类似于解析器，用以扩展解析器的功能，用于检测非常规的js代码。也可能会新增一些特定的规则。
-   * 【】如 eslint-plugin-vue，是为了帮助我们检测.vue文件中 <template> 和 <script> 中的js代码
-   */
   // plugins: ['html'],
   /**
    * 解析器配置项
@@ -824,26 +662,21 @@ module.exports = {
    }
    */
   parserOptions: {
-    parser: '@babel/eslint-parser'
-  },
-  /**
-   * 针对特定文件的配置
-   * 【】可以通过overrides对特定文件进行特定的eslint检测
-   * 【】特定文件的路径书写使用Glob格式，一个类似正则的路径规则，可以匹配不同的文件
-   * 【】配置几乎与 ESLint 的其他配置相同。覆盖块可以包含常规配置中的除了 extends、overrides 和 root 之外的其他任何有效配置选项，
-   */
-  overrides: [{
-      files: ['**/__tests__/*.{j,t}s?(x)'],
-      env: {
-        mocha: true
-      }
-    },
-    {
-      files: ['**/public/static/air-map-v1.0/*.{j,t}s'],
-      plugins: ['es5'],
-      rules: {
-        'es5/no-arrow-functions': 'error'
-      }
-    }
-  ]
+    parser: '@babel/eslint-parser',
+    requireConfigFile: false
+  }
+  // overrides: [{
+  //     files: ['**/__tests__/*.{j,t}s?(x)'],
+  //     env: {
+  //       mocha: true
+  //     }
+  //   },
+  //   {
+  //     files: ['**/public/static/air-map-v1.0/*.{j,t}s'],
+  //     plugins: ['es5'],
+  //     rules: {
+  //       'es5/no-arrow-functions': 'error'
+  //     }
+  //   }
+  // ]
 }
