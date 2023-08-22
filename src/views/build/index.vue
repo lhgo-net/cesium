@@ -1,6 +1,10 @@
 <template>
 	<div class="tool">
-		<v-select label="Select" :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']" variant="underlined"></v-select>
+		<v-select
+			label="Select"
+			:items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+			variant="underlined"
+		></v-select>
 	</div>
 </template>
 

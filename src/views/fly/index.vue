@@ -1,25 +1,18 @@
 <template>
-  <div class="container">
-
-  </div>
+	<div class="container"></div>
 </template>
 
 <script setup>
-import {onMounted} from 'vue'
+import { onMounted } from 'vue'
 
-onMounted(() => {
+onMounted(() => {})
 
-})
-
-function build(){
-
-}
-
+function build() {}
 </script>
 
 <style scoped>
-.container{
-  position: absolute;
-  z-index: 1000;
+.container {
+	position: absolute;
+	z-index: 1000;
 }
 </style>
