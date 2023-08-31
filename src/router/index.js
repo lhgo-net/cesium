@@ -27,8 +27,18 @@ const router = createRouter({
           path: 'highlight',
           name: 'highlight',
           component: () => import('@/views/highlight/index.vue')
+        },
+        {
+          path: 'ThreeDimensionalNavigation',
+          name: 'ThreeDimensionalNavigation',
+          component: () => import('@/views/ThreeDimensionalNavigation/index.vue')
         }
       ]
+    },
+    {
+      path: '/linechart',
+      name: 'linechart',
+      component: () => import('@/views/linechart/lineChart.vue')
     }
   ]
 })

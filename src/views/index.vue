@@ -31,7 +31,7 @@ const navList = reactive([
   },
   {
     path: 'build',
-    title: '全球城市矢量建筑模型'
+    title: '矢量建筑模型'
   },
   {
     path: 'fly',
@@ -40,6 +40,10 @@ const navList = reactive([
   {
     path: 'highlight',
     title: '3D突出城市'
+  },
+  {
+    path: 'ThreeDimensionalNavigation',
+    title: '立体走行'
   }
 ])
 

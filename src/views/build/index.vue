@@ -1,5 +1,12 @@
 <template>
   <div class="tool">
+    <v-switch
+      v-model="terrainLoadding"
+      hide-details
+      true-value="是"
+      false-value="否"
+      :label="`是否加载地形: ${terrainLoadding}`"
+    ></v-switch>
     <v-select
       label="Select"
       :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
@@ -9,9 +16,10 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted, reactive } from 'vue'
+import { onMounted, onUnmounted, ref, reactive } from 'vue'
 import { provider } from '@/utils/ceisum.map'
 
+const terrainLoadding = ref('否')
 const data = reactive({
   terrain: null,
   imageLayer: null,
@@ -52,5 +60,7 @@ async function createOsmBuildings() {
 .tool {
   position: absolute;
   z-index: 1000;
+  top: 64px;
+  width: 200px;
 }
 </style>

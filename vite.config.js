@@ -2,7 +2,7 @@ import {
   defineConfig
 } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import eslintPlugin from 'vite-plugin-eslint';
+import eslintPlugin from 'vite-plugin-eslint'
 // import less from '@vitejs/plugin-less'
 import path from 'path'
 
@@ -10,7 +10,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [
     vue(), eslintPlugin({
-      include: [],
+      include: []
     })
   ],
   resolve: {
@@ -26,15 +26,20 @@ export default defineConfig({
   //   }
   // },
   optimizeDeps: {
-    include: ['cesium'],
+    include: ['cesium']
   },
   define: {
-    CESIUM_BASE_URL: JSON.stringify('/cesium'),
+    CESIUM_BASE_URL: JSON.stringify('/cesium')
   },
   server: {
     host: '0.0.0.0',
     proxy: {
       '/GISFile': 'http://150.158.144.23',
+      '/api': {
+        target: 'http://webkczg.com:8762',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
     }
   }
 })
