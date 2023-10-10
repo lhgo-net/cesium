@@ -35,10 +35,16 @@ export default defineConfig({
     host: '0.0.0.0',
     proxy: {
       '/GISFile': 'http://150.158.144.23',
+      '/sysu_noise': 'http://101.43.97.106:8080',
       '/api': {
         target: 'http://webkczg.com:8762',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
+      },
+      '/api/Tileset': {
+        target: 'localhost:18098/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/\//, '')
       }
     }
   }

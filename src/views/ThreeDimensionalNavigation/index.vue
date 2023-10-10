@@ -63,10 +63,8 @@ function walkThroughImage(taskId, startRecId, maxColor = 1, capt = 0.7, pointNum
 
 function toImage(data) {
   const blob = new Blob([data], { type: 'image/png' })
-  // const reader = new FileReader()
   const url = window.URL.createObjectURL(blob)
   const img = document.createElement('img')
-  // const body = document.querySelector('body')
   img.src = url
   return url
 }
@@ -93,9 +91,6 @@ function handleParam() {
   viewer.zoomTo(viewer.entities)
   console.log(viewer.entities)
 }
-// function img() {
-//   new Cesium.MaterialProperty()
-// }
 
 function wall(arr, url) {
   // console.log(arr)
@@ -117,23 +112,6 @@ onMounted(() => {
     })
     walkThroughTasks()
     handleParam()
-    // wall()
-
-    const greenWall = viewer.entities.add({
-      name: 'Green wall from surface with outline',
-      wall: {
-        positions: Cesium.Cartesian3.fromDegreesArrayHeights([
-          104.36140497906362,
-          31.058718684416775,
-          1000.0,
-          104.36090217470567,
-          31.059292559123275,
-          1000.0]),
-        material: Cesium.Color.GREEN,
-        outline: true
-      }
-    })
-    viewer.zoomTo(greenWall)
   })
 })
 

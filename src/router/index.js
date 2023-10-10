@@ -32,6 +32,11 @@ const router = createRouter({
           path: 'ThreeDimensionalNavigation',
           name: 'ThreeDimensionalNavigation',
           component: () => import('@/views/ThreeDimensionalNavigation/index.vue')
+        },
+        {
+          path: 'vecBuild',
+          name: 'vecBuild',
+          component: () => import('@/views/vecBuild/index.vue')
         }
       ]
     },

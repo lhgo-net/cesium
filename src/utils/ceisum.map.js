@@ -7,7 +7,7 @@ import defaultBJ from '../assets/json/xnBJ.json'
 export function map(id) {
   Cesium.Ion.defaultAccessToken = CESIUM_TOKEN
   Cesium.Camera.DEFAULT_VIEW_RECTANGLE = Cesium.Rectangle.fromDegrees(90, -20, 110, 90)
-  window.Cesium = Cesium
+
   const viewer = new Cesium.Viewer(id, {
     geocoder: false, // 位置查找工具
     homeButton: false, // 视角返回初始位置
@@ -22,6 +22,9 @@ export function map(id) {
   })
 
   viewer._cesiumWidget._creditContainer.style.display = 'none'
+  // viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1200
+  // viewer.scene.screenSpaceCameraController.maximumZoomDistance = 25000000
+
   // 修改homeButton的默认返回位置
   window.viewer = viewer
 

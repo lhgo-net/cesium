@@ -1,8 +1,9 @@
 <template>
   <div class="app-container">
     <l-header></l-header>
-    <router-view></router-view>
-    <l-map></l-map>
+    <l-map>
+      <router-view></router-view>
+    </l-map>
     <l-nav>
       <div style="color: white; text-align: center">
         <ul>
@@ -14,13 +15,14 @@
 </template>
 
 <script setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import lMap from '@/components/map.vue'
 import lHeader from '@/components/header.vue'
 // import lSider from '@/components/sider.vue'
 import lNav from '@/components/nav.vue'
 // import lLine from '@/components/chart/chart.vue'
+import { pop } from '@/utils/event'
 
 const router = useRouter()
 // const route = useRoute()
@@ -33,25 +35,37 @@ const navList = reactive([
     path: 'build',
     title: '矢量建筑模型'
   },
-  {
-    path: 'fly',
-    title: '模拟走行'
-  },
+  // {
+  //   path: 'fly',
+  //   title: '模拟走行'
+  // },
   {
     path: 'highlight',
     title: '3D突出城市'
   },
   {
-    path: 'ThreeDimensionalNavigation',
-    title: '立体走行'
+    path: 'vecBuild',
+    title: '突出城市矢量建筑'
+  },
+  {
+    path: 'vecBuild1',
+    title: '突出城市矢量建筑1'
   }
+  // {
+  //   path: 'ThreeDimensionalNavigation',
+  //   title: '立体走行'
+  // }
 ])
 
-onMounted(async () => {})
+onMounted(async () => {
+})
 
 function onClick(item) {
   router.push(item.path)
 }
+nextTick(() => {
+  pop()
+})
 </script>
 
 <style scoped lang="less">

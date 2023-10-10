@@ -1,5 +1,7 @@
 <template>
-  <div id="map"></div>
+  <div id="map">
+    <slot></slot>
+  </div>
 </template>
 
 <script setup>
