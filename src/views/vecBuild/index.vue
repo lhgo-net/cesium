@@ -10,7 +10,7 @@ import { nextTick, onMounted } from 'vue'
 async function initBuild() {
   const tilesets = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
     url: 'http://172.16.8.133:18098/Tileset/yx/tileset.json',
-    // url: 'http://101.43.97.106:8080/sysu_noise/sysu_noise_3dtiles/tileset.json',
+    // url: '/sysu_noise/sysu_noise_3dtiles/tileset.json',
     show: true,
     skipLevelOfDetail: true,
     baseScreenSpaceError: 1024,
@@ -30,7 +30,7 @@ async function initBuild() {
         // eslint-disable-next-line no-template-curly-in-string
         conditions: [
           // eslint-disable-next-line no-undef, no-template-curly-in-string
-          ['true', 'rgb(33, 150, 243)']
+          // ['true', 'rgb(33, 150, 243)']
 
           // // eslint-disable-next-line no-template-curly-in-string
           // ['${Height} >= 30', 'rgba(45, 0, 75, 0.5)'],
@@ -64,6 +64,7 @@ async function initBuild() {
   //       }
   //       `
   // })
+
   const customShader = new Cesium.CustomShader({
     // lightingModel: Cesium.LightingModel.UNLIT,
     //  lightingModel: Cesium.LightingModel.PBR,
@@ -82,7 +83,7 @@ async function initBuild() {
       },
       u_texture1: {
         value: new Cesium.TextureUniform({
-          url: '/img/sec3_bg2.png.png'
+          url: '/img/333.png'
         }),
         type: Cesium.UniformType.SAMPLER_2D
       }
@@ -97,15 +98,37 @@ async function initBuild() {
             }`,
     // 片元着色器
     fragmentShaderText: `
+          // void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) {
+          //   vec3 positionMC = fsInput.attributes.positionMC;
+          //   float width = 75.0;
+          //   float height = 150.0;
+          //   if (dot(vec3(0.0, 0.0, 1.0), v_normalMC) > 0.95) {
+          //     material.diffuse = vec3(0.079, 0.107, 0.111);
+          //   } else {
+          //     float textureX = 0.0;
+          //     float dotYAxis = dot(vec3(0.0, 1.0, 0.0), v_normalMC);
+          //     // cos(45deg) 约等于 0.71
+          //     if (dotYAxis > 0.71 || dotYAxis < -0.71) {
+          //       textureX = mod(positionMC.x, width) / width;
+          //     } else {
+          //       textureX = mod(positionMC.z, width) / width;
+          //     }
+
+          //     float textureY = mod(positionMC.y, height) / height;
+          //     vec3 rgb = texture(u_texture, vec2(textureX, textureY)).rgb;
+          //     material.diffuse = rgb;
+          //   }
+          // }
+
            void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) {
               vec3 positionMC = fsInput.attributes.positionMC;
               //这里是设置要贴图的图片的尺寸，设置小了会重复
-              float width = 10000.0;
-              float height = 10000.0;
+              float width = 75.0;
+              float height = 75.0;
               vec3 rgb;
               //这是是设置了屋顶的颜色，当和法向量平行时，就是屋顶，这里设置0.95，相当于垂直，建筑物四周开始贴图
               if (dot(vec3(0.0, 1.0, 0.0), v_normalMC) > 0.95) {
-                material.diffuse = vec3(1.0, 0.0, 0.0);
+                material.diffuse = vec3(0.079, 0.107, 0.111);
               } else {
                 float textureX = 0.0;
                 float dotYAxis = dot(vec3(0.0, 0.0, 1.0), v_normalMC);
@@ -120,18 +143,38 @@ async function initBuild() {
                 float textureY = mod(positionMC.y, height) / height;
                 //我这里是根据建筑物高度贴了两张不同的图片
                 // if (positionMC.y < 30.0) {
-                   rgb = texture(u_texture, vec2(textureX, textureY)).rgb;
+                //    rgb = texture(u_texture, vec2(textureX, textureY)).rgb;
                 // }
                 // else {
-                  //  rgb = texture(u_texture1, vec2(textureX, textureY)).rgb;
+                   rgb = texture(u_texture1, vec2(textureX, textureY)).rgb;
                 // }
                 material.diffuse = rgb;
               }
-          }`
+          }
+          `
+  })
+  tilesets.tileLoad.addEventListener(function(title) {
+    const content = title.content
+    console.log(content)
+    const featuresLength = content.featuresLength
+    console.log('要素数量为：')
+    console.log(featuresLength)
+    console.log('第一个要素为：')
+    const feature = content.getFeature(0)
+    console.log(feature.content)
+    const Cesium3DTileBatchTable = new Cesium.Cesium3DTileBatchTable(content, featuresLength)
+    console.log(Cesium3DTileBatchTable)
+    const color = Cesium3DTileBatchTable.getColor(0, {})
+    console.log(color)
+    // console.log(Cesium3DTileBatchTable.getGlslComputeSt(feature.batchTable))
+    Cesium3DTileBatchTable.setColor(0, Cesium.Color.BLUE.withAlpha(0.4))
+    Cesium3DTileBatchTable.update(tilesets, viewer.scene)
+    // Cesium3DTileBatchTable.destroy()
+    // console.log(uv)
   })
 
-  tilesets.customShader = customShader
-
+  // tilesets.customShader = customShader
+  console.log(customShader)
   viewer.scene.imageryLayers.addImageryProvider(
     new Cesium.ImageryProvider({
       defaultAlpha: 1.0,
