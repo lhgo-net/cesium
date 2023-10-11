@@ -9,8 +9,8 @@ import { nextTick, onMounted } from 'vue'
 
 async function initBuild() {
   const tilesets = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
-    url: 'http://172.16.8.133:18098/Tileset/yx/tileset.json',
-    // url: '/sysu_noise/sysu_noise_3dtiles/tileset.json',
+    // url: 'http://172.16.8.133:18098/Tileset/yx/tileset.json',
+    url: '/sysu_noise/sysu_noise_3dtiles/tileset.json',
     show: true,
     skipLevelOfDetail: true,
     baseScreenSpaceError: 1024,
@@ -175,18 +175,6 @@ async function initBuild() {
 
   // tilesets.customShader = customShader
   console.log(customShader)
-  viewer.scene.imageryLayers.addImageryProvider(
-    new Cesium.ImageryProvider({
-      defaultAlpha: 1.0,
-      defaultColor: new Cesium.Color(0.0, 0.0, 0.0, 0.0),
-      getPixelData: function(x, y, level, frameState) {
-        // 在这里实现你的颜色渐变逻辑
-        const color = computeGradientColor(x, y, level, frameState)
-        const pixelData = new Uint8Array([color.red * 255, color.green * 255, color.blue * 255, color.alpha * 255])
-        return pixelData
-      }
-    })
-  )
   console.log(tilesets)
   // varying vec4 v_positionEC;
   //   varying vec3 v_normalEC;
@@ -214,15 +202,6 @@ async function initBuild() {
 //         float vtxf_diff = step(0.005, abs(vtxf_h - vtxf_a13));
 //         material.diffuse += material.diffuse * (1.0 - vtxf_diff);
 //         }
-}
-function computeGradientColor(x, y, level, frameState) {
-  // 在这里实现你的颜色渐变逻辑
-  // 这里简单返回一个渐变色
-  const t = frameState.time / 1000.0 // 获取时间，单位是秒
-  const red = Math.sin(t) * 0.5 + 0.5
-  const green = Math.cos(t) * 0.5 + 0.5
-  const blue = Math.sin(t + Math.PI) * 0.5 + 0.5
-  return new Cesium.Color(red, green, blue, 1.0)
 }
 onMounted(() => {
   nextTick(() => {

@@ -29,9 +29,9 @@ window.Cesium = Cesium
 const vuetify = createVuetify({
   components,
   directives,
-  theme: {
-    defaultTheme: 'dark'
-  },
+  // theme: {
+  //   defaultTheme: 'dark'
+  // },
   defaults: {
     // VSheet: {
     //   style: [{ coloo: '#ffffff', backgroundColor:'rgba(42, 42, 42, 0.8)'}]
