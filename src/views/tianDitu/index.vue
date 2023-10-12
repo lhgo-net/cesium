@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <l-map></l-map>
   </div>
 </template>
@@ -17,16 +17,6 @@ const data = reactive({
 
 onMounted(() => {
   imageLayer()
-  terrain()
-  viewer.camera.setView({
-    destination: Cesium.Cartesian3.fromDegrees(106.26667, 38.46667, 2000000.0),
-    orientation: {
-      heading: 6.283185307179586,
-      // 视角
-      pitch: -1.5686521559334161,
-      roll: 0
-    }
-  })
 })
 onUnmounted(() => {
   remove()
@@ -35,12 +25,6 @@ function remove() {
   viewer.imageryLayers.removeAll()
 }
 
-function terrain() {
-  data.terrain = viewer.terrainProvider = Cesium.createWorldTerrain({
-    requestWaterMask: true, // 请求水体效果所需要的海岸线数据
-    requestVertexNormals: true // 请求地形照明数据
-  })
-}
 function imageLayer() {
   data.imageLayer = provider(viewer, {
     name: '影像底图',
@@ -55,7 +39,6 @@ function imageLayer() {
 
 <style scoped>
 .container {
-  position: absolute;
-  z-index: 1000;
+  position: relative;
 }
 </style>

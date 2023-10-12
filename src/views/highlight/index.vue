@@ -1,8 +1,11 @@
 <template>
-  <div class="container"></div>
+  <div>
+    <l-map></l-map>
+  </div>
 </template>
 
 <script setup>
+import lMap from '@/components/map.vue'
 import { onMounted, onUnmounted } from 'vue'
 import defaultBJ from '@/assets/json/xnBJ.json'
 import { flat, getColorRamp } from '@/utils/utils'

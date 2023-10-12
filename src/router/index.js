@@ -14,36 +14,31 @@ const router = createRouter({
           component: () => import('@/views/terrain/index.vue')
         },
         {
-          path: 'build',
-          name: 'build',
-          component: () => import('@/views/build/index.vue')
-        },
-        {
-          path: 'fly',
-          name: 'fly',
-          component: () => import('@/views/fly/index.vue')
-        },
-        {
           path: 'highlight',
           name: 'highlight',
           component: () => import('@/views/highlight/index.vue')
         },
         {
-          path: 'ThreeDimensionalNavigation',
-          name: 'ThreeDimensionalNavigation',
-          component: () => import('@/views/ThreeDimensionalNavigation/index.vue')
-        },
-        {
           path: 'vecBuild',
           name: 'vecBuild',
           component: () => import('@/views/vecBuild/index.vue')
+        },
+        {
+          path: 'gradient',
+          name: 'gradient',
+          component: () => import('@/views/3DTile/gradient.vue')
+        },
+        {
+          path: 'pastePictures',
+          name: 'pastePictures',
+          component: () => import('@/views/3DTile/pastePictures.vue')
+        },
+        {
+          path: 'tianDitu',
+          name: 'tianDitu',
+          component: () => import('@/views/tianDitu/index.vue')
         }
       ]
-    },
-    {
-      path: '/linechart',
-      name: 'linechart',
-      component: () => import('@/views/linechart/lineChart.vue')
     }
   ]
 })

@@ -5,60 +5,60 @@ export const CESIUM_TOKEN =
 // 墨卡托投影
 export const TDT_IMAGE_W = [
   {
-    name: '矢量底图',
+    name: '全球矢量底图(墨卡托投影)',
     key: 'vec_w'
   },
   {
-    name: '影像底图',
+    name: '全球影像底图(墨卡托投影)',
     key: 'img_w'
   },
   {
-    name: '地形晕渲',
+    name: '全球地形晕渲(墨卡托投影)',
     key: 'ter_w'
   }
 ]
 // 墨卡托投影TDT_Annotation_W
 export const tdtAnnotationW = [
   {
-    name: '矢量注记',
+    name: '全球矢量注记(墨卡托投影)',
     key: 'cva_w'
   },
   {
-    name: '影像注记',
+    name: '全球影像注记(墨卡托投影)',
     key: 'cia_w'
   },
   {
-    name: '地形注记',
+    name: '全球地形注记(墨卡托投影)',
     key: 'cta_w'
   }
 ]
 // 经纬度投影
 export const TDT_IMAGE_C = [
   {
-    name: '矢量底图',
+    name: '全球矢量底图经纬度投影',
     key: 'vec_c'
   },
   {
-    name: '影像底图',
+    name: '全球影像底图经纬度投影',
     key: 'img_c'
   },
   {
-    name: '地形晕渲',
+    name: '全球地形晕渲经纬度投影',
     key: 'ter_c'
   }
 ]
 // 经纬度投影
 export const tdtAnnotationC = [
   {
-    name: '矢量注记',
+    name: '全球矢量注记经纬度投影',
     key: 'cva_c'
   },
   {
-    name: '影像注记',
+    name: '全球影像注记经纬度投影',
     key: 'cia_c'
   },
   {
-    name: '地形注记',
+    name: '全球地形注记经纬度投影',
     key: 'cta_c'
   }
 ]

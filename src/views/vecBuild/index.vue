@@ -9,8 +9,8 @@ import { nextTick, onMounted } from 'vue'
 
 async function initBuild() {
   const tilesets = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
-    // url: 'http://172.16.8.133:18098/Tileset/yx/tileset.json',
-    url: '/sysu_noise/sysu_noise_3dtiles/tileset.json',
+    url: 'http://172.16.8.133:18098/Tileset/yx/tileset.json',
+    // url: '/sysu_noise/sysu_noise_3dtiles/tileset.json',
     show: true,
     skipLevelOfDetail: true,
     baseScreenSpaceError: 1024,
