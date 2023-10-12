@@ -1,13 +1,11 @@
 <template>
   <div class="app-container">
-    <v-system-bar>
+    <v-system-bar height="50">
+      <v-avatar color="info">LH</v-avatar>
+      <v-chip v-for="tag in version"
+        :key="tag"
+      >{{ tag }}</v-chip>
       <v-spacer></v-spacer>
-
-      <!-- <v-icon>mdi-square</v-icon>
-
-      <v-icon>mdi-circle</v-icon>
-
-      <v-icon>mdi-triangle</v-icon> -->
     </v-system-bar>
     <v-navigation-drawer>
 
@@ -26,6 +24,7 @@
 import { onMounted, reactive, nextTick, toRaw } from 'vue'
 import { useRouter } from 'vue-router'
 import { pop } from '@/utils/event'
+import { version } from '@/config/app.js'
 
 const router = useRouter()
 // const route = useRoute()

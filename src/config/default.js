@@ -35,30 +35,30 @@ export const tdtAnnotationW = [
 // 经纬度投影
 export const TDT_IMAGE_C = [
   {
-    name: '全球矢量底图经纬度投影',
+    name: '全球矢量底图(经纬度投影)',
     key: 'vec_c'
   },
   {
-    name: '全球影像底图经纬度投影',
+    name: '全球影像底图(经纬度投影)',
     key: 'img_c'
   },
   {
-    name: '全球地形晕渲经纬度投影',
+    name: '全球地形晕渲(经纬度投影)',
     key: 'ter_c'
   }
 ]
 // 经纬度投影
 export const tdtAnnotationC = [
   {
-    name: '全球矢量注记经纬度投影',
+    name: '全球矢量注记(经纬度投影)',
     key: 'cva_c'
   },
   {
-    name: '全球影像注记经纬度投影',
+    name: '全球影像注记(经纬度投影)',
     key: 'cia_c'
   },
   {
-    name: '全球地形注记经纬度投影',
+    name: '全球地形注记(经纬度投影)',
     key: 'cta_c'
   }
 ]

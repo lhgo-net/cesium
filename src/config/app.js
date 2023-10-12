@@ -1,0 +1,1 @@
+export const version = ['vue3@3.2.47', 'vite@4.3.9', 'cesium@1.106']
