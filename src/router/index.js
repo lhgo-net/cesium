@@ -23,6 +23,7 @@ const router = createRouter({
           name: 'vecBuild',
           component: () => import('@/views/vecBuild/index.vue')
         },
+        // 3DTile
         {
           path: 'gradient',
           name: 'gradient',
@@ -33,10 +34,17 @@ const router = createRouter({
           name: 'pastePictures',
           component: () => import('@/views/3DTile/pastePictures.vue')
         },
+        // 影像
         {
           path: 'tianDitu',
           name: 'tianDitu',
           component: () => import('@/views/tianDitu/index.vue')
+        },
+        // 实体
+        {
+          path: 'trackPlayback',
+          name: 'trackPlayback',
+          component: () => import('@/views/entity/trackPlayback.vue')
         }
       ]
     }
