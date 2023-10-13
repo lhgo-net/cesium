@@ -6,7 +6,7 @@
 
 <script setup>
 import lMap from '@/components/map.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 // import { useRouter } from 'vue-router'
 
 // const router = useRouter()
@@ -51,29 +51,47 @@ function trackPlayback() {
       material: Cesium.Color.RED,
       width: 2
     }
-    // billboard: {
-    //   image: 'image.png'
-    // }
   })
-  viewer.zoomTo(dataSource)
   const property = new Cesium.SampledPositionProperty()
   const startTime = new Date()
   const timeSamp = startTime.getTime()
   let stopTime
-  for (let index = 0; index < lujing.length; index++) {
-    const item = lujing[index]
-    const time = new Date(timeSamp + index * 5000)
-    stopTime = time
-    const position = Cesium.Cartesian3.fromDegrees(item[0], item[1])
-    property.addSample(Cesium.JulianDate.fromDate(time), position)
-  }
   lujing.forEach((item, index) => {
     const time = new Date(timeSamp + index * 5000)
     stopTime = time
+    console.log(stopTime)
     const position = Cesium.Cartesian3.fromDegrees(item[0], item[1])
     property.addSample(Cesium.JulianDate.fromDate(time), position)
   })
+  property.setInterpolationOptions({
+    interpolationDegree: 0.00001,
+    interpolationAlgorithm: Cesium.LagrangepolynomialApproxmation
+  })
+  viewer.entities.add({
+    availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
+      start: Cesium.JulianDate.fromDate(startTime),
+      stop: Cesium.JulianDate.fromDate(new Date(stopTime))
+    })]),
+    position: property,
+    path: {
+      leadTime: 0,
+      resolution: 1,
+      material: new Cesium.PolylineGlowMaterialProperty({
+        glowPower: 0.1,
+        color: Cesium.Color.GREEN
+      }),
+      width: 10
+    },
+    billboard: {
+      image: '/img/222.png'
+    }
+  })
+  viewer.clock.currentTime = Cesium.JulianDate.fromDate(startTime)
+  viewer.clock.stopTime = Cesium.JulianDate.fromDate(new Date(stopTime))
+  viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP
+  viewer.clock.shouldAnimate = true
   viewer.dataSources.add(dataSource)
+  viewer.zoomTo(dataSource)
 }
 
 onMounted(async () => {

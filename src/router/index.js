@@ -38,7 +38,7 @@ const router = createRouter({
         {
           path: 'tianDitu',
           name: 'tianDitu',
-          component: () => import('@/views/tianDitu/index.vue')
+          component: () => import('@/views/layer/tianDitu.vue')
         },
         // 实体
         {
