@@ -2,28 +2,31 @@
   <div class="container">
     <l-map>
       <div class="tool">
-        <v-select
-          v-model="data.selectImageLayer"
-          :items="data.imageLayer"
-          item-title="name"
-          item-value="key"
-          persistent-hint
-          return-object
-          single-line
-          density
-          @update:modelValue="onImageLayer"
-        ></v-select>
-        <v-select
-          v-model="data.selectAnnotation"
-          :items="data.annotation"
-          item-title="name"
-          item-value="key"
-          persistent-hint
-          return-object
-          single-line
-          density
-          @update:modelValue="onLabelLayer"
-        ></v-select>
+        <v-sheet></v-sheet>
+        <v-sheet border rounded>
+          <v-select
+            v-model="data.selectImageLayer"
+            :items="data.imageLayer"
+            item-title="name"
+            item-value="key"
+            persistent-hint
+            return-object
+            single-line
+            density
+            @update:modelValue="onImageLayer"
+          ></v-select>
+          <v-select
+            v-model="data.selectAnnotation"
+            :items="data.annotation"
+            item-title="name"
+            item-value="key"
+            persistent-hint
+            return-object
+            single-line
+            density
+            @update:modelValue="onLabelLayer"
+          ></v-select>
+        </v-sheet>
       </div>
     </l-map>
   </div>
@@ -83,7 +86,7 @@ function imageLayer() {
 .tool{
   position: absolute;
   width: 250px;
-  background: white;
+  /* background: white; */
   left: 10px;
   top: 10px;
   padding: 10px;
