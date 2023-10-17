@@ -1,13 +1,8 @@
 export const library = [
   {
-    path: 'terrain',
-    title: '地形观测',
-    value: '1'
-  },
-  {
-    path: 'highlight',
-    title: '3D突出城市',
-    value: '2'
+    path: 'index',
+    title: '介绍',
+    value: '0'
   },
   // 影像图层
   { type: 'divider' },
@@ -49,5 +44,21 @@ export const library = [
     path: 'testDemo',
     title: '测试demo',
     value: '6'
+  },
+  // 其他
+  { type: 'divider' },
+  {
+    type: 'subheader',
+    title: '其他'
+  },
+  {
+    path: 'terrain',
+    title: '地形观测',
+    value: '1'
+  },
+  {
+    path: 'highlight',
+    title: '3D突出城市',
+    value: '2'
   }
 ]

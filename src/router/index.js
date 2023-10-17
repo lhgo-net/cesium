@@ -3,11 +3,17 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    { path: '/', redirect: 'index' },
     {
       path: '/',
-      name: 'index',
+      name: 'contanner',
       component: () => import('@/views/index.vue'),
       children: [
+        {
+          path: 'index',
+          name: 'index',
+          component: () => import('@/views/home/index.vue')
+        },
         {
           path: 'terrain',
           name: 'terrain',
