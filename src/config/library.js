@@ -40,11 +40,6 @@ export const library = [
     title: '贴图',
     value: '6'
   },
-  {
-    path: 'testDemo',
-    title: '测试demo',
-    value: '6'
-  },
   // 其他
   { type: 'divider' },
   {
@@ -60,5 +55,10 @@ export const library = [
     path: 'highlight',
     title: '3D突出城市',
     value: '2'
+  },
+  {
+    path: 'testDemo',
+    title: '测试demo',
+    value: '6'
   }
 ]
