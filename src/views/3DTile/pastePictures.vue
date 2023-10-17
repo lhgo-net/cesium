@@ -22,18 +22,10 @@ async function initBuild() {
   imageLayer.contrast = -1.2
   imageLayer1.hue = 3
   imageLayer1.contrast = -1.2
-  const tilesets = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
-    url: 'http://172.16.8.133:18098/Tileset/yx/tileset.json',
-    // url: '/sysu_noise/sysu_noise_3dtiles/tileset.json',
-    show: true,
-    skipLevelOfDetail: true,
-    baseScreenSpaceError: 1024,
-    skipScreenSpaceErrorFactor: 16,
-    skipLevels: 1,
-    immediatelyLoadDesiredLevelOfDetail: false,
-    loadSiblings: false,
-    cullWithChildrenBounds: true
-  }))
+
+  const tilesets = viewer.scene.primitives.add(
+    await Cesium.Cesium3DTileset.fromIonAssetId(2315873)
+  )
   tilesets.readyPromise.then(function(tileset) {
     viewer.flyTo(tileset)
   })

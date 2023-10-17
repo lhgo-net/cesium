@@ -44,5 +44,10 @@ export const library = [
     path: 'pastePictures',
     title: '贴图',
     value: '6'
+  },
+  {
+    path: 'testDemo',
+    title: '测试demo',
+    value: '6'
   }
 ]

@@ -10,7 +10,7 @@ import { onMounted } from 'vue'
 import lMap from '@/components/map.vue'
 import { provider } from '@/utils/ceisum.map'
 
-function initBuild() {
+async function initBuild() {
   const imageLayer = provider(viewer, {
     name: '矢量底图',
     key: 'vec_w'
@@ -24,18 +24,9 @@ function initBuild() {
   imageLayer1.hue = 3
   imageLayer1.contrast = -1.2
 
-  const tilesets = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
-    url: 'http://172.16.8.133:18098/Tileset/yx/tileset.json',
-    // url: '/sysu_noise/sysu_noise_3dtiles/tileset.json',
-    show: true,
-    skipLevelOfDetail: true,
-    baseScreenSpaceError: 1024,
-    skipScreenSpaceErrorFactor: 16,
-    skipLevels: 1,
-    immediatelyLoadDesiredLevelOfDetail: false,
-    loadSiblings: false,
-    cullWithChildrenBounds: true
-  }))
+  const tilesets = viewer.scene.primitives.add(
+    await Cesium.Cesium3DTileset.fromIonAssetId(2315873)
+  )
   tilesets.readyPromise.then(function(tileset) {
     tileset.style = new Cesium.Cesium3DTileStyle({
       color: {

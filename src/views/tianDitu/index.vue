@@ -41,8 +41,8 @@ import { TDT_IMAGE_W, tdtAnnotationW, TDT_IMAGE_C, tdtAnnotationC } from '@/conf
 const data = reactive({
   imageLayer: [...TDT_IMAGE_W, ...TDT_IMAGE_C],
   annotation: [...tdtAnnotationW, ...tdtAnnotationC],
-  selectImageLayer: { name: '全球影像底图(经纬度投影)', key: 'img_c' },
-  selectAnnotation: { name: '全球矢量注记(经纬度投影)', key: 'cva_c' }
+  selectImageLayer: { name: '全球影像底图(墨卡托投影)', key: 'img_w' },
+  selectAnnotation: { name: '全球影像注记(墨卡托投影)', key: 'cva_w' }
 })
 
 onMounted(() => {

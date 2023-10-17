@@ -34,6 +34,11 @@ const router = createRouter({
           name: 'pastePictures',
           component: () => import('@/views/3DTile/pastePictures.vue')
         },
+        {
+          path: 'testDemo',
+          name: 'testDemo',
+          component: () => import('@/views/3DTile/testDemo.vue')
+        },
         // 影像
         {
           path: 'tianDitu',
