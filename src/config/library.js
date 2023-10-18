@@ -46,6 +46,11 @@ export const library = [
     value: '6'
   },
   {
+    path: 'singleBuildColor',
+    title: '修改单个建筑颜色',
+    value: '6'
+  },
+  {
     path: 'testDemo',
     title: '测试demo',
     value: '6'
