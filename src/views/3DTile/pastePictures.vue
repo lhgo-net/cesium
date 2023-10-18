@@ -41,7 +41,7 @@ async function initBuild() {
     uniforms: {
       u_texture: {
         value: new Cesium.TextureUniform({
-          url: '/img/Building.png'
+          url: '/img/buildbuild.png'
         }),
         type: Cesium.UniformType.SAMPLER_2D
       },
@@ -106,12 +106,12 @@ async function initBuild() {
                 }
                 float textureY = mod(positionMC.y, height) / height;
                 //我这里是根据建筑物高度贴了两张不同的图片
-                if (positionMC.y < 30.0) {
+                // if (positionMC.y < 30.0) {
                    rgb = texture(u_texture, vec2(textureX, textureY)).rgb;
-                }
-                else {
-                   rgb = texture(u_texture1, vec2(textureX, textureY)).rgb;
-                }
+                // }
+                // else {
+                //    rgb = texture(u_texture1, vec2(textureX, textureY)).rgb;
+                // }
                 material.diffuse = rgb;
               }
           }
