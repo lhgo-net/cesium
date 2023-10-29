@@ -67,9 +67,9 @@ const router = createRouter({
           }
         },
         {
-          path: 'singleBuildColor',
-          name: '修改单个建筑颜色',
-          component: () => import('@/views/3DTile/singleBuildColor.vue')
+          path: 'randomColor',
+          name: '随机颜色',
+          component: () => import('@/views/3DTile/randomColor.vue')
         },
         // 影像
         {

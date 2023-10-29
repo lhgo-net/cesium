@@ -44,6 +44,11 @@ export const library = [
     title: '贴图',
     value: '6'
   },
+  {
+    path: 'randomColor',
+    title: '随机颜色',
+    value: '6'
+  },
   // 其他
   { type: 'divider' },
   {
@@ -59,11 +64,6 @@ export const library = [
     path: 'highlight',
     title: '3D突出城市',
     value: '2'
-  },
-  {
-    path: 'singleBuildColor',
-    title: '修改单个建筑颜色',
-    value: '6'
   },
   {
     path: 'testDemo',
