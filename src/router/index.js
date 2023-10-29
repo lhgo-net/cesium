@@ -66,6 +66,11 @@ const router = createRouter({
             title: '测试DEMO'
           }
         },
+        {
+          path: 'singleBuildColor',
+          name: '修改单个建筑颜色',
+          component: () => import('@/views/3DTile/singleBuildColor.vue')
+        },
         // 影像
         {
           path: 'tianDitu',

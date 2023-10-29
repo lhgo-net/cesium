@@ -1,6 +1,6 @@
 # Vue3 + Vite + Cesium
 
-个人案列库
+案列库
 
 ## cesium静态文件
 
