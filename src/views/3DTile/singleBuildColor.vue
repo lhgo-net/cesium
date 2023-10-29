@@ -1,16 +1,15 @@
 <template>
   <div>
-    <l-map></l-map>
+    <l-map @ready="ready"></l-map>
   </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 
-import lMap from '@/components/map.vue'
 import { provider } from '@/utils/ceisum.map'
 
-async function initBuild() {
+async function ready(viewer) {
   const imageLayer = provider(viewer, {
     name: '矢量底图',
     key: 'vec_w'
@@ -47,7 +46,6 @@ async function initBuild() {
 }
 
 onMounted(() => {
-  initBuild()
 })
 
 </script>
