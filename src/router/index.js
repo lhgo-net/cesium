@@ -83,6 +83,14 @@ const router = createRouter({
           meta: {
             title: '轨迹回放'
           }
+        },
+        {
+          path: 'flyLine',
+          name: 'flyLine',
+          component: () => import('@/views/entity/flyLine.vue'),
+          meta: {
+            title: '飞线'
+          }
         }
       ]
     }

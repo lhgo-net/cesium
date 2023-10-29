@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <l-map>
+    <l-map @ready="ready">
       <div class="tool">
         <v-sheet></v-sheet>
         <v-sheet border rounded>
@@ -46,27 +46,22 @@ const data = reactive({
 })
 
 onMounted(() => {
-  imageLayer()
 })
 onUnmounted(() => {
-  remove()
 })
 
 function onImageLayer(item) {
   const obj = toRaw(item)
-  data.imageLayer1 = provider(viewer, obj)
+  data.imageLayer1 = provider(data.viewer, obj)
 }
 
 function onLabelLayer(item) {
   const obj = toRaw(item)
-  data.imageLayer1 = provider(viewer, obj)
+  data.imageLayer1 = provider(data.viewer, obj)
 }
 
-function remove() {
-  viewer.imageryLayers.removeAll()
-}
-
-function imageLayer() {
+function ready(viewer) {
+  data.viewer = viewer
   data.imageLayer1 = provider(viewer, {
     name: '影像底图',
     key: 'img_c'

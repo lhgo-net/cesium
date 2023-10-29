@@ -5,11 +5,14 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, defineEmits } from 'vue'
 import { map } from '@/utils/ceisum.map'
 
+const emit = defineEmits([])
+
 onMounted(() => {
-  window.viewer = map('map')
+  const viewer = map('map')
+  emit('ready', viewer)
 })
 
 </script>

@@ -24,6 +24,10 @@ export const library = [
     path: 'trackPlayback',
     title: '轨迹回放'
   },
+  {
+    path: 'flyLine',
+    title: '飞线'
+  },
   // 3DTile
   { type: 'divider' },
   {
