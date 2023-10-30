@@ -16,9 +16,10 @@ function generateRandomPosition(position, num) {
   }
   return list
 }
-function lineFlowInit(_viewer, _center, _num) {
+function lineFlowInit(viewer, _center, _num) {
   const _positions = generateRandomPosition(_center, _num)
-  _positions.forEach(item => {
+  const dataSource = new Cesium.CustomDataSource('myEntity')
+  _positions.forEach((item, index) => {
     // 经纬度
     const startLon = item[0]
     const startLat = item[1]
@@ -33,7 +34,8 @@ function lineFlowInit(_viewer, _center, _num) {
     const linePositions = []
     linePositions.push(startPoint)
     linePositions.push(endPoint)
-    _viewer.entities.add({
+    const entity = new Cesium.Entity({
+      name: 'polyline' + index,
       polyline: {
         positions: linePositions,
         // eslint-disable-next-line no-undef, no-undef
@@ -46,10 +48,13 @@ function lineFlowInit(_viewer, _center, _num) {
         })
       }
     })
+    dataSource.entities.add(entity)
   })
+  viewer.dataSources.add(dataSource)
+  viewer.flyTo(dataSource)
 }
 
 async function ready(viewer) {
-  lineFlowInit(viewer, [113.280637, 23.125178], 5000)
+  lineFlowInit(viewer, [113.280637, 23.125178], 2000)
 }
 </script>
