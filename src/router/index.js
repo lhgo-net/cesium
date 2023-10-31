@@ -59,6 +59,14 @@ const router = createRouter({
           }
         },
         {
+          path: 'noise',
+          name: 'noise',
+          component: () => import('@/views/3DTile/noise.vue'),
+          meta: {
+            title: '噪声'
+          }
+        },
+        {
           path: 'testDemo',
           name: 'testDemo',
           component: () => import('@/views/3DTile/testDemo.vue'),

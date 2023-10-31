@@ -45,6 +45,11 @@ export const library = [
     value: '6'
   },
   {
+    path: 'noise',
+    title: '噪声',
+    value: '6'
+  },
+  {
     path: 'randomColor',
     title: '随机颜色',
     value: '6'

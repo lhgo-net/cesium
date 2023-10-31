@@ -12,154 +12,17 @@
 
 <script setup>
 import { lineFlowMaterialProperty } from '../../utils/CesiumExtend/lineFlowMaterialProperty'
+import { provider } from '@/utils/ceisum.map'
 const myCesium = lineFlowMaterialProperty(Cesium)
 const dataSource = new Cesium.CustomDataSource('myEntity')
+const viewer = null
 
 function verticalLine() {
-
+  dataSource.entities.removeAll()
+  lineFlowInit(viewer, [106.713478, 26.578343], 1000)
 }
 function parabola() {
-
-}
-
-function generateRandomPosition(position, num) {
-  const list = []
-  for (let i = 0; i < num; i++) {
-    // random产生的随机数范围是0-1，需要加上正负模拟
-    const lon = position[0] + Math.random() * 0.04 * (i % 2 === 0 ? 1 : -1)
-    const lat = position[1] + Math.random() * 0.04 * (i % 2 === 0 ? 1 : -1)
-    list.push([lon, lat])
-  }
-  return list
-}
-function lineFlowInit(viewer, _center, _num) {
-  const _positions = generateRandomPosition(_center, _num)
-  _positions.forEach((item, index) => {
-    // 经纬度
-    const startLon = item[0]
-    const startLat = item[1]
-
-    // eslint-disable-next-line new-cap, no-undef
-    const startPoint = new myCesium.Cartesian3.fromDegrees(startLon, startLat, 0)
-
-    // 随机高度
-    const height = 5000 * Math.random()
-    // eslint-disable-next-line new-cap, no-undef
-    const endPoint = new myCesium.Cartesian3.fromDegrees(startLon, startLat, height)
-    const linePositions = []
-    linePositions.push(startPoint)
-    linePositions.push(endPoint)
-    const entity = new Cesium.Entity({
-      name: 'polyline' + index,
-      polyline: {
-        positions: linePositions,
-        // eslint-disable-next-line no-undef, no-undef
-        material: new myCesium.LineFlowMaterialProperty({
-          // eslint-disable-next-line no-undef
-          color: new myCesium.Color(1.0, 1.0, 0.0, 1.0),
-          speed: 10 * Math.random(),
-          percent: 0.2,
-          gradient: 0.05
-        })
-      }
-    })
-    dataSource.entities.add(entity)
-  })
-  viewer.dataSources.add(dataSource)
-  viewer.flyTo(dataSource)
-}
-
-/**
-* @description: 抛物飞线效果初始化
-* @param {*} viewer
-* @param {*} _num :每条线上的飞线数量
-* @return {*}
-*/
-function parabolaFlowInit(viewer, _center, _positions, _num) {
-  _positions.forEach(item => {
-    const _siglePositions = parabola(_center, item, 5000)
-    // 创建飞线
-    for (let i = 0; i < _num; i++) {
-      const entity1 = new Cesium.Entity({
-        polyline: {
-          positions: _siglePositions,
-          material: new myCesium.LineFlowMaterialProperty({
-            color: new Cesium.Color(1.0, 1.0, 0.0, 0.8),
-            speed: 15 * Math.random(),
-            percent: 0.1,
-            gradient: 0.01
-          })
-        }
-      })
-
-      dataSource.entities.add(entity1)
-    }
-    const entity2 = new Cesium.Entity({
-      polyline: {
-        positions: _siglePositions,
-        material: new Cesium.Color(1.0, 1.0, 0.0, 0.2)
-      }
-    })
-    dataSource.entities.add(entity2)
-  })
-  viewer.dataSources.add(dataSource)
-
-  /**
-    * @description: 抛物线构造函数（参考开源代码）
-    * @param {*}
-    * @return {*}
-    */
-  function parabola(startPosition, endPosition, height = 0, count = 50) {
-    // 方程 y=-(4h/L^2)*x^2+h h:顶点高度 L：横纵间距较大者
-    const result = []
-    height = Math.max(+height, 100)
-    count = Math.max(+count, 50)
-    const diffLon = Math.abs(startPosition[0] - endPosition[0])
-    const diffLat = Math.abs(startPosition[1] - endPosition[1])
-    const L = Math.max(diffLon, diffLat)
-    let dlt = L / count
-    if (diffLon > diffLat) {
-      // base on lon
-      const delLat = (endPosition[1] - startPosition[1]) / count
-      if (startPosition[0] - endPosition[0] > 0) {
-        dlt = -dlt
-      }
-      for (let i = 0; i < count; i++) {
-        const h =
-          height -
-          (Math.pow(-0.5 * L + Math.abs(dlt) * i, 2) * 4 * height) /
-          Math.pow(L, 2)
-        const lon = startPosition[0] + dlt * i
-        const lat = startPosition[1] + delLat * i
-        // eslint-disable-next-line new-cap
-        const point = new Cesium.Cartesian3.fromDegrees(lon, lat, h)
-        result.push(point)
-      }
-    } else {
-      // base on lat
-      const delLon = (endPosition[0] - startPosition[0]) / count
-      if (startPosition[1] - endPosition[1] > 0) {
-        dlt = -dlt
-      }
-      for (let i = 0; i < count; i++) {
-        const h =
-          height -
-          (Math.pow(-0.5 * L + Math.abs(dlt) * i, 2) * 4 * height) /
-          Math.pow(L, 2)
-        const lon = startPosition[0] + delLon * i
-        const lat = startPosition[1] + dlt * i
-        // eslint-disable-next-line new-cap
-        const point = new Cesium.Cartesian3.fromDegrees(lon, lat, h)
-        result.push(point)
-      }
-    }
-    return result
-  }
-}
-
-async function ready(viewer) {
-  lineFlowInit(viewer, [106.713478, 26.578343], 1000)
-  // 抛物飞线效果
+  dataSource.entities.removeAll()
   const position = [
     [107.053287, 26.778993],
     [107.055953, 26.779768],
@@ -959,5 +822,158 @@ async function ready(viewer) {
     [107.053287, 26.778993]
   ]
   parabolaFlowInit(viewer, [106.713478, 26.578343], position, 3)
+}
+
+function generateRandomPosition(position, num) {
+  const list = []
+  for (let i = 0; i < num; i++) {
+    // random产生的随机数范围是0-1，需要加上正负模拟
+    const lon = position[0] + Math.random() * 0.04 * (i % 2 === 0 ? 1 : -1)
+    const lat = position[1] + Math.random() * 0.04 * (i % 2 === 0 ? 1 : -1)
+    list.push([lon, lat])
+  }
+  return list
+}
+function lineFlowInit(viewer, _center, _num) {
+  const _positions = generateRandomPosition(_center, _num)
+  _positions.forEach((item, index) => {
+    // 经纬度
+    const startLon = item[0]
+    const startLat = item[1]
+
+    // eslint-disable-next-line new-cap, no-undef
+    const startPoint = new myCesium.Cartesian3.fromDegrees(startLon, startLat, 0)
+
+    // 随机高度
+    const height = 5000 * Math.random()
+    // eslint-disable-next-line new-cap, no-undef
+    const endPoint = new myCesium.Cartesian3.fromDegrees(startLon, startLat, height)
+    const linePositions = []
+    linePositions.push(startPoint)
+    linePositions.push(endPoint)
+    const entity = new Cesium.Entity({
+      name: 'polyline' + index,
+      polyline: {
+        positions: linePositions,
+        // eslint-disable-next-line no-undef, no-undef
+        material: new myCesium.LineFlowMaterialProperty({
+          // eslint-disable-next-line no-undef
+          color: new myCesium.Color(1.0, 1.0, 0.0, 1.0),
+          speed: 10 * Math.random(),
+          percent: 0.2,
+          gradient: 0.05
+        })
+      }
+    })
+    dataSource.entities.add(entity)
+  })
+  viewer.dataSources.add(dataSource)
+  viewer.flyTo(dataSource)
+}
+
+/**
+* @description: 抛物飞线效果初始化
+* @param {*} viewer
+* @param {*} _num :每条线上的飞线数量
+* @return {*}
+*/
+function parabolaFlowInit(viewer, _center, _positions, _num) {
+  _positions.forEach(item => {
+    const _siglePositions = parabola(_center, item, 5000)
+    // 创建飞线
+    for (let i = 0; i < _num; i++) {
+      const entity1 = new Cesium.Entity({
+        polyline: {
+          positions: _siglePositions,
+          material: new myCesium.LineFlowMaterialProperty({
+            color: new Cesium.Color(1.0, 1.0, 0.0, 0.8),
+            speed: 15 * Math.random(),
+            percent: 0.1,
+            gradient: 0.01
+          })
+        }
+      })
+
+      dataSource.entities.add(entity1)
+    }
+    const entity2 = new Cesium.Entity({
+      polyline: {
+        positions: _siglePositions,
+        material: new Cesium.Color(1.0, 1.0, 0.0, 0.2)
+      }
+    })
+    dataSource.entities.add(entity2)
+  })
+  viewer.dataSources.add(dataSource)
+
+  /**
+    * @description: 抛物线构造函数（参考开源代码）
+    * @param {*}
+    * @return {*}
+    */
+  function parabola(startPosition, endPosition, height = 0, count = 50) {
+    // 方程 y=-(4h/L^2)*x^2+h h:顶点高度 L：横纵间距较大者
+    const result = []
+    height = Math.max(+height, 100)
+    count = Math.max(+count, 50)
+    const diffLon = Math.abs(startPosition[0] - endPosition[0])
+    const diffLat = Math.abs(startPosition[1] - endPosition[1])
+    const L = Math.max(diffLon, diffLat)
+    let dlt = L / count
+    if (diffLon > diffLat) {
+      // base on lon
+      const delLat = (endPosition[1] - startPosition[1]) / count
+      if (startPosition[0] - endPosition[0] > 0) {
+        dlt = -dlt
+      }
+      for (let i = 0; i < count; i++) {
+        const h =
+          height -
+          (Math.pow(-0.5 * L + Math.abs(dlt) * i, 2) * 4 * height) /
+          Math.pow(L, 2)
+        const lon = startPosition[0] + dlt * i
+        const lat = startPosition[1] + delLat * i
+        // eslint-disable-next-line new-cap
+        const point = new Cesium.Cartesian3.fromDegrees(lon, lat, h)
+        result.push(point)
+      }
+    } else {
+      // base on lat
+      const delLon = (endPosition[0] - startPosition[0]) / count
+      if (startPosition[1] - endPosition[1] > 0) {
+        dlt = -dlt
+      }
+      for (let i = 0; i < count; i++) {
+        const h =
+          height -
+          (Math.pow(-0.5 * L + Math.abs(dlt) * i, 2) * 4 * height) /
+          Math.pow(L, 2)
+        const lon = startPosition[0] + delLon * i
+        const lat = startPosition[1] + dlt * i
+        // eslint-disable-next-line new-cap
+        const point = new Cesium.Cartesian3.fromDegrees(lon, lat, h)
+        result.push(point)
+      }
+    }
+    return result
+  }
+}
+
+async function ready(viewer) {
+  const imageLayer = provider(viewer, {
+    name: '矢量底图',
+    key: 'vec_w'
+  })
+  const imageLayer1 = provider(viewer, {
+    name: '矢量标记',
+    key: 'cva_w'
+  })
+  imageLayer.hue = 3
+  imageLayer.contrast = -1.2
+  imageLayer1.hue = 3
+  imageLayer1.contrast = -1.2
+  // eslint-disable-next-line no-self-assign
+  viewer = viewer
+  lineFlowInit(viewer, [106.713478, 26.578343], 1000)
 }
 </script>
