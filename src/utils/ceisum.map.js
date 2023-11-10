@@ -25,9 +25,6 @@ export function map(id) {
   // viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1200
   // viewer.scene.screenSpaceCameraController.maximumZoomDistance = 25000000
 
-  // 修改homeButton的默认返回位置
-  window.viewer = viewer
-
   return viewer
 }
 

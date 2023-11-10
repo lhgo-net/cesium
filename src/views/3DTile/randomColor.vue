@@ -1,16 +1,19 @@
 <template>
   <div>
-    <l-map></l-map>
+    <l-map @ready="ready"></l-map>
   </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 
-import lMap from '@/components/map.vue'
 import { provider } from '@/utils/ceisum.map'
 
-async function initBuild() {
+function getRandomHexColor() {
+  return '#' + Math.floor(Math.random() * 16777215).toString(16)
+}
+
+async function ready(viewer) {
   const imageLayer = provider(viewer, {
     name: '矢量底图',
     key: 'vec_w'
@@ -37,17 +40,20 @@ async function initBuild() {
   })
   console.log(tilesets)
 
-  tilesets.tileLoad.addEventListener(function(title) {
+  tilesets.tileLoad.addEventListener(async function(title) {
     const content = title.content
-    const feature = content.getFeature(0)
-    feature.content.batchTable._features[460].color = Cesium.Color.RED.withAlpha(0.4)
-    console.log(feature.content.batchTable._features[0])
+    const _features = content.batchTable._features
+    const colors = []
+    for (let i = 0; i < _features.length; i++) {
+      const cesiumColor = await Cesium.Color.fromCssColorString(getRandomHexColor())
+      colors.push(cesiumColor)
+      const color = colors[i]
+      _features[i].color = color || Cesium.Color.RED.withAlpha(0.4)
+    }
   })
-  console.log(viewer.scene)
 }
 
 onMounted(() => {
-  initBuild()
 })
 
 </script>

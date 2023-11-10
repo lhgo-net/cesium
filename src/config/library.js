@@ -24,6 +24,10 @@ export const library = [
     path: 'trackPlayback',
     title: '轨迹回放'
   },
+  {
+    path: 'flyLine',
+    title: '飞线'
+  },
   // 3DTile
   { type: 'divider' },
   {
@@ -38,6 +42,16 @@ export const library = [
   {
     path: 'pastePictures',
     title: '贴图',
+    value: '6'
+  },
+  {
+    path: 'noise',
+    title: '噪声',
+    value: '6'
+  },
+  {
+    path: 'randomColor',
+    title: '随机颜色',
     value: '6'
   },
   // 其他
@@ -55,11 +69,6 @@ export const library = [
     path: 'highlight',
     title: '3D突出城市',
     value: '2'
-  },
-  {
-    path: 'singleBuildColor',
-    title: '修改单个建筑颜色',
-    value: '6'
   },
   {
     path: 'testDemo',

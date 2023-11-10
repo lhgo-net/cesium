@@ -1,18 +1,17 @@
 <template>
   <div>
-    <l-map></l-map>
+    <l-map @ready="ready"></l-map>
   </div>
 </template>
 
 <script setup>
-import lMap from '@/components/map.vue'
 import { onMounted } from 'vue'
 // import { useRouter } from 'vue-router'
 
 // const router = useRouter()
 // const route = useRoute()
 
-function trackPlayback() {
+function ready(viewer) {
   const dataSource = new Cesium.CustomDataSource('myData')
   const lujing = [
     [107.053287, 26.778993],
@@ -95,7 +94,6 @@ function trackPlayback() {
 }
 
 onMounted(async () => {
-  trackPlayback()
 })
 
 </script>

@@ -1,15 +1,15 @@
 <template>
   <div>
-    <l-map></l-map>
+    <l-map @ready="ready"></l-map>
   </div>
 </template>
 
 <script setup>
 import lMap from '@/components/map.vue'
-import { nextTick, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { provider } from '@/utils/ceisum.map'
 
-async function initBuild() {
+async function ready(viewer) {
   const imageLayer = provider(viewer, {
     name: '矢量底图',
     key: 'vec_w'
@@ -120,9 +120,6 @@ async function initBuild() {
   tilesets.customShader = customShader
 }
 onMounted(() => {
-  nextTick(() => {
-    initBuild()
-  })
 })
 
 </script>

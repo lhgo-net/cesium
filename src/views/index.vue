@@ -21,9 +21,8 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, nextTick, toRaw } from 'vue'
+import { onMounted, reactive, toRaw } from 'vue'
 import { useRouter } from 'vue-router'
-import { pop } from '@/utils/event'
 import { version } from '@/config/app.js'
 import { library } from '@/config/library.js'
 
@@ -37,9 +36,6 @@ function onClick(item) {
   const obj = toRaw(item.id)
   router.push(obj.path)
 }
-nextTick(() => {
-  pop()
-})
 </script>
 
 <style scoped lang="less">

@@ -59,6 +59,14 @@ const router = createRouter({
           }
         },
         {
+          path: 'noise',
+          name: 'noise',
+          component: () => import('@/views/3DTile/noise.vue'),
+          meta: {
+            title: '噪声'
+          }
+        },
+        {
           path: 'testDemo',
           name: 'testDemo',
           component: () => import('@/views/3DTile/testDemo.vue'),
@@ -67,9 +75,9 @@ const router = createRouter({
           }
         },
         {
-          path: 'singleBuildColor',
-          name: '修改单个建筑颜色',
-          component: () => import('@/views/3DTile/singleBuildColor.vue')
+          path: 'randomColor',
+          name: '随机颜色',
+          component: () => import('@/views/3DTile/randomColor.vue')
         },
         // 影像
         {
@@ -87,6 +95,14 @@ const router = createRouter({
           component: () => import('@/views/entity/trackPlayback.vue'),
           meta: {
             title: '轨迹回放'
+          }
+        },
+        {
+          path: 'flyLine',
+          name: 'flyLine',
+          component: () => import('@/views/entity/flyLine.vue'),
+          meta: {
+            title: '飞线'
           }
         }
       ]
