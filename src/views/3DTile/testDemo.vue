@@ -7,6 +7,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import lMap from '@/components/map.vue'
+import './test.js'
 
 async function initBuild() {
   const tilesets = viewer.scene.primitives.add(
