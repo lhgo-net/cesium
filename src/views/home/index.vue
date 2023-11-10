@@ -5,7 +5,7 @@
   >
     <div v-for="items in 3" :key="items">
       <div class="title">标题{{ items }}</div>
-      <div style="display: flex;text-align: center;flex-wrap: wrap;justify-content: space-around;gap:20px 20px">
+      <div style="display: flex;text-align: center;flex-wrap: wrap;gap:20px 20px">
         <v-card v-for="item in 10"
           :key="item"
           variant="tonal"
