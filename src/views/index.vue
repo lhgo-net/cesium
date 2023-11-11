@@ -45,12 +45,15 @@ import { onMounted, reactive, toRaw } from 'vue'
 import { useRouter } from 'vue-router'
 import { version } from '@/config/app.js'
 import { library } from '@/config/library.js'
+import dynamic from '@/router/dynamic'
+import { menu } from '@/router/menu'
 
 const router = useRouter()
 // const route = useRoute()
 const navList = reactive([...library])
 
 onMounted(async () => {
+  dynamic(menu)
 })
 
 function onClick(item) {
