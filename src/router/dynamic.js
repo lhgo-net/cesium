@@ -6,11 +6,11 @@ function dynamic(menu) {
     console.log('---------------')
     return '无效数据'
   }
-  menu.forEach(async item => {
+  menu.forEach(item => {
     const filePath = `/src/views/${item.component}.vue`
     try {
-      const modulePath = await modles[filePath]()
-      const { default: component } = await modulePath
+      const modulePath = modles[filePath]
+      const component = modulePath
       const route = {
         name: item.name,
         path: item.path,
@@ -24,8 +24,6 @@ function dynamic(menu) {
       console.log('页面导入时错误：', error)
     }
   })
-  console.log(menu)
-  console.log(router.getRoutes())
 }
 
 export default dynamic

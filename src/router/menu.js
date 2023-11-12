@@ -1,4 +1,17 @@
 export const menu = [
+//   {
+//     name: '影像图层',
+//     children: [
+//       {
+//         name: '天地图',
+//         path: '/tianDitu',
+//         component: 'layer/tianDitu',
+//         meta: {
+//           title: '介绍'
+//         }
+//       }
+//     ]
+//   },
   {
     name: '地形观测',
     path: '/terrain',
