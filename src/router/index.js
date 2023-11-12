@@ -1,27 +1,23 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import router from './router'
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    { path: '/', redirect: 'index' },
-    { path: '/:catchAll(.*)', redirect: '/404' },
-    { path: '/404', component: () => import('@/views/404/404.vue') },
-    {
-      path: '/',
-      component: () => import('@/views/index.vue'),
-      children: [
-        {
-          path: 'index',
-          component: () => import('@/views/home/index.vue')
-        }
-      ]
-    }
-  ]
-})
+import { menu } from './menu'
+import dynamic from './dynamic'
 
-router.beforeEach(async (to) => {
-  if (to.meta.title) { // 判断是否有标题
-    document.title = to.meta.title
+// let routesLoaded = false
+
+router.beforeEach(async (to, from, next) => {
+  document.title = ` ${to.meta.title} | LH`
+  console.log(to)
+  // eslint-disable-next-line no-undef
+  const token = localStorage.getItem('token')
+  if (!token) {
+    console.log(token)
+    await dynamic(menu)
+    // routesLoaded = true
+    next(to)
   }
+  // console.log(router.getRoutes())
+  next()
 })
+
 export default router

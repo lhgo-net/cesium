@@ -1,9 +1,7 @@
-import router from './index'
+import router from './router'
 const modles = import.meta.glob('/src/views/**/**.vue')
 
 function dynamic(menu) {
-  console.log(menu)
-  console.log(modles)
   if (!menu || !menu.length) {
     console.log('---------------')
     return '无效数据'
@@ -11,7 +9,7 @@ function dynamic(menu) {
   menu.forEach(async item => {
     const filePath = `/src/views/${item.component}.vue`
     try {
-      const modulePath = modles[filePath]()
+      const modulePath = await modles[filePath]()
       const { default: component } = await modulePath
       const route = {
         name: item.name,
@@ -26,6 +24,8 @@ function dynamic(menu) {
       console.log('页面导入时错误：', error)
     }
   })
+  console.log(menu)
+  console.log(router.getRoutes())
 }
 
 export default dynamic

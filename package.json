@@ -29,6 +29,7 @@
     "mockjs": "^1.1.0",
     "moment": "^2.29.4",
     "noisejs": "^2.1.0",
+    "pinia": "^2.1.7",
     "prettier": "^3.0.2",
     "vite-plugin-eslint": "^1.8.1",
     "vue": "3.2.47",

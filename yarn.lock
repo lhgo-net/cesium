@@ -3590,6 +3590,11 @@ node-releases@^2.0.13:
   resolved "https://registry.npmmirror.com/node-releases/-/node-releases-2.0.13.tgz#d5ed1627c23e3461e819b02e57b75e4899b1c81d"
   integrity sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==
 
+noisejs@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmmirror.com/noisejs/-/noisejs-2.1.0.tgz#84b4c4cd04ff43367034f65253e213e0d9fe1aff"
+  integrity sha512-sw39KaUS2YBta6apZ0/H+nnCsUyxT/ZRxgv/HnDxx6pWO2e2nUmWgLhpOaQdlxxkFepIpxDrlXy3fHVx0S3SLg==
+
 normalize-path@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmmirror.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
@@ -3800,6 +3805,14 @@ pify@^4.0.1:
   version "4.0.1"
   resolved "https://registry.npmmirror.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
+
+pinia@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.npmmirror.com/pinia/-/pinia-2.1.7.tgz#4cf5420d9324ca00b7b4984d3fbf693222115bbc"
+  integrity sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==
+  dependencies:
+    "@vue/devtools-api" "^6.5.0"
+    vue-demi ">=0.14.5"
 
 point-in-polygon@^1.1.0:
   version "1.1.0"
@@ -4404,6 +4417,11 @@ vite@4.3.9:
     rollup "^3.21.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+vue-demi@>=0.14.5:
+  version "0.14.6"
+  resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.14.6.tgz#dc706582851dc1cdc17a0054f4fec2eb6df74c92"
+  integrity sha512-8QA7wrYSHKaYgUxDA5ZC24w+eHm3sYCbp0EzcDwKqN3p6HqtTCGR/GVsPyZW92unff4UlcSh++lmqDWN3ZIq4w==
 
 vue-eslint-parser@^9.3.1:
   version "9.3.2"

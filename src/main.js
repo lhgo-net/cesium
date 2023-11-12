@@ -11,6 +11,9 @@ import * as Cesium from 'cesium'
 import router from './router/index.js'
 
 import lMap from '@/components/map.vue'
+import { menu } from './router/menu.js'
+import dynamic from './router/dynamic.js'
+dynamic(menu)
 
 window.Cesium = Cesium
 
