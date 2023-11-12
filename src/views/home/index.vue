@@ -1,16 +1,9 @@
 <template>
-  <v-sheet
-    class="mx-auto pa-2"
-    color="grey-lighten-4"
-  >
-    <div v-for="items in 3" :key="items">
-      <div class="title">标题{{ items }}</div>
-      <div style="display: flex;text-align: center;flex-wrap: wrap;gap:20px 20px">
-        <v-card v-for="item in 10"
-          :key="item"
-          variant="tonal"
-          width="300px"
-        >
+  <v-sheet class="mx-auto pa-2" color="grey-lighten-4">
+    <div v-for="items in data" :key="items.name">
+      <div class="title">{{ items.name }}</div>
+      <div style="display: flex; text-align: center; flex-wrap: wrap; gap: 20px 20px">
+        <v-card v-for="item in items.children" :key="item.name" variant="tonal" width="300px" @click="toRoute(item)">
           <v-img
             src="https://cdn.vuetifyjs.com/images/cards/house.jpg"
             class="align-end"
@@ -18,7 +11,7 @@
             height="200px"
             cover
           ></v-img>
-          <v-card-actions>案列{{ item }}</v-card-actions>
+          <v-card-actions>{{ item.name }}</v-card-actions>
         </v-card>
       </div>
     </div>
@@ -26,11 +19,23 @@
 </template>
 
 <script setup>
-//
+import { reactive, toRaw } from 'vue'
+import { useRouter } from 'vue-router'
+import { menu } from '../../router/menu'
+const data = reactive(menu)
+
+const router = useRouter()
+
+function toRoute(item) {
+  const obj = toRaw(item)
+  const href = router.resolve({ ...obj })
+  console.log(href)
+  window.open(href.href, '_blank')
+}
 </script>
 
 <style scoped>
-.title{
+.title {
   padding: 20px 0;
   font-size: 18px;
   font-weight: 1000;

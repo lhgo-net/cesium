@@ -1,137 +1,94 @@
 export const menu = [
-//   {
-//     name: '影像图层',
-//     children: [
-//       {
-//         name: '天地图',
-//         path: '/tianDitu',
-//         component: 'layer/tianDitu',
-//         meta: {
-//           title: '介绍'
-//         }
-//       }
-//     ]
-//   },
   {
-    name: '地形观测',
-    path: '/terrain',
-    component: 'home/index'
+    name: '影像图层',
+    children: [
+      {
+        name: '天地图',
+        path: '/tianDitu',
+        component: 'layer/tianDiTu',
+        meta: {
+          title: '介绍'
+        }
+      }
+    ]
   },
   {
-    name: '随机颜色',
-    path: '/randomColor',
-    component: '3DTile/randomColor'
+    name: '实体',
+    children: [
+      {
+        name: '轨迹回放',
+        path: '/trackPlayback',
+        component: 'entity/trackPlayback',
+        meta: {
+          title: '轨迹回放'
+        }
+      },
+      {
+        name: '飞线',
+        path: '/flyLine',
+        component: 'entity/flyLine',
+        meta: {
+          title: '飞线'
+        }
+      }
+    ]
   },
   {
-    name: 'indexs',
-    path: '/indexs',
-    component: 'home/index'
+    name: '3DTile',
+    children: [
+      {
+        name: '渐变效果',
+        path: '/gradient',
+        component: '3DTile/gradient',
+        meta: {
+          title: '渐变效果'
+        }
+      },
+      {
+        name: '贴图',
+        path: '/pastePictures',
+        component: '3DTile/pastePictures',
+        meta: {
+          title: '贴图'
+        }
+      },
+      {
+        name: '噪声',
+        path: '/noise',
+        component: '3DTile/noise',
+        meta: {
+          title: '噪声'
+        }
+      },
+      {
+        name: '随机颜色',
+        path: '/randomColor',
+        component: '3DTile/randomColor',
+        meta: {
+          title: '随机颜色'
+        }
+      }
+    ]
+  },
+  {
+    name: '其他',
+    children: [
+      {
+        name: '地形观测',
+        path: '/terrain',
+        component: 'terrain/index',
+        meta: {
+          title: '地形观测'
+        }
+      },
+      {
+        name: '3D突出城市',
+        path: '/highlight',
+        component: 'highlight/index',
+        meta: {
+          title: '3D突出城市'
+        }
+      }
+    ]
   }
 ]
-
-// [
-//     { path: '/', redirect: 'index' },
-//     {
-//       path: '/',
-//       name: 'contanner',
-//       component: () => import('@/views/index.vue'),
-//       children: [
-//         {
-//           path: 'index',
-//           name: 'index',
-//           component: () => import('@/views/home/index.vue'),
-//           meta: {
-//             title: '介绍'
-//           }
-//         },
-//         {
-//           path: 'terrain',
-//           name: 'terrain',
-//           component: () => import('@/views/terrain/index.vue'),
-//           meta: {
-//             title: '地形观测'
-//           }
-//         },
-//         {
-//           path: 'highlight',
-//           name: 'highlight',
-//           component: () => import('@/views/highlight/index.vue'),
-//           meta: {
-//             title: '3D突出城市'
-//           }
-//         },
-//         {
-//           path: 'vecBuild',
-//           name: 'vecBuild',
-//           component: () => import('@/views/vecBuild/index.vue'),
-//           meta: {
-//             title: '测试DEMO'
-//           }
-//         },
-//         // 3DTile
-//         {
-//           path: 'gradient',
-//           name: 'gradient',
-//           component: () => import('@/views/3DTile/gradient.vue'),
-//           meta: {
-//             title: '渐变效果'
-//           }
-//         },
-//         {
-//           path: 'pastePictures',
-//           name: 'pastePictures',
-//           component: () => import('@/views/3DTile/pastePictures.vue'),
-//           meta: {
-//             title: '贴图'
-//           }
-//         },
-//         {
-//           path: 'noise',
-//           name: 'noise',
-//           component: () => import('@/views/3DTile/noise.vue'),
-//           meta: {
-//             title: '噪声'
-//           }
-//         },
-//         {
-//           path: 'testDemo',
-//           name: 'testDemo',
-//           component: () => import('@/views/3DTile/testDemo.vue'),
-//           meta: {
-//             title: '测试DEMO'
-//           }
-//         },
-//         {
-//           path: 'randomColor',
-//           name: '随机颜色',
-//           component: () => import('@/views/3DTile/randomColor.vue')
-//         },
-//         // 影像
-//         {
-//           path: 'tianDitu',
-//           name: 'tianDitu',
-//           component: () => import('@/views/layer/tianDitu.vue'),
-//           meta: {
-//             title: '天地图'
-//           }
-//         },
-//         // 实体
-//         {
-//           path: 'trackPlayback',
-//           name: 'trackPlayback',
-//           component: () => import('@/views/entity/trackPlayback.vue'),
-//           meta: {
-//             title: '轨迹回放'
-//           }
-//         },
-//         {
-//           path: 'flyLine',
-//           name: 'flyLine',
-//           component: () => import('@/views/entity/flyLine.vue'),
-//           meta: {
-//             title: '飞线'
-//           }
-//         }
-//       ]
-//     }
-//   ]

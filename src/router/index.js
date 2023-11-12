@@ -6,7 +6,7 @@ import router from './router'
 // let routesLoaded = false
 
 router.beforeEach(async (to, from, next) => {
-  document.title = ` ${to.meta.title} | LH`
+  document.title = `${to.meta.title || to.name} | LH`
   console.log(to)
   // eslint-disable-next-line no-undef
   // const token = localStorage.getItem('token')

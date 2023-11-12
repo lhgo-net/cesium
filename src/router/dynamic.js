@@ -3,7 +3,6 @@ const modles = import.meta.glob('/src/views/**/**.vue')
 
 function dynamic(menu) {
   if (!menu || !menu.length) {
-    console.log('---------------')
     return '无效数据'
   }
   menu.forEach(item => {
@@ -11,6 +10,9 @@ function dynamic(menu) {
     try {
       const modulePath = modles[filePath]
       const component = modulePath
+      if (item.children && item.children.length) {
+        dynamic(item.children)
+      }
       const route = {
         name: item.name,
         path: item.path,
