@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <l-map></l-map>
-  </div>
+  <l-map></l-map>
 </template>
 
 <script setup>

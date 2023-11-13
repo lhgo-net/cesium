@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <l-map @ready="ready"></l-map>
-  </div>
+  <l-map @ready="ready"></l-map>
 </template>
 
 <script setup>
@@ -45,8 +43,4 @@ function ready(viewer) {
 </script>
 
 <style scoped>
-.container {
-  position: absolute;
-  z-index: 1000;
-}
 </style>
