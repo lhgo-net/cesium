@@ -5,7 +5,7 @@
       <div style="display: flex; text-align: center; flex-wrap: wrap; gap: 20px 20px">
         <v-card v-for="item in items.children" :key="item.name" variant="tonal" width="300px" @click="toRoute(item)">
           <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/house.jpg"
+            :src="item.img || 'https://cdn.vuetifyjs.com/images/cards/house.jpg'"
             class="align-end"
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="200px"

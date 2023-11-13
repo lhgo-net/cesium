@@ -24,11 +24,21 @@ export const menu = [
         }
       },
       {
-        name: '飞线',
-        path: '/flyLine',
-        component: 'entity/flyLine',
+        name: '垂直飞线',
+        path: '/verticalFlyingLines',
+        component: 'entity/verticalFlyingLines',
+        img: '/img/verticalFlyingLines.png',
         meta: {
-          title: '飞线'
+          title: '垂直飞线'
+        }
+      },
+      {
+        name: '抛物线',
+        path: '/parabolicLines',
+        component: 'entity/parabolicLines',
+        img: '/img/parabolicLines.png',
+        meta: {
+          title: '抛物线'
         }
       }
     ]
@@ -40,6 +50,7 @@ export const menu = [
         name: '渐变效果',
         path: '/gradient',
         component: '3DTile/gradient',
+        img: '/img/gradient.png',
         meta: {
           title: '渐变效果'
         }
@@ -48,6 +59,7 @@ export const menu = [
         name: '贴图',
         path: '/pastePictures',
         component: '3DTile/pastePictures',
+        img: '/img/pastePictures.png',
         meta: {
           title: '贴图'
         }
@@ -64,6 +76,7 @@ export const menu = [
         name: '随机颜色',
         path: '/randomColor',
         component: '3DTile/randomColor',
+        img: '/img/randomColor.png',
         meta: {
           title: '随机颜色'
         }
