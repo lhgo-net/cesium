@@ -45,12 +45,15 @@ import { onMounted, reactive, toRaw } from 'vue'
 import { useRouter } from 'vue-router'
 import { version } from '@/config/app.js'
 import { library } from '@/config/library.js'
+// import { useMenuStore } from '@/store/index.js'
 
 const router = useRouter()
 // const route = useRoute()
+// const store = useMenuStore()
 const navList = reactive([...library])
 
 onMounted(async () => {
+  // console.log(toRaw(store))
 })
 
 function onClick(item) {

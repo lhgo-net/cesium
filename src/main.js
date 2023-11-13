@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 
 import 'vuetify/styles'
@@ -11,9 +12,6 @@ import * as Cesium from 'cesium'
 import router from './router/index.js'
 
 import lMap from '@/components/map.vue'
-import { menu } from './router/menu.js'
-import dynamic from './router/dynamic.js'
-dynamic(menu)
 
 window.Cesium = Cesium
 
@@ -25,10 +23,12 @@ const vuetify = createVuetify({
     defaultSet: 'mdi'
   }
 })
+const pinia = createPinia()
 const app = createApp(App)
 
 app.component('lMap', lMap)
 
+app.use(pinia)
 app.use(router)
 app.use(vuetify)
 app.mount('#app')

@@ -1,10 +1,13 @@
+// import { toRaw } from 'vue'
 import router from './router'
+// import { useMenuStore } from '@/store/index'
 const modles = import.meta.glob('/src/views/**/**.vue')
 
 function dynamic(menu) {
   if (!menu || !menu.length) {
     return '无效数据'
   }
+  // const store = toRaw(useMenuStore())
   menu.forEach(item => {
     const filePath = `/src/views/${item.component}.vue`
     try {
