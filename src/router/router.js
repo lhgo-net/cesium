@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { toRaw } from 'vue'
+// import { toRaw } from 'vue'
 import { useMenuStore } from '../store/menu'
-import { menu } from './menu'
+import { menus } from './menu'
 
 const modules = import.meta.glob('/src/views/**/**.vue')
 
-export async function dynamic(menu) {
+export function dynamic(menu) {
   if (!menu || !menu.length) {
     return '无效数据'
   }
@@ -29,7 +29,7 @@ export async function dynamic(menu) {
       }
 
       if (item.children && item.children.length) {
-        const childRoutes = await dynamic(item.children)
+        const childRoutes = dynamic(item.children)
         route.children = childRoutes
       }
 
@@ -75,39 +75,62 @@ const router = createRouter({
 })
 // const newRouter = createRouter()
 // router.matcher = newRouter.matcher
-export default router
 
 router.beforeEach(async (to, from, next) => {
   document.title = `${to.meta.title || to.name} | LH`
 
-  const useMenu = toRaw(useMenuStore())
-  useMenu.setMenuList(menu)
+  const routeStore = useMenuStore()
 
-  const dynamicRoutes = await dynamic(menu)
-  console.log(dynamicRoutes)
-  console.log(to)
-  console.log(router)
-
-  // 清空现有路由
-  router.getRoutes().forEach(route => {
-    router.removeRoute(route.name)
-  })
-  if (to.meta.requireAuth) {
-    // 添加新的动态路由
+  // Ensure dynamic routes are available
+  if (!routeStore.dynamicRoutes.length) {
+    // Implement your dynamic route fetching logic
+    const dynamicRoutes = dynamic(menus)
+    routeStore.setDynamicRoutes(dynamicRoutes)
     dynamicRoutes.forEach(item => {
       if (item.children && item.children.length) {
         item.children.forEach(route => {
           router.addRoute(route)
-          router.replace(router.currentRoute.value.fullPath)
+          // router.replace(router.currentRoute.value.fullPath)
         })
       } else {
         router.addRoute(item)
       }
     })
-    next()
+    next({ ...to, replace: true })
   } else {
-    next('/index')
+    next()
   }
+
+  // const useMenu = toRaw(useMenuStore())
+  // useMenu.setMenuList(menu)
+
+  // const dynamicRoutes = await dynamic(menu)
+  // console.log(dynamicRoutes)
+  // console.log(to)
+  // console.log(router)
+
+  // // 清空现有路由
+  // router.getRoutes().forEach(route => {
+  //   router.removeRoute(route.name)
+  // })
+  // if (to.meta.requireAuth) {
+  //   // 添加新的动态路由
+  //   dynamicRoutes.forEach(item => {
+  //     if (item.children && item.children.length) {
+  //       item.children.forEach(route => {
+  //         router.addRoute(route)
+  //         router.replace(router.currentRoute.value.fullPath)
+  //       })
+  //     } else {
+  //       router.addRoute(item)
+  //     }
+  //   })
+  //   next()
+  // } else {
+  //   next('/index')
+  // }
 
   console.log(router.getRoutes())
 })
+
+export default router

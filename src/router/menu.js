@@ -1,4 +1,4 @@
-export const menu = [
+export const menus = [
   {
     name: '影像图层',
     children: [
@@ -105,3 +105,13 @@ export const menu = [
     ]
   }
 ]
+
+// export const menus = {
+//   name: '随机颜色',
+//   path: '/randomColor',
+//   component: '3DTile/randomColor',
+//   img: '/img/randomColor.png',
+//   meta: {
+//     title: '随机颜色'
+//   }
+// }
