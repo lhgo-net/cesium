@@ -2,76 +2,112 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { toRaw } from 'vue'
 import { useMenuStore } from '../store/menu'
 import { menu } from './menu'
-const modles = import.meta.glob('/src/views/**/**.vue')
 
-function dynamic(menu) {
+const modules = import.meta.glob('/src/views/**/**.vue')
+
+export async function dynamic(menu) {
   if (!menu || !menu.length) {
     return '无效数据'
   }
-  console.log(modles)
-  menu.forEach(item => {
+
+  const routesToAdd = []
+
+  for (const item of menu) {
     const filePath = `/src/views/${item.component}.vue`
     try {
-      const modulePath = modles[filePath]
+      const modulePath = modules[filePath]
       const component = modulePath
-      if (item.children && item.children.length) {
-        dynamic(item.children)
-      }
+
       const route = {
         name: item.name,
         path: item.path,
         component,
         meta: {
-          titel: item.name
+          title: item.name,
+          requireAuth: true
         }
       }
-      router.addRoute(route)
+
+      if (item.children && item.children.length) {
+        const childRoutes = await dynamic(item.children)
+        route.children = childRoutes
+      }
+
+      routesToAdd.push(route)
     } catch (error) {
       console.log('页面导入时错误：', error)
     }
-  })
-}
-
-const routes = [
-  { path: '/', redirect: 'index' },
-  { path: '/:catchAll(.*)', redirect: '/404' },
-  {
-    path: '/404',
-    name: '404',
-    component: () => import('@/views/404/404.vue'),
-    meta: {
-      title: '404'
-    }
-  },
-  {
-    path: '/',
-    component: () => import('@/views/index.vue'),
-    children: [
-      {
-        path: 'index',
-        name: '案列',
-        component: () => import('@/views/home/index.vue'),
-        meta: {
-          title: '案列'
-        }
-      }
-    ]
   }
-]
+
+  return routesToAdd
+}
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes: [
+    { path: '/', redirect: 'index' },
+    { path: '/:catchAll(.*)', redirect: '/404' },
+    {
+      path: '/404',
+      name: '404',
+      component: () => import('@/views/404/404.vue'),
+      meta: {
+        title: '404',
+        requireAuth: true
+      }
+    },
+    {
+      path: '/',
+      component: () => import('@/views/index.vue'),
+      children: [
+        {
+          path: 'index',
+          name: '案列',
+          component: () => import('@/views/home/index.vue'),
+          meta: {
+            title: '案列',
+            requireAuth: true
+          }
+        }
+      ]
+    }
+  ]
 })
+// const newRouter = createRouter()
+// router.matcher = newRouter.matcher
+export default router
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   document.title = `${to.meta.title || to.name} | LH`
 
   const useMenu = toRaw(useMenuStore())
   useMenu.setMenuList(menu)
-  dynamic(menu)
-  console.log(useMenu)
-  console.log(menu)
-  next()
+
+  const dynamicRoutes = await dynamic(menu)
+  console.log(dynamicRoutes)
+  console.log(to)
+  console.log(router)
+
+  // 清空现有路由
+  router.getRoutes().forEach(route => {
+    router.removeRoute(route.name)
+  })
+  if (to.meta.requireAuth) {
+    // 添加新的动态路由
+    dynamicRoutes.forEach(item => {
+      if (item.children && item.children.length) {
+        item.children.forEach(route => {
+          router.addRoute(route)
+          router.replace(router.currentRoute.value.fullPath)
+        })
+      } else {
+        router.addRoute(item)
+      }
+    })
+    next()
+  } else {
+    next('/index')
+  }
+
+  console.log(router.getRoutes())
 })
-export default router
