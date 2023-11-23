@@ -1,12 +1,5 @@
 <template>
   <div class="app-container">
-    <v-system-bar height="50">
-      <v-avatar color="info">LH</v-avatar>
-      <v-chip v-for="tag in version"
-        :key="tag"
-      >{{ tag }}</v-chip>
-      <v-spacer></v-spacer>
-    </v-system-bar>
     <v-navigation-drawer>
       <div class="d-flex px-2 my-2">
         <v-list-item title="三维GIS" subtitle="LH"></v-list-item>
@@ -32,6 +25,13 @@
         </div>
       </v-list> -->
     </v-navigation-drawer>
+    <v-system-bar height="50">
+      <v-avatar color="info">LH</v-avatar>
+      <v-chip v-for="tag in version"
+        :key="tag"
+      >{{ tag }}</v-chip>
+      <v-spacer></v-spacer>
+    </v-system-bar>
     <v-main>
       <v-container>
         <router-view></router-view>
