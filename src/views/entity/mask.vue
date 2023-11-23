@@ -8,10 +8,31 @@ import gy from '@/assets/json/贵州省.json'
 function ready(viewer) {
   viewer.scene.skyAtmosphere = undefined
   let point = []
-  // point数组中放你自己提亮范围的边界经纬度
+  const pointHeight = []
+  //   const height = []
+  //   const minHeight = []
   for (let i = 0; i < gy.features[0].geometry.coordinates[0][0].length; i++) {
     point = point.concat(gy.features[0].geometry.coordinates[0][0][i])
   }
+  for (let i = 0; i < gy.features[0].geometry.coordinates[0].length; i++) {
+    const item = gy.features[0].geometry.coordinates[0][i]
+    for (let l = 0; l < item.length; l++) {
+      pointHeight.push(item[l][0])
+      pointHeight.push(item[l][1])
+      pointHeight.push(10000)
+    }
+  }
+  console.log(gy.features[0].geometry.coordinates)
+  console.log(pointHeight)
+  viewer.entities.add({
+    // name: 'Green wall from surface with outline',
+    wall: {
+      positions: Cesium.Cartesian3.fromDegreesArrayHeights(pointHeight),
+      material: Cesium.Color.GREEN.withAlpha(0.5), // 添加半透明的填充材质
+      outline: true,
+      outlineColor: Cesium.Color.GREEN
+    }
+  })
   const hole = Cesium.Cartesian3.fromDegreesArray(point)
   const dataSource = new Cesium.CustomDataSource('inverseShade')
   viewer.dataSources.add(dataSource)
@@ -112,39 +133,6 @@ function ready(viewer) {
       clampToGround: true
     }
   })
-  const length = 1100
-  console.log(length)
-  const height = []
-  const minHeight = []
-  for (let i = 0; i < length; i++) {
-    height.push(10000)
-    minHeight.push(5000)
-  }
-  viewer.entities.add({
-    name: 'Green wall from surface with outline',
-    wall: {
-      positions: hole,
-      material: Cesium.Color.GREEN,
-      outline: true,
-      minimumHeight: 90000,
-      maximumHeight: 900000
-    }
-  })
-  //   const redWall = viewer.entities.add({
-  //     name: 'Red wall at height',
-  //     wall: {
-  //       positions: Cesium.Cartesian3.fromDegreesArrayHeights([
-  //         -115.0,
-  //         44.0,
-  //         200000.0,
-  //         -90.0,
-  //         44.0,
-  //         200000.0
-  //       ]),
-  //       minimumHeights: [100000.0, 100000.0],
-  //       material: Cesium.Color.RED
-  //     }
-  //   })
   viewer.zoomTo(test)
 }
 </script>
