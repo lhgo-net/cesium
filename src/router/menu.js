@@ -93,6 +93,19 @@ export const menu = [
     ]
   },
   {
+    name: '场景',
+    children: [
+      {
+        name: '水系',
+        path: '/water',
+        component: 'scenario/index',
+        meta: {
+          title: '水系'
+        }
+      }
+    ]
+  },
+  {
     name: '其他',
     children: [
       {

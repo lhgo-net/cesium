@@ -29,7 +29,7 @@ function ready(viewer) {
     wall: {
       positions: Cesium.Cartesian3.fromDegreesArrayHeights(pointHeight),
       material: Cesium.Color.GREEN.withAlpha(0.5), // 添加半透明的填充材质
-      outline: true,
+      outline: false,
       outlineColor: Cesium.Color.GREEN
     }
   })
