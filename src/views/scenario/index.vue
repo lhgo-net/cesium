@@ -15,13 +15,41 @@
         <s-box :title="'全国水环境概况'">
           <div>
             <div class="water-title">断面数据量：{{}}</div>
-            <div style="display:flex;justify-content: space-around;margin:10px 0">
+            <div class="water-container">
               <div class="data">
-                <div></div>
-                <div>目标</div>
-                <div>同比</div>
+                <div class="level">
+                  <div>
+                    <h2 style="color: aqua;">80%</h2>
+                    <span>优良率</span>
+                  </div>
+                </div>
+                <div class="water-text">
+                  <span>目标</span>
+                  <span style="color: aqua;text-indent: 20px;">12</span>
+                </div>
+                <div class="water-text">
+                  <span>同比</span>
+                  <span style="color: aqua;text-indent: 20px;">12</span>
+                  <span class="icon-up"></span>
+                </div>
               </div>
-              <div class="data"></div>
+              <div class="data">
+                <div class="level">
+                  <div>
+                    <h2 style="color: aqua;">80%</h2>
+                    <span>优良率</span>
+                  </div>
+                </div>
+                <div class="water-text">
+                  <span>目标</span>
+                  <span style="color: aqua;text-indent: 20px;">12</span>
+                </div>
+                <div class="water-text">
+                  <span>同比</span>
+                  <span style="color: aqua;text-indent: 20px;">12</span>
+                  <span class="icon-up"></span>
+                </div>
+              </div>
             </div>
           </div>
         </s-box>
@@ -441,9 +469,7 @@ export default {
   top: 75px;
   left: 5px;
   bottom: 5px;
-  div{
-    flex:1;
-  }
+  div:nth-child(1){flex:2;}
   div:nth-child(2){flex:2;}
   div:nth-child(3){flex:3;}
   .water-title{
@@ -467,15 +493,69 @@ export default {
       background: url('../../assets/img/title-logo.png') 100% 100%; /* 设置伪元素的背景颜色 */
       z-index: -1;  /* 将伪元素放在元素底层，以确保内容在其上层显示 */
   }
-  .data{
-      width: 110px;
-      height: 110px;
+  .water-container{
+    margin-top: 20px;
+    display:flex;
+    gap: 10px;
+    justify-content: space-around;
+    .data{
+      flex: 1;
+      // width: 150px;
+      // height: 150px;
       padding: 10px;
+      color: white;
       background: url('../../assets/img/data-border.png'); /* 设置伪元素的背景颜色 */
       background-size: contain;
       background-repeat: no-repeat;
+      .level{
+        // width: 130px;
+        height: 130px;
+        margin: 0 auto;
+        background: url('../../assets/img/logo-data.png'); /* 设置伪元素的背景颜色 */
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .water-text{
+        position: relative;
+        height: 30px;
+        line-height: 30px;
+        padding-left: 45px;
+      }
+      .water-text::before{
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        top: 50%;
+        left: 15%;
+        transform: translateY(-50%);
+        content: '';
+        border-radius: 50%;
+        background-color: white;
+      }
+      .icon-up{
+        display: inline-block;
+        margin-left: 20px;
+        width: 20px;
+        height: 20px;
+        background-image: url('../../assets/img/icon-down.png');
+        background-size: contain;
+      }
+      .icon-down{
+        display: inline-block;
+        margin-left: 20px;
+        width: 20px;
+        height: 20px;
+        background-image: url('../../assets/img/icon-down.png');
+        background-size: contain;
+      }
   }
 }
+  }
+
 .content-bottom{
     position: absolute;
     width: 60%;
