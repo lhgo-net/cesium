@@ -123,6 +123,14 @@ export const menu = [
         meta: {
           title: '3D突出城市'
         }
+      },
+      {
+        name: '地形',
+        path: '/terrain/city',
+        component: 'terrain/city/index',
+        meta: {
+          title: '地形'
+        }
       }
     ]
   }
