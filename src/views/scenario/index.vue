@@ -2,9 +2,9 @@
   <div class="container">
     <!-- top -->
     <div class="content-top">
-      <h2>
+      <span>
         水生态环境大数据应用平台
-      </h2>
+      </span>
     </div>
     <div class="top-nav">
       <top-select @onChange="onChangeSectionDelamination"></top-select>
@@ -453,33 +453,37 @@ export default {
     transform: translateX(-50%);
     padding: 5px;
   }
-  .content-top,.content-left,.content-right{
+  .content-left,.content-right{
     position: absolute;
     z-index: 999;
     padding: 10px;
     background: url('../../assets/img/sider-bg.png') 100% 100%;
   }
   .content-top {
-      height: 91px;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: url('../../assets/img/title-bg.png') 100% 100%;
-      h2 {
-          font-size: 30px;
-          font-weight: 800;
-          line-height: 70px;
-          text-align: center;
-          color: white;
-          background-clip: text;
-          -webkit-background-clip: text; /* 添加前缀 */
-          // background: linear-gradient(to top, #ff7e5f, #feb47b, #ffcc94, #f3d4ab, #e8dcb8);
-      }
+    position: absolute;
+    height: 125px;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: url('../../assets/img/title-bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      background: linear-gradient(to top, #0affff, #fff);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-size: 30px;
+      font-weight: 800;
+    }
   }
   .content-right{
     width: 420px;
     color: white;
-    top: 75px;
+    top: 100px;
     right: 5px;
     bottom: 5px;
     display: flex;
@@ -497,7 +501,7 @@ export default {
   width: 420px;
   display: flex;
   flex-direction: column;
-  top: 75px;
+  top: 100px;
   left: 5px;
   bottom: 5px;
   div:nth-child(1){flex:2;}
