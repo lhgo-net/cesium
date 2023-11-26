@@ -158,6 +158,7 @@ export default {
     initPieChart() {
       const dom = document.querySelector('#pieChart')
       const chart = Echart.init(dom)
+      const colors = ['rgba(92, 123, 217,.8)', 'rgba(145, 204, 117,.8)', 'rgba(250, 200, 88,.8)', 'rgba(238, 102, 102,.8)', 'rgba(115, 192, 222,.8)', 'rgba(59, 162, 114,.8)']
       const option = {
         legend: {
           top: 'top',
@@ -190,61 +191,91 @@ export default {
               {
                 value: 40,
                 name: 'rose 1',
+                itemStyle: {
+                  color: colors[0],
+                  borderColor: colors[0],
+                  borderWidth: 4
+                },
                 label: {
-                  backgroundColor: 'white',
+                  backgroundColor: colors[0],
                   padding: 2,
                   borderRadius: 2,
-                  color: 'black'
+                  color: 'white'
                 }
               },
               {
                 value: 38,
                 name: 'rose 2',
+                itemStyle: {
+                  color: colors[1],
+                  borderColor: colors[1],
+                  borderWidth: 4
+                },
                 label: {
-                  backgroundColor: 'white',
+                  backgroundColor: colors[1],
                   padding: 2,
                   borderRadius: 2,
-                  color: 'black'
+                  color: 'white'
                 }
               },
               {
                 value: 32,
                 name: 'rose 3',
+                itemStyle: {
+                  color: colors[2],
+                  borderColor: colors[2],
+                  borderWidth: 4
+                },
                 label: {
-                  backgroundColor: 'white',
+                  backgroundColor: colors[2],
                   padding: 2,
                   borderRadius: 2,
-                  color: 'black'
+                  color: 'white'
                 }
               },
               {
                 value: 30,
                 name: 'rose 4',
+                itemStyle: {
+                  color: colors[3],
+                  borderColor: colors[3],
+                  borderWidth: 4
+                },
                 label: {
-                  backgroundColor: 'white',
+                  backgroundColor: colors[3],
                   padding: 2,
                   borderRadius: 2,
-                  color: 'black'
+                  color: 'white'
                 }
               },
               {
                 value: 28,
                 name: 'rose 5',
+                itemStyle: {
+                  color: colors[4],
+                  borderColor: colors[4],
+                  borderWidth: 4
+                },
                 label: {
-                  backgroundColor: 'white',
+                  backgroundColor: colors[4],
                   padding: 2,
                   borderRadius: 2,
-                  color: 'black'
+                  color: 'white'
                 }
               },
               {
                 value: 26,
                 name: 'rose 6',
+                itemStyle: {
+                  color: colors[5],
+                  borderColor: colors[5],
+                  borderWidth: 4
+                },
                 label: {
-                  backgroundColor: 'white',
+                  backgroundColor: colors[5],
                   padding: 2,
                   borderRadius: 2,
-                  color: 'black'
+                  color: 'white'
                 }
               }
             ]

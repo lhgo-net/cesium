@@ -113,7 +113,7 @@ export default {
     getColor(val) {
       const colors = ['#fff', '#91cc75', '#0dbc5a', '#fff', '#fff', '#fff', '#fff']
       console.log(colors[val])
-      return colors[val]
+      return val > 10 ? colors[Math.floor(val / 10)] : colors[val]
     }
   },
   mounted() {
