@@ -5,7 +5,16 @@
         <li>
           <div>区域选择</div>
           <ul class="sub-menu">
-            <li class="menu-item"><span>区域1</span></li>
+            <li class="menu-item">
+              <span>区域1</span>
+              <div class="sub-menu-item">
+                <div class="sub-menu-item-title">
+                  <div>按行政区</div>
+                  <div>按流域</div>
+                </div>
+                <div class="sub-menu-item-main"></div>
+              </div>
+            </li>
             <li class="menu-item"><span>区域2</span></li>
             <li class="menu-item"><span>区域3</span></li>
           </ul>
@@ -105,7 +114,33 @@ function onChange(item, index) {
 .main-menu>li:hover .sub-menu {
     display: block;
 }
-
+.sub-menu-item{
+  display: none;
+  position: absolute;
+  cursor: pointer;
+  width: 300px;
+  top: 10px;
+  left: 90%;
+  padding: 10px;
+  background-color: #22485b;
+  border: 2px solid rgb(5, 177, 172);
+  // box-shadow: 0 0 10px 10px rgba(9, 144, 148, 0.5);
+  .sub-menu-item-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    div{
+      flex: 1;
+      text-align: center;
+    }
+  }
+  .sub-menu-item-main{
+    min-height: 200px;
+  }
+}
+.main-menu>li>.sub-menu:hover .sub-menu-item{
+  display: block;
+}
 /* 菜单项样式 */
 .menu-item {
     padding: 10px;

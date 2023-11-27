@@ -9,6 +9,9 @@
     <div class="top-nav">
       <top-select @onChange="onChangeSectionDelamination"></top-select>
     </div>
+    <div class="tool-popup">
+      <popup></popup>
+    </div>
     <!-- <top-select @onSwitch="onSwitch" @onLayerChage="onLayerChage" @onChangeSectionDelamination="onChangeSectionDelamination"></top-select> -->
     <div class="content-left">
       <div>
@@ -81,6 +84,7 @@ import box from './box.vue'
 // import topSelect from './top-select.vue'
 import topSelect from './nav.vue'
 import sideRight from './right/index.vue'
+import popup from './pop.vue'
 import * as Echart from 'echarts'
 import { TDT_TOKEN, TDT_SUBBDOMAINS } from './config/index'
 import gyPolygon from '@/assets/json/贵州省.json'
@@ -88,7 +92,8 @@ export default {
   components: {
     SBox: box,
     topSelect,
-    sideRight
+    sideRight,
+    popup
   },
   data() {
     return {
@@ -439,6 +444,14 @@ export default {
 </script>
 
 <style scoped lang="less">
+
+.tool-popup{
+  position: absolute;
+  z-index: 10;
+  top: 20%;
+  left: 30%;
+  transform: translate(-30%,-20%);
+}
 .container{
   position: relative;
   height: 100%;
