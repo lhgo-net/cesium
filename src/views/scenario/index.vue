@@ -87,7 +87,9 @@ import sideRight from './right/index.vue'
 import popup from './pop.vue'
 import * as Echart from 'echarts'
 import { TDT_TOKEN, TDT_SUBBDOMAINS } from './config/index'
-import gyPolygon from '@/assets/json/贵州省.json'
+// import gyPolygon from '@/assets/json/贵州省.json'
+import water from '@/assets/json/water/water1.json'
+import { flattenArray } from './utlis/index'
 export default {
   components: {
     SBox: box,
@@ -105,28 +107,50 @@ export default {
   methods: {
     ready(viewer) {
       this.viewer = viewer
-      const promise = Cesium.GeoJsonDataSource.load(gyPolygon)
-      promise.then(dataSource => {
-        viewer.dataSources.add(dataSource)
-        const entities = dataSource.entities.values
+      // const promise = Cesium.GeoJsonDataSource.load(gyPolygon)
+      // promise.then(dataSource => {
+      //   viewer.dataSources.add(dataSource)
+      //   const entities = dataSource.entities.values
 
-        for (let i = 0; i < entities.length; i++) {
-          const entity = entities[i]
-          entity.polygon.material = Cesium.Color.DEEPSKYBLUE.withAlpha(0.5)
-          entity.polygon.outline = false
-          entity.polygon.extrudedHeight = 5000
-        }
-      })
+      //   for (let i = 0; i < entities.length; i++) {
+      //     const entity = entities[i]
+      //     entity.polygon.material = Cesium.Color.DEEPSKYBLUE.withAlpha(0.5)
+      //     entity.polygon.outline = false
+      //     entity.polygon.extrudedHeight = 5000
+      //   }
+      // })
       // viewer.zoomTo(viewer.entities)
-      viewer.camera.flyTo({
-        destination: Cesium.Cartesian3.fromDegrees(106.713478, 26.578343, 800000.0), // 设置高度
-        orientation: {
-          pitch: Cesium.Math.toRadians(-90), // 设置俯仰角
-          heading: Cesium.Math.toRadians(0), // 设置偏航角
-          roll: 0.0 // 设置滚转角
-        }
-      })
-      this.onSwitch(true)
+      // viewer.camera.flyTo({
+      //   destination: Cesium.Cartesian3.fromDegrees(106.713478, 26.578343, 800000.0), // 设置高度
+      //   orientation: {
+      //     pitch: Cesium.Math.toRadians(-90), // 设置俯仰角
+      //     heading: Cesium.Math.toRadians(0), // 设置偏航角
+      //     roll: 0.0 // 设置滚转角
+      //   }
+      // })
+      const instance = []
+      for (let i = 0; i < water.features.length; i++) {
+        const item = water.features[i]
+        // console.log(flattenArray(item.geometry.coordinates[0]))
+        const polyline = new Cesium.PolylineGeometry({
+          positions: Cesium.Cartesian3.fromDegreesArray(flattenArray(item.geometry.coordinates[0])),
+          width: 10.0,
+          vertexFormat: Cesium.PolylineColorAppearance.VERTEX_FORMAT
+        })
+        instance.push(new Cesium.GeometryInstance({
+          geometry: polyline,
+          attributes: {
+            color: Cesium.ColorGeometryInstanceAttribute.fromColor(new Cesium.Color(1.0, 1.0, 1.0, 1.0))
+          }
+        }))
+      }
+      viewer.scene.primitives.add(new Cesium.Primitive({
+        geometryInstances: instance,
+        appearance: new Cesium.PolylineColorAppearance({
+          translucent: false
+        })
+      }))
+      // this.onSwitch(true)
     },
     onSwitch(item) {
       // if (item) {
