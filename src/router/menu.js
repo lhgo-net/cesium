@@ -3,9 +3,10 @@ export const menu = [
     name: '影像图层',
     children: [
       {
-        name: '天地图',
-        path: '/tianDitu',
-        component: 'layer/tianDiTu',
+        name: '图层',
+        path: '/layer',
+        component: 'layer/index',
+        img: '/img/layer.png',
         meta: {
           title: '介绍'
         }
@@ -45,7 +46,7 @@ export const menu = [
         name: '遮罩',
         path: '/mask',
         component: 'entity/mask',
-        img: '',
+        img: '/img/mask.png',
         meta: {
           title: '遮罩'
         }
@@ -99,6 +100,7 @@ export const menu = [
         name: '水系',
         path: '/water',
         component: 'scenario/index',
+        img: '/img/water.png',
         meta: {
           title: '水系'
         }
