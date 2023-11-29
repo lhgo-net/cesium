@@ -134,13 +134,13 @@ export default {
         // console.log(flattenArray(item.geometry.coordinates[0]))
         const polyline = new Cesium.PolylineGeometry({
           positions: Cesium.Cartesian3.fromDegreesArray(flattenArray(item.geometry.coordinates[0])),
-          width: 10.0,
+          width: 1.0,
           vertexFormat: Cesium.PolylineColorAppearance.VERTEX_FORMAT
         })
         instance.push(new Cesium.GeometryInstance({
           geometry: polyline,
           attributes: {
-            color: Cesium.ColorGeometryInstanceAttribute.fromColor(new Cesium.Color(1.0, 1.0, 1.0, 1.0))
+            color: Cesium.ColorGeometryInstanceAttribute.fromColor(new Cesium.Color(0.0, 0.0, 1.0, 1.0))
           }
         }))
       }

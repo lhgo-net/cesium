@@ -1,89 +1,54 @@
 <template>
   <l-map @ready="ready">
-    <div class="tool">
-      <v-sheet></v-sheet>
-      <v-sheet border rounded>
-        <v-select
-          v-model="data.selectImageLayer"
-          :items="data.imageLayer"
-          item-title="name"
-          item-value="key"
-          persistent-hint
-          return-object
-          single-line
-          density
-          @update:modelValue="onImageLayer"
-        ></v-select>
-        <v-select
-          v-model="data.selectAnnotation"
-          :items="data.annotation"
-          item-title="name"
-          item-value="key"
-          persistent-hint
-          return-object
-          single-line
-          density
-          @update:modelValue="onLabelLayer"
-        ></v-select>
-      </v-sheet>
-    </div>
   </l-map>
 </template>
 
 <script setup>
+import * as dat from 'dat.gui'
 import lMap from '@/components/map.vue'
-import { onMounted, onUnmounted, reactive, toRaw } from 'vue'
+import { onMounted, onUnmounted, reactive } from 'vue'
 import { provider } from '@/utils/ceisum.map'
-import { TDT_IMAGE_W, tdtAnnotationW, TDT_IMAGE_C, tdtAnnotationC } from '@/config/default'
 
-const data = reactive({
-  imageLayer: [...TDT_IMAGE_W, ...TDT_IMAGE_C],
-  annotation: [...tdtAnnotationW, ...tdtAnnotationC],
-  selectImageLayer: { name: '全球影像底图(经纬度投影)', key: 'img_c' },
-  selectAnnotation: { name: '全球矢量注记(经纬度投影)', key: 'cva_c' }
-})
+const gui = new dat.GUI()
+const folder = gui.addFolder('天地图')
+
+const layer = {
+  全球影像底图: function() {
+    provider(data.viewer, { name: '全球影像底图(墨卡托投影)', key: 'img_w' })
+  },
+  全球矢量底图: function() {
+    provider(data.viewer, { name: '全球影像底图(墨卡托投影)', key: 'vec_w' })
+  },
+  全球地形晕渲: function() {
+    provider(data.viewer, { name: '全球地形晕渲(墨卡托投影)', key: 'ter_w' })
+  },
+  全球矢量注记: function() {
+    provider(data.viewer, { name: '全球矢量注记(墨卡托投影)', key: 'cva_w' })
+  },
+  全球影像注记: function() {
+    provider(data.viewer, { name: '全球影像注记(墨卡托投影)', key: 'cia_w' })
+  },
+  全球地形注记: function() {
+    provider(data.viewer, { name: '全球地形注记(墨卡托投影)', key: 'cta_w' })
+  }
+}
+
+folder.add(layer, '全球影像底图').onChange(e => e)
+folder.add(layer, '全球矢量底图').onChange(e => e)
+folder.add(layer, '全球地形晕渲').onChange(e => e)
+folder.add(layer, '全球矢量注记').onChange(e => e)
+folder.add(layer, '全球影像注记').onChange(e => e)
+folder.add(layer, '全球地形注记').onChange(e => e)
+folder.open()
+
+const data = reactive({})
 
 onMounted(() => {
 })
 onUnmounted(() => {
 })
 
-function onImageLayer(item) {
-  const obj = toRaw(item)
-  data.imageLayer1 = provider(data.viewer, obj)
-}
-
-function onLabelLayer(item) {
-  const obj = toRaw(item)
-  data.imageLayer1 = provider(data.viewer, obj)
-}
-
 function ready(viewer) {
   data.viewer = viewer
-  data.imageLayer1 = provider(viewer, {
-    name: '影像底图',
-    key: 'img_c'
-  })
-  data.annotation1 = provider(viewer, {
-    name: '影像注记',
-    key: 'cva_c'
-  })
 }
 </script>
-
-  <style scoped>
-  .container {
-    position: relative;
-
-  }
-  .tool{
-    position: absolute;
-    width: 250px;
-    /* background: white; */
-    left: 10px;
-    top: 10px;
-    padding: 10px;
-    border-radius: 2px;
-    z-index: 1000;
-  }
-  </style>
