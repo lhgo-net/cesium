@@ -3,10 +3,27 @@
 </template>
 
 <script setup>
+import { reactive } from 'vue'
 import gy from '@/assets/json/贵州省.json'
+import * as dat from 'dat.gui'
 
-function ready(viewer) {
-  viewer.scene.skyAtmosphere = undefined
+const data = reactive({})
+
+const gui = new dat.GUI()
+const obj = {
+  遮罩: true
+}
+gui.add(obj, '遮罩').onChange(e => {
+  if (e) {
+    mask()
+  } else {
+    data.viewer.dataSources.removeAll()
+    data.viewer.entities.removeAll()
+  }
+})
+
+function mask() {
+  data.viewer.scene.skyAtmosphere = undefined
   let point = []
   const pointHeight = []
   //   const height = []
@@ -22,9 +39,7 @@ function ready(viewer) {
       pointHeight.push(10000)
     }
   }
-  console.log(gy.features[0].geometry.coordinates)
-  console.log(pointHeight)
-  viewer.entities.add({
+  data.viewer.entities.add({
     // name: 'Green wall from surface with outline',
     wall: {
       positions: Cesium.Cartesian3.fromDegreesArrayHeights(pointHeight),
@@ -35,7 +50,7 @@ function ready(viewer) {
   })
   const hole = Cesium.Cartesian3.fromDegreesArray(point)
   const dataSource = new Cesium.CustomDataSource('inverseShade')
-  viewer.dataSources.add(dataSource)
+  data.viewer.dataSources.add(dataSource)
   dataSource.entities.add({
     polygon: {
       hierarchy: {
@@ -125,7 +140,7 @@ function ready(viewer) {
     }
   })
 
-  const test = viewer.entities.add({
+  const test = data.viewer.entities.add({
     polyline: {
       positions: hole,
       width: 5,
@@ -133,6 +148,11 @@ function ready(viewer) {
       clampToGround: true
     }
   })
-  viewer.zoomTo(test)
+  data.viewer.zoomTo(test)
+}
+
+function ready(viewer) {
+  data.viewer = viewer
+  mask()
 }
 </script>
