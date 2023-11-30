@@ -1,4 +1,18 @@
 export const menu = [
+  // {
+  //   name: '工具',
+  //   children: [
+  //     {
+  //       name: '工具',
+  //       path: '/gisTool',
+  //       component: 'tool/index',
+  //       img: '/img/layer.png',
+  //       meta: {
+  //         title: '工具'
+  //       }
+  //     }
+  //   ]
+  // },
   {
     name: '影像图层',
     children: [
@@ -9,6 +23,15 @@ export const menu = [
         img: '/img/layer.png',
         meta: {
           title: '介绍'
+        }
+      },
+      {
+        name: '工具',
+        path: '/gisTool',
+        component: 'tool/index',
+        img: '/img/layer.png',
+        meta: {
+          title: '工具'
         }
       }
     ]

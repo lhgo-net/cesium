@@ -15,3 +15,19 @@ export function getColorRamp(startColor, endColor) {
 export function flat(arr) {
   return [].concat(...arr.map(x => (Array.isArray(x) ? flat(x) : x)))
 }
+
+export function toWG84(point, viewer) {
+  const ellipsoid = viewer.scene.globe.ellipsoid
+  // eslint-disable-next-line new-cap
+  const cartesian3 = new Cesium.Cartesian3(point.x, point.y, point.z)
+  // eslint-disable-next-line new-cap
+  const cartographic = ellipsoid.cartesianToCartographic(cartesian3)
+  const lat = Cesium.Math.toDegrees(cartographic.latitude)
+  const lng = Cesium.Math.toDegrees(cartographic.longitude)
+  const height = cartographic.height
+  return {
+    lat,
+    lng,
+    height
+  }
+}

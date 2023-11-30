@@ -30,6 +30,7 @@ function toRoute(item) {
   const obj = toRaw(item)
   const href = router.resolve({ ...obj })
   console.log(href)
+  console.log(obj)
   window.open(href.href, '_blank')
 }
 </script>
