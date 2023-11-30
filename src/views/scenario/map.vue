@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import * as Cesium from 'cesium/Cesium'
-import 'cesium/Widgets/widgets.css'
+// import * as Cesium from 'cesium/'
+// import 'cesium/Widgets/widgets.css'
 import { flattenArray } from './utlis/index'
 
 import china from '@/assets/json/china_.json'
@@ -63,7 +63,7 @@ export default {
         }
       })
 
-      let point = flattenArray(china.geometries[0].coordinates)
+      const point = flattenArray(china.geometries[0].coordinates)
       const hole = Cesium.Cartesian3.fromDegreesArray(point)
       const dataSource = new Cesium.CustomDataSource('inverseShade')
       viewer.dataSources.add(dataSource)
@@ -167,7 +167,7 @@ export default {
         //   pitch: viewer.camera.pitch
         // }
         // console.log(a) // 当前视角
-        var pickedObject = viewer.scene.pick(movement.endPosition)
+        const pickedObject = viewer.scene.pick(movement.endPosition)
         if (Cesium.defined(pickedObject)) {
           // 鼠标在实体上
           console.log('Mouse over the entity')
