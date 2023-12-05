@@ -5,6 +5,11 @@
 <script setup>
 import { toWG84 } from '@/utils/utils.js'
 import * as dat from 'dat.gui'
+import * as turf from '@turf/turf'
+
+import gy from '@/assets/json/贵州省.json'
+
+import test from '@/assets/img/1.png'
 
 let viewer = null
 
@@ -34,6 +39,27 @@ cameraFolder.open()
 
 function ready(viewers) {
   viewer = viewers
+  const box = turf.bbox(gy)
+  console.log(box)
+  const points = turf.randomPoint(250, { bbox: box })
+  console.log(points)
+  const pointPrimitives = viewer.scene.primitives.add(new Cesium.PointPrimitiveCollection())
+  const billboards = viewer.scene.primitives.add(new Cesium.BillboardCollection())
+  for (let i = 0; i < points.features.length; i++) {
+    const element = points.features[i].geometry.coordinates
+
+    pointPrimitives.add({
+      // eslint-disable-next-line new-cap
+      position: new Cesium.Cartesian3.fromDegrees(...element),
+      color: Cesium.Color.YELLOW
+    })
+    billboards.add({
+      // eslint-disable-next-line new-cap
+      position: new Cesium.Cartesian3.fromDegrees(...element),
+      image: test,
+      scale: 0.2
+    })
+  }
 }
 </script>
 

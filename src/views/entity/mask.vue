@@ -6,6 +6,7 @@
 import { reactive } from 'vue'
 import gy from '@/assets/json/贵州省.json'
 import * as dat from 'dat.gui'
+import { getColorRamp } from '@/utils/utils'
 
 const data = reactive({})
 
@@ -43,9 +44,10 @@ function mask() {
     // name: 'Green wall from surface with outline',
     wall: {
       positions: Cesium.Cartesian3.fromDegreesArrayHeights(pointHeight),
-      material: Cesium.Color.GREEN.withAlpha(0.5), // 添加半透明的填充材质
+      material: getColorRamp('rgba(52,192,214,0.0)', 'rgba(15,93,180,0.6)'), // 添加半透明的填充材质
       outline: false,
       outlineColor: Cesium.Color.GREEN
+      // material: getColorRamp('rgb(52,192,214)', 'rgb(15,93,180)')
     }
   })
   const hole = Cesium.Cartesian3.fromDegreesArray(point)
@@ -140,15 +142,15 @@ function mask() {
     }
   })
 
-  const test = data.viewer.entities.add({
-    polyline: {
-      positions: hole,
-      width: 5,
-      material: Cesium.Color.AQUA.withAlpha(1),
-      clampToGround: true
-    }
-  })
-  data.viewer.zoomTo(test)
+  // const test = data.viewer.entities.add({
+  //   polyline: {
+  //     positions: hole,
+  //     width: 5,
+  //     material: Cesium.Color.AQUA.withAlpha(1),
+  //     clampToGround: true
+  //   }
+  // })
+  data.viewer.zoomTo(data.viewer.entities)
 }
 
 function ready(viewer) {

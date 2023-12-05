@@ -33,6 +33,15 @@ export const menu = [
         meta: {
           title: '工具'
         }
+      },
+      {
+        name: '热力图',
+        path: '/heatmap',
+        component: 'heatmap/index',
+        img: '/img/layer.png',
+        meta: {
+          title: '热力图'
+        }
       }
     ]
   },
