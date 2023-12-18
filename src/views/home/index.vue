@@ -28,10 +28,10 @@ const router = useRouter()
 
 function toRoute(item) {
   const obj = toRaw(item)
-  // router.push(obj.path)
-  const href = router.resolve({ ...obj })
-  console.log(href)
-  window.open(href.href, '_blank')
+  router.push(obj.path)
+  // const href = router.resolve({ ...obj })
+  // console.log(href)
+  // window.open(href.href, '_blank')
 }
 </script>
 
