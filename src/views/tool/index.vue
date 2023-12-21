@@ -56,13 +56,20 @@ function ready(viewers) {
     billboards.add({
       // eslint-disable-next-line new-cap
       position: new Cesium.Cartesian3.fromDegrees(...element),
+      id: i + 'test',
+      code: i,
       image: test,
       scale: 0.2
     })
   }
+  const handle = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+  handle.setInputAction(function (click) {
+    // console.log(pick)
+    const pick = viewer.scene.pick(click.position)
+    console.log(click)
+    console.log(pick)
+  }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 }
 </script>
 
-<style lang="less" scoped>
-
-</style>
+<style lang="less" scoped></style>
