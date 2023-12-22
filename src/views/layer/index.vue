@@ -14,28 +14,28 @@ const folder = gui.addFolder('天地图')
 const themeFolder = gui.addFolder('主题')
 
 const layer = {
-  全球影像底图: function() {
+  全球影像底图: function () {
     provider(data.viewer, { name: '全球影像底图(墨卡托投影)', key: 'img_w' })
   },
-  全球矢量底图: function() {
+  全球矢量底图: function () {
     provider(data.viewer, { name: '全球影像底图(墨卡托投影)', key: 'vec_w' })
   },
-  全球地形晕渲: function() {
+  全球地形晕渲: function () {
     provider(data.viewer, { name: '全球地形晕渲(墨卡托投影)', key: 'ter_w' })
   },
-  全球矢量注记: function() {
+  全球矢量注记: function () {
     provider(data.viewer, { name: '全球矢量注记(墨卡托投影)', key: 'cva_w' })
   },
-  全球影像注记: function() {
+  全球影像注记: function () {
     provider(data.viewer, { name: '全球影像注记(墨卡托投影)', key: 'cia_w' })
   },
-  全球地形注记: function() {
+  全球地形注记: function () {
     provider(data.viewer, { name: '全球地形注记(墨卡托投影)', key: 'cta_w' })
   }
 }
 
 const theme = {
-  blue: function() {
+  blue: function () {
     const layers = data.viewer.scene.imageryLayers
     layers.addImageryProvider(new Cesium.MapboxStyleImageryProvider({
       url: 'https://api.mapbox.com/styles/v1',
@@ -45,7 +45,7 @@ const theme = {
       scaleFactor: true
     }))
   },
-  sky: function() {
+  sky: function () {
     const layers = data.viewer.scene.imageryLayers
     layers.addImageryProvider(new Cesium.MapboxStyleImageryProvider({
       url: 'https://api.mapbox.com/styles/v1',

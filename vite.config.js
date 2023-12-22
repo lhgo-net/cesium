@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     vue(),
     eslintPlugin({
-      include: []
+      include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue']
     })
   ],
   resolve: {

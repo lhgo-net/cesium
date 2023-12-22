@@ -1,34 +1,34 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import App from './App.vue';
 
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import '@mdi/font/css/materialdesignicons.css'
-import * as Cesium from 'cesium'
+import 'vuetify/styles';
+import { createVuetify } from 'vuetify';
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
+import '@mdi/font/css/materialdesignicons.css';
+import * as Cesium from 'cesium';
 
-import router from './router/index.js'
+import router from './router/index.js';
 
-import lMap from '@/components/map.vue'
-import { menu } from './router/menu.js'
-import dynamic from './router/dynamic.js'
-dynamic(menu)
+import lMap from '@/components/myMap.vue';
+import { menu } from './router/menu.js';
+import dynamic from './router/dynamic.js';
+dynamic(menu);
 
-window.Cesium = Cesium
+window.Cesium = Cesium;
 
 const vuetify = createVuetify({
-  components,
-  directives,
-  defaults: {},
-  icons: {
-    defaultSet: 'mdi'
-  }
-})
-const app = createApp(App)
+	components,
+	directives,
+	defaults: {},
+	icons: {
+		defaultSet: 'mdi',
+	},
+});
+const app = createApp(App);
 
-app.component('lMap', lMap)
+app.component('lMap', lMap);
 
-app.use(router)
-app.use(vuetify)
-app.mount('#app')
+app.use(router);
+app.use(vuetify);
+app.mount('#app');
