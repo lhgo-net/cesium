@@ -2,7 +2,7 @@
   "name": "cesium",
   "private": true,
   "version": "0.0.0",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -27,22 +27,22 @@
     "moment": "^2.29.4",
     "pinia": "^2.1.7",
     "three": "^0.160.0",
-    "vue": "3.2.47",
+    "vue": "3.3",
     "vue-router": "^4.2.4",
-    "vuetify": "^3.3.3"
+    "vuetify": "^3.4.8"
   },
   "devDependencies": {
     "@babel/core": "^7.23.6",
     "@babel/eslint-parser": "^7.23.3",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "@typescript-eslint/parser": "^6.15.0",
     "@vitejs/plugin-vue": "^4.1.0",
+    "@vue/eslint-config-standard": "^8.0.1",
     "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-prettier": "^5.1.1",
     "eslint-plugin-vue": "^9.19.2",
     "prettier": "^3.1.1",
-    "typescript": "^5.3.3",
     "vite": "4.3.9",
     "vite-plugin-eslint": "^1.8.1"
   }
