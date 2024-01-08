@@ -24,17 +24,17 @@ const obj = {
       heading: viewer.scene.camera.heading,
       pitch: viewer.scene.camera.pitch,
       roll: viewer.scene.camera.roll,
-      ...toWG84(viewer.scene.camera.position, viewer)
+      ...toWG84(viewer.scene.camera.position, viewer),
     }
     alert(JSON.stringify(camera))
-  }
+  },
 }
 // console.log(viewer.scene.camera.heading)
 // console.log(viewer.scene.camera.pitch)
 // console.log(viewer.scene.camera.roll)
 // console.log(viewer.scene.camera.position)
 
-cameraFolder.add(obj, 'camera').onChange(e => e)
+cameraFolder.add(obj, 'camera').onChange((e) => e)
 cameraFolder.open()
 
 function ready(viewers) {
@@ -51,7 +51,7 @@ function ready(viewers) {
     pointPrimitives.add({
       // eslint-disable-next-line new-cap
       position: new Cesium.Cartesian3.fromDegrees(...element),
-      color: Cesium.Color.YELLOW
+      color: Cesium.Color.YELLOW,
     })
     billboards.add({
       // eslint-disable-next-line new-cap
@@ -59,7 +59,7 @@ function ready(viewers) {
       id: i + 'test',
       code: i,
       image: test,
-      scale: 0.2
+      scale: 0.2,
     })
   }
   const handle = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)

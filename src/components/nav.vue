@@ -1,7 +1,7 @@
 <template>
   <div class="horizontal-scrollbar-container nav-container">
     <div ref="scroll" class="scroll-wrapper">
-      <div class="scroll-content" style="color:white">
+      <div class="scroll-content" style="color: white">
         <slot></slot>
         <!-- <div class="scroll-item" v-for="index in 100" :key="index">{{index}}</div> -->
       </div>
@@ -30,8 +30,8 @@ function initScroll() {
       fade: false,
       interactive: true,
       scrollbarTrackClickable: true,
-      scrollbarTrackOffsetType: 'clickedPoint' // can use 'step'
-    }
+      scrollbarTrackOffsetType: 'clickedPoint', // can use 'step'
+    },
   })
 }
 </script>
@@ -76,7 +76,8 @@ function initScroll() {
   }
 }
 </style>
-// <style lang="less" rel="stylesheet/stylus" scoped>
+//
+<style lang="less" rel="stylesheet/stylus" scoped>
 // .horizontal-scrollbar-container .scroll-wrapper {
 //   position: relative;
 //   display: flex;

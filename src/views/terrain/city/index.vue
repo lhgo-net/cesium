@@ -8,7 +8,6 @@
       Edge styling enabled
     </div> -->
   </l-map>
-
 </template>
 
 <script setup>
@@ -23,7 +22,7 @@ function ready(viewers) {
   viewer = viewers
   viewer.terrainProvider = Cesium.createWorldTerrain({
     requestWaterMask: true, // 请求水体效果所需要的海岸线数据
-    requestVertexNormals: true // 请求地形照明数据
+    requestVertexNormals: true, // 请求地形照明数据
   })
   // let tileset
 
@@ -93,7 +92,7 @@ async function loadGrandCanyon() {
     unionClippingRegions: true,
     edgeWidth: edgeStylingEnabled ? 1.0 : 0.0,
     edgeColor: Cesium.Color.WHITE,
-    enabled: clippingPlanesEnabled
+    enabled: clippingPlanesEnabled,
   })
   globe.backFaceCulling = false
   globe.showSkirts = false

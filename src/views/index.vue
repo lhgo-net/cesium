@@ -27,9 +27,7 @@
     </v-navigation-drawer>
     <v-system-bar height="50">
       <v-avatar color="info">LH</v-avatar>
-      <v-chip v-for="tag in version"
-        :key="tag"
-      >{{ tag }}</v-chip>
+      <v-chip v-for="tag in version" :key="tag">{{ tag }}</v-chip>
       <v-spacer></v-spacer>
     </v-system-bar>
     <v-main>
@@ -50,8 +48,7 @@ const router = useRouter()
 // const route = useRoute()
 const navList = reactive([...library])
 
-onMounted(async () => {
-})
+onMounted(async () => {})
 
 function onClick(item) {
   const obj = toRaw(item.id)
@@ -61,7 +58,7 @@ function onClick(item) {
 
 <style scoped lang="less">
 .app-container {
- position: relative;
+  position: relative;
 }
 
 .chart-container {
@@ -69,18 +66,18 @@ function onClick(item) {
 }
 
 ul {
-margin: 0;
-padding: 0;
-display: flex;
-text-align: center;
-align-items: center;
-justify-content: center;
-cursor: pointer;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 
-li {
-list-style: none;
-padding: 5px;
-}
+  li {
+    list-style: none;
+    padding: 5px;
+  }
 }
 
 /* .right-container,.left-container{

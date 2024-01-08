@@ -10,21 +10,19 @@ import { provider } from '@/utils/ceisum.map'
 async function ready(viewer) {
   const imageLayer = provider(viewer, {
     name: '矢量底图',
-    key: 'vec_w'
+    key: 'vec_w',
   })
   const imageLayer1 = provider(viewer, {
     name: '矢量标记',
-    key: 'cva_w'
+    key: 'cva_w',
   })
   imageLayer.hue = 3
   imageLayer.contrast = -1.2
   imageLayer1.hue = 3
   imageLayer1.contrast = -1.2
 
-  const tilesets = viewer.scene.primitives.add(
-    await Cesium.Cesium3DTileset.fromIonAssetId(2315873)
-  )
-  tilesets.readyPromise.then(function(tileset) {
+  const tilesets = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2315873))
+  tilesets.readyPromise.then(function (tileset) {
     viewer.flyTo(tileset)
   })
   const customShader = new Cesium.CustomShader({
@@ -33,22 +31,22 @@ async function ready(viewer) {
     // 设置变量，由顶点着色器传递给片元着色器
     varyings: {
       v_normalMC: Cesium.VaryingType.VEC3,
-      v_st: Cesium.VaryingType.VEC3
+      v_st: Cesium.VaryingType.VEC3,
     },
     // 外部传给顶点着色器或者片元着色器
     uniforms: {
       u_texture: {
         value: new Cesium.TextureUniform({
-          url: '/img/buildbuild.png'
+          url: '/img/buildbuild.png',
         }),
-        type: Cesium.UniformType.SAMPLER_2D
+        type: Cesium.UniformType.SAMPLER_2D,
       },
       u_texture1: {
         value: new Cesium.TextureUniform({
-          url: '/img/333.png'
+          url: '/img/333.png',
         }),
-        type: Cesium.UniformType.SAMPLER_2D
-      }
+        type: Cesium.UniformType.SAMPLER_2D,
+      },
     },
     // 贴纹理
     // 顶点着色器
@@ -113,15 +111,11 @@ async function ready(viewer) {
                 material.diffuse = rgb;
               }
           }
-          `
+          `,
   })
   tilesets.customShader = customShader
 }
-onMounted(() => {
-})
-
+onMounted(() => {})
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

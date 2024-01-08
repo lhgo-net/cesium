@@ -1,7 +1,7 @@
 'use strict'
 
 Cesium.LineFolw = {
-  aa: 11
+  aa: 11,
 }
 
 console.log(Cesium)

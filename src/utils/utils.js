@@ -13,7 +13,7 @@ export function getColorRamp(startColor, endColor) {
 }
 // 数组拍平
 export function flat(arr) {
-  return [].concat(...arr.map(x => (Array.isArray(x) ? flat(x) : x)))
+  return [].concat(...arr.map((x) => (Array.isArray(x) ? flat(x) : x)))
 }
 
 export function toWG84(point, viewer) {
@@ -28,6 +28,6 @@ export function toWG84(point, viewer) {
   return {
     lat,
     lng,
-    height
+    height,
   }
 }

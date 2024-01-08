@@ -10,5 +10,4 @@ onMounted(() => {
   const a = new Three()
   console.log(a)
 })
-
 </script>

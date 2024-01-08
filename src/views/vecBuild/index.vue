@@ -1,46 +1,44 @@
 <template>
-  <div>
-
-  </div>
+  <div></div>
 </template>
 
 <script setup>
 import { nextTick, onMounted } from 'vue'
 
 async function initBuild() {
-  const tilesets = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
-    url: 'http://172.16.8.133:18098/Tileset/yx/tileset.json',
-    // url: '/sysu_noise/sysu_noise_3dtiles/tileset.json',
-    show: true,
-    skipLevelOfDetail: true,
-    baseScreenSpaceError: 1024,
-    skipScreenSpaceErrorFactor: 16,
-    skipLevels: 1,
-    immediatelyLoadDesiredLevelOfDetail: false,
-    loadSiblings: false,
-    cullWithChildrenBounds: true
-  }))
-  tilesets.readyPromise.then(function(tileset) {
+  const tilesets = viewer.scene.primitives.add(
+    new Cesium.Cesium3DTileset({
+      url: 'http://172.16.8.133:18098/Tileset/yx/tileset.json',
+      // url: '/sysu_noise/sysu_noise_3dtiles/tileset.json',
+      show: true,
+      skipLevelOfDetail: true,
+      baseScreenSpaceError: 1024,
+      skipScreenSpaceErrorFactor: 16,
+      skipLevels: 1,
+      immediatelyLoadDesiredLevelOfDetail: false,
+      loadSiblings: false,
+      cullWithChildrenBounds: true,
+    })
+  )
+  tilesets.readyPromise.then(function (tileset) {
     tileset.style = new Cesium.Cesium3DTileStyle({
       defines: {
         // eslint-disable-next-line no-template-curly-in-string
-        material: '${feature["building:Height"]}'
+        material: '${feature["building:Height"]}',
       },
       color: {
         // eslint-disable-next-line no-template-curly-in-string
         conditions: [
           // eslint-disable-next-line no-undef, no-template-curly-in-string
           // ['true', 'rgb(33, 150, 243)']
-
           // // eslint-disable-next-line no-template-curly-in-string
           // ['${Height} >= 30', 'rgba(45, 0, 75, 0.5)'],
           // eslint-disable-next-line no-template-curly-in-string
           // ['${Height} == 33', 'rgb(102, 71, 151)'],
           // // eslint-disable-next-line no-template-curly-in-string
           // ['${Height} >= 10', 'rgb(170, 162, 204)']
-        ]
-
-      }
+        ],
+      },
     })
     viewer.flyTo(tileset)
   })
@@ -71,22 +69,22 @@ async function initBuild() {
     // 设置变量，由顶点着色器传递给片元着色器
     varyings: {
       v_normalMC: Cesium.VaryingType.VEC3,
-      v_st: Cesium.VaryingType.VEC3
+      v_st: Cesium.VaryingType.VEC3,
     },
     // 外部传给顶点着色器或者片元着色器
     uniforms: {
       u_texture: {
         value: new Cesium.TextureUniform({
-          url: '/img/Building.png'
+          url: '/img/Building.png',
         }),
-        type: Cesium.UniformType.SAMPLER_2D
+        type: Cesium.UniformType.SAMPLER_2D,
       },
       u_texture1: {
         value: new Cesium.TextureUniform({
-          url: '/img/333.png'
+          url: '/img/333.png',
         }),
-        type: Cesium.UniformType.SAMPLER_2D
-      }
+        type: Cesium.UniformType.SAMPLER_2D,
+      },
     },
     // 贴纹理
     // 顶点着色器
@@ -151,9 +149,9 @@ async function initBuild() {
                 material.diffuse = rgb;
               }
           }
-          `
+          `,
   })
-  tilesets.tileLoad.addEventListener(function(title) {
+  tilesets.tileLoad.addEventListener(function (title) {
     const content = title.content
     console.log(content)
     const featuresLength = content.featuresLength
@@ -188,29 +186,26 @@ async function initBuild() {
 
   //     gl_FragColor = vec4(cr, cg, cb, 1.0);
 
-// void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) {
-//         float _baseHeight = 0.0; // 物体的基础高度，需要修改成一个合适的建筑基础高度
-//         float _heightRange = 30.0; // 高亮的范围(_baseHeight ~ _baseHeight + _      heightRange) 默认是 0-60米
-//         float _glowRange = 60.0; // 光环的移动范围(高度)
-//         float vtxf_height = fsInput.attributes.positionMC.y-_baseHeight;
-//         float vtxf_a11 = fract(czm_frameNumber / 120.0) * 3.14159265 * 2.0;
-//         float vtxf_a12 = vtxf_height / _heightRange + sin(vtxf_a11) * 0.1;
-//         material.diffuse*= vec3(vtxf_a12, vtxf_a12, vtxf_a12);
-//         float vtxf_a13 = fract(czm_frameNumber / 360.0);
-//         float vtxf_h = clamp(vtxf_height / _glowRange, 0.5, 1.0);
-//         vtxf_a13 = abs(vtxf_a13 - 0.5) * 2.0;
-//         float vtxf_diff = step(0.005, abs(vtxf_h - vtxf_a13));
-//         material.diffuse += material.diffuse * (1.0 - vtxf_diff);
-//         }
+  // void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) {
+  //         float _baseHeight = 0.0; // 物体的基础高度，需要修改成一个合适的建筑基础高度
+  //         float _heightRange = 30.0; // 高亮的范围(_baseHeight ~ _baseHeight + _      heightRange) 默认是 0-60米
+  //         float _glowRange = 60.0; // 光环的移动范围(高度)
+  //         float vtxf_height = fsInput.attributes.positionMC.y-_baseHeight;
+  //         float vtxf_a11 = fract(czm_frameNumber / 120.0) * 3.14159265 * 2.0;
+  //         float vtxf_a12 = vtxf_height / _heightRange + sin(vtxf_a11) * 0.1;
+  //         material.diffuse*= vec3(vtxf_a12, vtxf_a12, vtxf_a12);
+  //         float vtxf_a13 = fract(czm_frameNumber / 360.0);
+  //         float vtxf_h = clamp(vtxf_height / _glowRange, 0.5, 1.0);
+  //         vtxf_a13 = abs(vtxf_a13 - 0.5) * 2.0;
+  //         float vtxf_diff = step(0.005, abs(vtxf_h - vtxf_a13));
+  //         material.diffuse += material.diffuse * (1.0 - vtxf_diff);
+  //         }
 }
 onMounted(() => {
   nextTick(() => {
     initBuild()
   })
 })
-
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

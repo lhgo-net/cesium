@@ -8,9 +8,9 @@ export function mockGuizhouPoint() {
         {
           'lat|106.125092-107.279166': 0,
           'lon|26.183396-27.357802': 0,
-          'value|0-300': 0
-        }
-      ]
+          'value|0-300': 0,
+        },
+      ],
     })
     resolve(data)
   })
@@ -18,7 +18,7 @@ export function mockGuizhouPoint() {
 
 export async function clustering() {
   const dataSource = new Cesium.CustomDataSource('myData')
-  mockGuizhouPoint().then(res => {
+  mockGuizhouPoint().then((res) => {
     console.log(res)
     for (let i = 0; i < res.data.length; i++) {
       const item = res.data[i]
@@ -29,7 +29,7 @@ export async function clustering() {
           pixelSize: 10,
           depthTestAgainstTerrain: true,
           heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-          color: Cesium.Color.RED
+          color: Cesium.Color.RED,
         },
         label: {
           text: item.value.toString(),
@@ -37,17 +37,16 @@ export async function clustering() {
           // 竖直对齐方式
           verticalOrigin: Cesium.VerticalOrigin.CENTER,
           // 水平对齐方式
-          horizontalOrigin: Cesium.HorizontalOrigin.LEFT
+          horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
           // 偏移量
           // pixelOffset: new Cesium.Cartesian2(15, 0),
-        }
+        },
       })
     }
     dataSource.clustering.enabled = true
     dataSource.clustering.pixelRange = 60
     dataSource.clustering.minimumClusterSize = 2
-    dataSource.entities.values.forEach(entity => {
-    })
+    dataSource.entities.values.forEach((entity) => {})
     dataSource.clustering.clusterEvent.addEventListener(function (clusteredEntities, cluster) {
       // 关闭自带的显示聚合数量的标签
       cluster.label.show = false
@@ -85,7 +84,7 @@ export function combineIconAndLabel(url, label, size) {
   canvas.height = size * 4
   const ctx = canvas.getContext('2d')
 
-  const promise = new Cesium.Resource.FetchImage(url).then(image => {
+  const promise = new Cesium.Resource.FetchImage(url).then((image) => {
     // 异常判断
     try {
       ctx.drawImage(image, 0, 0)
