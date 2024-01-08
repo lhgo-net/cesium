@@ -12,7 +12,11 @@ import * as Cesium from 'cesium'
 import router from './router/index.js'
 // import { dynamic } from './router/router.js'
 // import { useMenuStore } from './store/menu.js'
+<<<<<<< HEAD
 import lMap from '@/components/map.vue'
+=======
+import lMap from '@/components/myMap.vue'
+>>>>>>> dev
 
 window.Cesium = Cesium
 
@@ -21,8 +25,8 @@ const vuetify = createVuetify({
   directives,
   defaults: {},
   icons: {
-    defaultSet: 'mdi'
-  }
+    defaultSet: 'mdi',
+  },
 })
 const pinia = createPinia()
 const app = createApp(App)

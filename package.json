@@ -9,8 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@babel/core": "^7.22.10",
-    "@babel/eslint-parser": "^7.22.10",
     "@better-scroll/scroll-bar": "^2.5.1",
     "@dataview/datav-vue3": "^0.0.0-test.1672506674342",
     "@mdi/font": "^7.2.96",
@@ -21,26 +19,40 @@
     "copy-webpack-plugin": "^11.0.0",
     "dat.gui": "^0.7.9",
     "echarts": "^5.4.3",
-    "eslint": "^8.51.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
+    "heatmap.js": "^2.0.5",
     "kriging": "^0.1.12",
     "less": "^4.1.3",
     "less-loader": "^11.1.3",
     "mockjs": "^1.1.0",
     "moment": "^2.29.4",
+<<<<<<< HEAD
     "noisejs": "^2.1.0",
     "pinia": "2.0.14",
     "prettier": "^3.0.2",
     "vite-plugin-eslint": "^1.8.1",
     "vue": "3.2.47",
+=======
+    "pinia": "^2.1.7",
+    "three": "^0.160.0",
+    "vue": "3.3",
+>>>>>>> dev
     "vue-router": "^4.2.4",
-    "vuetify": "^3.3.3"
+    "vuetify": "^3.4.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/eslint-parser": "^7.23.3",
     "@vitejs/plugin-vue": "^4.1.0",
     "@vue/eslint-config-standard": "^8.0.1",
-    "eslint-plugin-vue": "^9.17.0",
-    "vite": "4.3.9"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^5.1.1",
+    "eslint-plugin-vue": "^9.19.2",
+    "prettier": "^3.1.1",
+    "vite": "4.3.9",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }

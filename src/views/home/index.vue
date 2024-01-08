@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { reactive, toRaw } from 'vue'
+import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { menus } from '../../router/menu'
 const data = reactive(menus)
@@ -27,10 +27,16 @@ const data = reactive(menus)
 const router = useRouter()
 
 function toRoute(item) {
+<<<<<<< HEAD
   const obj = toRaw(item)
   router.push(obj.path)
   // const href = router.resolve({ ...obj })
   // console.log(href)
+=======
+  router.push(item.path)
+  // const obj = toRaw(item)
+  // const href = router.resolve({ ...obj })
+>>>>>>> dev
   // window.open(href.href, '_blank')
 }
 </script>

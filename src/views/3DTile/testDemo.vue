@@ -11,11 +11,11 @@ import { provider } from '@/utils/ceisum.map'
 async function ready(viewer) {
   const imageLayer = provider(viewer, {
     name: '矢量底图',
-    key: 'vec_w'
+    key: 'vec_w',
   })
   const imageLayer1 = provider(viewer, {
     name: '矢量标记',
-    key: 'cva_w'
+    key: 'cva_w',
   })
   imageLayer.hue = 3
   imageLayer.contrast = -1.2
@@ -73,7 +73,7 @@ function makeGradientTexture() {
 
       const Y = 0.257 * r + 0.504 * g + 0.098 * b + 16
       const V = 0.439 * r - 0.368 * g - 0.071 * b + 128
-      const U = -(0.148 * r) - (0.291 * g) + (0.439 * b) + 128
+      const U = -(0.148 * r) - 0.291 * g + 0.439 * b + 128
       typedArray[index + 0] = Y
       typedArray[index + 1] = U
       typedArray[index + 2] = V
@@ -89,15 +89,11 @@ function makeGradientTexture() {
     typedArray,
     width,
     height,
-    pixelFormat: Cesium.PixelFormat.RGB
+    pixelFormat: Cesium.PixelFormat.RGB,
   })
 }
 
-onMounted(() => {
-})
-
+onMounted(() => {})
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

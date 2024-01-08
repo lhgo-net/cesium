@@ -38,7 +38,7 @@ function ready(viewer) {
     [107.257584, 26.793108],
     [107.259303, 26.795727],
     [107.26257, 26.797523],
-    [107.26609, 26.803241]
+    [107.26609, 26.803241],
   ]
 
   dataSource.entities.add({
@@ -46,8 +46,8 @@ function ready(viewer) {
     polyline: {
       positions: Cesium.Cartesian3.fromDegreesArray(lujing.flat()),
       material: Cesium.Color.RED,
-      width: 2
-    }
+      width: 2,
+    },
   })
   const property = new Cesium.SampledPositionProperty()
   const startTime = new Date()
@@ -62,26 +62,28 @@ function ready(viewer) {
   })
   property.setInterpolationOptions({
     interpolationDegree: 0.00001,
-    interpolationAlgorithm: Cesium.LagrangepolynomialApproxmation
+    interpolationAlgorithm: Cesium.LagrangepolynomialApproxmation,
   })
   viewer.entities.add({
-    availability: new Cesium.TimeIntervalCollection([new Cesium.TimeInterval({
-      start: Cesium.JulianDate.fromDate(startTime),
-      stop: Cesium.JulianDate.fromDate(new Date(stopTime))
-    })]),
+    availability: new Cesium.TimeIntervalCollection([
+      new Cesium.TimeInterval({
+        start: Cesium.JulianDate.fromDate(startTime),
+        stop: Cesium.JulianDate.fromDate(new Date(stopTime)),
+      }),
+    ]),
     position: property,
     path: {
       leadTime: 0,
       resolution: 1,
       material: new Cesium.PolylineGlowMaterialProperty({
         glowPower: 0.1,
-        color: Cesium.Color.GREEN
+        color: Cesium.Color.GREEN,
       }),
-      width: 10
+      width: 10,
     },
     billboard: {
-      image: '/img/222.png'
-    }
+      image: '/img/222.png',
+    },
   })
   viewer.clock.currentTime = Cesium.JulianDate.fromDate(startTime)
   viewer.clock.stopTime = Cesium.JulianDate.fromDate(new Date(stopTime))
@@ -91,7 +93,5 @@ function ready(viewer) {
   viewer.zoomTo(dataSource)
 }
 
-onMounted(async () => {
-})
-
+onMounted(async () => {})
 </script>

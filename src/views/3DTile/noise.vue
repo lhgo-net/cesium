@@ -7,10 +7,8 @@
 <script setup>
 async function ready(viewer) {
   console.log(viewer)
-  const tilesets = viewer.scene.primitives.add(
-    await Cesium.Cesium3DTileset.fromIonAssetId(2315873)
-  )
-  tilesets.readyPromise.then(function(tileset) {
+  const tilesets = viewer.scene.primitives.add(await Cesium.Cesium3DTileset.fromIonAssetId(2315873))
+  tilesets.readyPromise.then(function (tileset) {
     // tileset.style = new Cesium.Cesium3DTileStyle({
     //   color: {
     //     conditions: [['true', 'color(\'rgb(51, 153, 255)\',1)']]

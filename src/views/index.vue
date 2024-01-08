@@ -1,12 +1,5 @@
 <template>
   <div class="app-container">
-    <v-system-bar height="50">
-      <v-avatar color="info">LH</v-avatar>
-      <v-chip v-for="tag in version"
-        :key="tag"
-      >{{ tag }}</v-chip>
-      <v-spacer></v-spacer>
-    </v-system-bar>
     <v-navigation-drawer>
       <div class="d-flex px-2 my-2">
         <v-list-item title="三维GIS" subtitle="LH"></v-list-item>
@@ -32,6 +25,11 @@
         </div>
       </v-list> -->
     </v-navigation-drawer>
+    <v-system-bar height="50">
+      <v-avatar color="info">LH</v-avatar>
+      <v-chip v-for="tag in version" :key="tag">{{ tag }}</v-chip>
+      <v-spacer></v-spacer>
+    </v-system-bar>
     <v-main>
       <v-container>
         <router-view></router-view>
@@ -52,9 +50,13 @@ const router = useRouter()
 // const store = useMenuStore()
 const navList = reactive([...library])
 
+<<<<<<< HEAD
 onMounted(async () => {
   // console.log(toRaw(store))
 })
+=======
+onMounted(async () => {})
+>>>>>>> dev
 
 function onClick(item) {
   const obj = toRaw(item.id)
@@ -64,7 +66,7 @@ function onClick(item) {
 
 <style scoped lang="less">
 .app-container {
- position: relative;
+  position: relative;
 }
 
 .chart-container {
@@ -72,18 +74,18 @@ function onClick(item) {
 }
 
 ul {
-margin: 0;
-padding: 0;
-display: flex;
-text-align: center;
-align-items: center;
-justify-content: center;
-cursor: pointer;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 
-li {
-list-style: none;
-padding: 5px;
-}
+  li {
+    list-style: none;
+    padding: 5px;
+  }
 }
 
 /* .right-container,.left-container{

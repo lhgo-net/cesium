@@ -38,7 +38,7 @@ export function dynamic(menu) {
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', redirect: 'index' },
+    { path: '', redirect: 'index' },
     { path: '/:catchAll(.*)', redirect: '/404' },
     {
       path: '/404',
@@ -46,8 +46,12 @@ const router = createRouter({
       component: () => import('@/views/404/404.vue'),
       meta: {
         title: '404',
+<<<<<<< HEAD
         requireAuth: true
       }
+=======
+      },
+>>>>>>> dev
     },
     {
       path: '/',
@@ -59,12 +63,20 @@ const router = createRouter({
           component: () => import('@/views/home/index.vue'),
           meta: {
             title: '案列',
+<<<<<<< HEAD
             requireAuth: true
           }
         }
       ]
     }
   ]
+=======
+          },
+        },
+      ],
+    },
+  ],
+>>>>>>> dev
 })
 let registerRouteFresh = true
 router.beforeEach(async (to, from, next) => {

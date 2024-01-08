@@ -45,9 +45,9 @@ function lineFlowInit(viewer, _center, _num) {
           color: new myCesium.Color(1.0, 1.0, 0.0, 1.0),
           speed: 10 * Math.random(),
           percent: 0.2,
-          gradient: 0.05
-        })
-      }
+          gradient: 0.05,
+        }),
+      },
     })
     dataSource.entities.add(entity)
   })
@@ -58,11 +58,11 @@ function lineFlowInit(viewer, _center, _num) {
 async function ready(viewer) {
   const imageLayer = provider(viewer, {
     name: '矢量底图',
-    key: 'vec_w'
+    key: 'vec_w',
   })
   const imageLayer1 = provider(viewer, {
     name: '矢量标记',
-    key: 'cva_w'
+    key: 'cva_w',
   })
   imageLayer.hue = 3
   imageLayer.contrast = -1.2

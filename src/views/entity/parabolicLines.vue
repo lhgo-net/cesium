@@ -805,19 +805,19 @@ function parabola(viewer) {
     [107.04934, 26.772205],
     [107.051071, 26.773403],
     [107.051555, 26.777467],
-    [107.053287, 26.778993]
+    [107.053287, 26.778993],
   ]
   parabolaFlowInit(viewer, [106.713478, 26.578343], position, 3)
 }
 
 /**
-* @description: 抛物飞线效果初始化
-* @param {*} viewer
-* @param {*} _num :每条线上的飞线数量
-* @return {*}
-*/
+ * @description: 抛物飞线效果初始化
+ * @param {*} viewer
+ * @param {*} _num :每条线上的飞线数量
+ * @return {*}
+ */
 function parabolaFlowInit(viewer, _center, _positions, _num) {
-  _positions.forEach(item => {
+  _positions.forEach((item) => {
     const _siglePositions = parabola(_center, item, 5000)
     // 创建飞线
     for (let i = 0; i < _num; i++) {
@@ -828,9 +828,9 @@ function parabolaFlowInit(viewer, _center, _positions, _num) {
             color: new Cesium.Color(1.0, 1.0, 0.0, 0.8),
             speed: 15 * Math.random(),
             percent: 0.1,
-            gradient: 0.01
-          })
-        }
+            gradient: 0.01,
+          }),
+        },
       })
 
       dataSource.entities.add(entity1)
@@ -838,8 +838,8 @@ function parabolaFlowInit(viewer, _center, _positions, _num) {
     const entity2 = new Cesium.Entity({
       polyline: {
         positions: _siglePositions,
-        material: new Cesium.Color(1.0, 1.0, 0.0, 0.2)
-      }
+        material: new Cesium.Color(1.0, 1.0, 0.0, 0.2),
+      },
     })
     dataSource.entities.add(entity2)
   })
@@ -847,10 +847,10 @@ function parabolaFlowInit(viewer, _center, _positions, _num) {
   viewer.flyTo(dataSource)
 
   /**
-    * @description: 抛物线构造函数（参考开源代码）
-    * @param {*}
-    * @return {*}
-    */
+   * @description: 抛物线构造函数（参考开源代码）
+   * @param {*}
+   * @return {*}
+   */
   function parabola(startPosition, endPosition, height = 0, count = 50) {
     // 方程 y=-(4h/L^2)*x^2+h h:顶点高度 L：横纵间距较大者
     const result = []
@@ -867,10 +867,7 @@ function parabolaFlowInit(viewer, _center, _positions, _num) {
         dlt = -dlt
       }
       for (let i = 0; i < count; i++) {
-        const h =
-          height -
-          (Math.pow(-0.5 * L + Math.abs(dlt) * i, 2) * 4 * height) /
-          Math.pow(L, 2)
+        const h = height - (Math.pow(-0.5 * L + Math.abs(dlt) * i, 2) * 4 * height) / Math.pow(L, 2)
         const lon = startPosition[0] + dlt * i
         const lat = startPosition[1] + delLat * i
         // eslint-disable-next-line new-cap
@@ -884,10 +881,7 @@ function parabolaFlowInit(viewer, _center, _positions, _num) {
         dlt = -dlt
       }
       for (let i = 0; i < count; i++) {
-        const h =
-          height -
-          (Math.pow(-0.5 * L + Math.abs(dlt) * i, 2) * 4 * height) /
-          Math.pow(L, 2)
+        const h = height - (Math.pow(-0.5 * L + Math.abs(dlt) * i, 2) * 4 * height) / Math.pow(L, 2)
         const lon = startPosition[0] + delLon * i
         const lat = startPosition[1] + dlt * i
         // eslint-disable-next-line new-cap
@@ -902,11 +896,11 @@ function parabolaFlowInit(viewer, _center, _positions, _num) {
 async function ready(viewer) {
   const imageLayer = provider(viewer, {
     name: '矢量底图',
-    key: 'vec_w'
+    key: 'vec_w',
   })
   const imageLayer1 = provider(viewer, {
     name: '矢量标记',
-    key: 'cva_w'
+    key: 'cva_w',
   })
   imageLayer.hue = 3
   imageLayer.contrast = -1.2
