@@ -1,0 +1,19 @@
+{
+  "name": "cesium-npm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "lhcesium": "workspace:^"
+  },
+  "engines": {
+    "node": ">=v18.18.0",
+    "pnpm": "9.6.0"
+  },
+  "keywords": ["cesium","lhgo"],
+  "author": "",
+  "license": "ISC"
+}
