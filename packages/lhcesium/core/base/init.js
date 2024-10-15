@@ -121,20 +121,20 @@ const init = (id, customConfig = {}, showGlobe = true) =>
   });
 
 class GlobeRotate {
-  constructor(viewer) {
-    this.viewer = viewer;
+  constructor() {
+    // viewer = viewer
   }
 
   // 根据国际天体参考系计算旋转矩阵
   _icrf() {
-    if (this.viewer.scene.mode !== Cesium.SceneMode.SCENE3D) {
+    if (viewer.scene.mode !== Cesium.SceneMode.SCENE3D) {
       return true;
     }
     let icrfToFixed = Cesium.Transforms.computeIcrfToFixedMatrix(
-      this.viewer.clock.currentTime
+      viewer.clock.currentTime
     );
     if (icrfToFixed) {
-      let camera = this.viewer.camera;
+      let camera = viewer.camera;
       let offset = Cesium.Cartesian3.clone(camera.position);
       let transform = Cesium.Matrix4.fromRotationTranslation(icrfToFixed);
       // 偏移相机，否则会场景旋转而地球不转
@@ -145,22 +145,22 @@ class GlobeRotate {
   // 绑定事件
   _bindEvent() {
     // 转动的速度设置
-    this.viewer.clock.multiplier = 15 * 1000;
+    viewer.clock.multiplier = 15 * 1000;
     // 初始化为单位矩阵
-    this.viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
-    this.viewer.scene.postUpdate.addEventListener(this._icrf, this);
+    viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+    viewer.scene.postUpdate.addEventListener(this._icrf, this);
   }
 
   // 解除绑定
   _unbindEvent() {
-    this.viewer.clock.multiplier = 1;
-    this.viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
-    this.viewer.scene.postUpdate.removeEventListener(this._icrf, this);
+    viewer.clock.multiplier = 1;
+    viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+    viewer.scene.postUpdate.removeEventListener(this._icrf, this);
   }
 
   // 开始旋转
   start() {
-    this.viewer.clock.shouldAnimate = true;
+    viewer.clock.shouldAnimate = true;
     this._unbindEvent();
     this._bindEvent();
     return this;
