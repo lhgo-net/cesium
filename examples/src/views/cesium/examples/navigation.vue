@@ -6,6 +6,8 @@
 import { onMounted } from "vue";
 import { Base } from "lhcesium";
 import CesiumNavigation from "cesium-navigation-es6";
+import "cesium-navigation-es6/dist/styles/cesium-navigation.css";
+
 const { init } = Base;
 onMounted(async () => {
   const v = await init("map", {
@@ -14,17 +16,19 @@ onMounted(async () => {
   });
   const options = {
     enableCompass: true,
-    enableZoomControls: false,
+    enableZoomControls: true,
     enableCompassOuterRing: true,
-    enableDistanceLegend: false,
+    enableDistanceLegend: true,
+    enableDistanceLegend: true,  
+    resetTooltip:'重置视图',
+    zoomInTooltip:'放大',
+    zoomOutTooltip:'缩小'
   };
-
-  //修改重置视图的tooltip
-  options.resetTooltip = "重置视图";
-  //修改放大按钮的tooltip
-  options.zoomInTooltip = "放大";
-  //修改缩小按钮的tooltip
-  options.zoomOutTooltip = "缩小";
-  CesiumNavigation(v.viewer, options);
+  new CesiumNavigation(v.viewer, options);
 });
 </script>
+
+<!-- <style scoped lang="scss">
+@import "@cesium-navigation-es6/dist/styles/cesium-navigation.css";
+
+</style> -->

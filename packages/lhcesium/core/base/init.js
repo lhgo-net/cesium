@@ -191,4 +191,4 @@ const wfsGet = (url, layerName, cql) => {
   });
 };
 
-export { ViewerConfig, init, TokenConfig, GlobeRotate,wfsGet };
+export { ViewerConfig, init, TokenConfig, GlobeRotate, wfsGet };
