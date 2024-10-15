@@ -20,7 +20,6 @@ const emits = defineEmits(['changeCity'])
 const handlerChange = (item) => {
   item = toRaw(item)
   item.districts = []
-  console.log(item)
   emits('changeCity', item)
 }
 

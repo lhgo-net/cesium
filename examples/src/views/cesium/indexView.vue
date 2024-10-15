@@ -1,74 +1,48 @@
 <template>
   <div>
+    <v-app-bar color="#46556c" flat>
+      <template v-slot:prepend>
+        <v-menu>
+          <template v-slot:activator="{ props }">
+            <v-app-bar-nav-icon v-bind="props"></v-app-bar-nav-icon>
+          </template>
+        </v-menu>
+      </template>
+      <v-app-bar-title>lhgo webGIS系统</v-app-bar-title>
+    </v-app-bar>
     <v-navigation-drawer color="#10172a" location="left" permanent>
-      <v-card color="transparent" flat>
-        <v-card-text>
-          <v-list>
-            <!-- <v-list-group>
-              <template v-slot:activator="{ props }">
-                <v-list-item
-                  v-bind="props"
-                  prepend-icon="mdi-account-circle"
-                  title="案列"
-                ></v-list-item>
-              </template>
-              <v-list-item
-                v-for="item in caseLibs"
-                :key="item.value"
-                :title="item.name"
-                :value="item.name"
-                @click="handlerToRoute(item)"
-              ></v-list-item>
-            </v-list-group> -->
-
-            <v-list-item
-              v-for="item in treeData"
-              :key="item.value"
-              :title="item.name"
-              :value="item.value"
-              @click="handlerChange(item)"
-            ></v-list-item>
-          </v-list>
-        </v-card-text>
-      </v-card>
+      <v-treeview
+        v-model="active"
+        :items="Tree"
+        item-value="path"
+        item-title="title"
+        @click:select="select"
+        return-object
+      ></v-treeview>
     </v-navigation-drawer>
     <v-main>
-      <component :is="componentChange"></component>
+      <router-view></router-view>
     </v-main>
   </div>
 </template>
-
-<script>
-import initEarth from '@/components/cesium/init-earth.vue'
-
-export default {
-  components: {
-    initEarth
-  }
-}
-</script>
-
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { menuItem, caselibs } from '@/config'
+import { useRouter } from "vue-router";
+import { Tree } from "@/config";
+import { ref } from "vue";
 
-const treeData = ref(menuItem)
-const caseLibs = ref(caselibs)
-const router = useRouter()
-
-let componentChange = ref('init-earth')
+const router = useRouter();
+const active = ref({})
 
 const handlerToRoute = (item) => {
+  console.log(item)
   const pathHerf = router.resolve({
     path: item.value,
-    query: {}
-  })
-  return window.open(pathHerf.href, '_blank')
-}
-function handlerChange(item) {
-  document.title = item.name
-  componentChange.value = item.value
+    query: {},
+  });
+  // return window.open(pathHerf.href, "_blank");
+};
+function select(item) {
+  router.push(item.id);
 }
 </script>
 
