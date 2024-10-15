@@ -49,6 +49,12 @@ export const Tree = [
         routerName: "cesium",
         component: () => import("../views/cesium/examples/them-black.vue"),
       },
+      {
+        title: "天空蓝",
+        path: "/examples/sky",
+        routerName: "cesium",
+        component: () => import("../views/cesium/examples/them-mapbox.vue"),
+      },
     ],
   },
   {
@@ -65,6 +71,12 @@ export const Tree = [
         path: "/examples/layer-gaode",
         routerName: "cesium",
         component: () => import("../views/cesium/examples/layer-gaode.vue"),
+      },
+      {
+        title: "mapbox",
+        path: "/examples/layer-mapbox",
+        routerName: "cesium",
+        component: () => import("../views/cesium/examples/layer-mapbox.vue"),
       },
       {
         title: "geoserver-自定义",
@@ -99,12 +111,12 @@ export const Tree = [
     routerName: "cesium",
     component: () => import("../views/cesium/examples/heat.vue"),
   },
-  {
-    title: "淹没分析",
-    path: "/examples/inundationAnalysis",
-    routerName: "cesium",
-    component: () => import("../views/cesium/examples/inundationAnalysis.vue"),
-  },
+  // {
+  //   title: "淹没分析",
+  //   path: "/examples/inundationAnalysis",
+  //   routerName: "cesium",
+  //   component: () => import("../views/cesium/examples/inundationAnalysis.vue"),
+  // },
   {
     title: "实体",
     children: [
@@ -225,6 +237,12 @@ export const Tree = [
         path: "/examples/weather-fog",
         routerName: "cesium",
         component: () => import("../views/cesium/examples/weather-fog.vue"),
+      },
+      {
+        title: "风场",
+        path: "/examples/wind",
+        routerName: "cesium",
+        component: () => import("../views/cesium/examples/wind.vue"),
       },
     ],
   },
