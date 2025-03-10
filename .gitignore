@@ -25,6 +25,9 @@ config
 *.sw?
 .env*
 
+# project
+lakeAreaCalculation
+
 # git
 .gitignore
 
