@@ -43,6 +43,7 @@ export class Camera {
    * @param {Number} lon - 旋转中心点的经度。
    * @param {Number} lat - 旋转中心点的纬度。
    * @param {Number} height - 相机距离旋转中心点的高度（米）。
+   * @param {Number} speed - 旋转速度（度/秒）。
    */
   rotate(viewer, lon, lat, height) {
     var position = Cesium.Cartesian3.fromDegrees(lon, lat, height);
