@@ -3,7 +3,7 @@ import { lineFlowMaterialProperty } from "./MaterialProperty/lineFlowMaterialPro
 import gy from '../../assets/json/贵州省.json'
 const myCesium = lineFlowMaterialProperty(Cesium);
 
-export class Line {
+export class Polyline {
   constructor() {
     this.dataSource = new Cesium.CustomDataSource("myEntity");
     this.dataSources = new Cesium.CustomDataSource("dataSources");
@@ -225,7 +225,7 @@ export class Line {
     viewer.zoomTo(viewer.entities);
   }
   trackPlayback(viewer) {
-    const dataSource = new Cesium.CustomDataSource("redCard");
+    // const dataSource = new Cesium.CustomDataSource("redCard");
     const lujing = [
       [113.3843422, 23.1539674],
       [113.387509, 23.1542347],
@@ -245,25 +245,16 @@ export class Line {
       [113.3933828, 23.1536232],
       [113.3937306, 23.153454],
       [113.3941956, 23.1531846],
-      [113.3945335, 23.1529656],
-      [113.3950321, 23.1525945],
-      [113.3952958, 23.1523647],
-      [113.3957323, 23.1519319],
-      [113.3960895, 23.1515215],
-      [113.3965296, 23.1509512],
-      [113.3970031, 23.1501069],
-      [113.397203, 23.1496492],
-      [113.3973647, 23.1491585],
     ];
 
-    dataSource.entities.add({
-      name: "line",
-      polyline: {
-        positions: Cesium.Cartesian3.fromDegreesArray(lujing.flat()),
-        material: Cesium.Color.RED.withAlpha(0.1),
-        width: 2,
-      },
-    });
+    // dataSource.entities.add({
+    //   name: "line",
+    //   polyline: {
+    //     positions: Cesium.Cartesian3.fromDegreesArray(lujing.flat()),
+    //     material: Cesium.Color.RED.withAlpha(0.1),
+    //     width: 2,
+    //   },
+    // });
     const property = new Cesium.SampledPositionProperty();
     const startTime = new Date();
     const timeSamp = startTime.getTime();
@@ -271,7 +262,6 @@ export class Line {
     lujing.forEach((item, index) => {
       const time = new Date(timeSamp + index * 5000);
       stopTime = time;
-      console.log(stopTime);
       const position = Cesium.Cartesian3.fromDegrees(item[0], item[1]);
       property.addSample(Cesium.JulianDate.fromDate(time), position);
     });
@@ -306,8 +296,8 @@ export class Line {
     viewer.clock.stopTime = Cesium.JulianDate.fromDate(new Date(stopTime));
     viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP;
     viewer.clock.shouldAnimate = true;
-    viewer.dataSources.add(dataSource);
-    viewer.zoomTo(dataSource);
+    // viewer.dataSources.add(dataSource);
+    viewer.zoomTo(viewer.entities);
   }
   go(){
     viewer.zoomTo(this.dataSources);

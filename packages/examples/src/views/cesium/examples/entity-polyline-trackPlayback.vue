@@ -5,12 +5,12 @@
 <script setup>
 import { onMounted } from 'vue'
 import { Base, Entity } from "@lh/cesium";
-const { init, modifyMap, ImageryLayerConfig, addImageryLayer } = Base;
-const { Line } = Entity;
+const { init } = Base;
+const { Polyline } = Entity;
 
 let viewer;
 
-const line = new Line()
+const line = new Polyline()
 onMounted(async () => {
   const v = await init("map");
   viewer = v.viewer;

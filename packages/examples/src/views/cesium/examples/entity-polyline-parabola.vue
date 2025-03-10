@@ -6,10 +6,10 @@
 import { onMounted } from "vue";
 import { Base,Entity } from "@lh/cesium";
 const { init } = Base;
-const { Line } = Entity;
+const { Polyline } = Entity;
 let viewer;
 
-const line = new Line();
+const line = new Polyline();
 onMounted(async () => {
   const v = await init("map");
   viewer = v.viewer;

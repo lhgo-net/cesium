@@ -12,7 +12,6 @@
         <v-card flat>
             <v-card-title>静态文件</v-card-title>
             <v-card-text>
-                <p>说明：数据来源互联网，可做技术研究。因服务器宽带限制（2M），数据加载有点慢</p>
                 <p>倾斜摄影：/GISFile/incline/xianggang_jiulong/tileset.json</p>
                 
             </v-card-text>
@@ -20,9 +19,8 @@
         <v-card flat>
             <v-card-title>联系</v-card-title>
             <v-card-text>
-                <p>说明：接受各种定制开发，免费售后技术问题解答</p>
-                <p>邮箱：huaker_hk@163.com</p>
-                <p>QQ：1589714512</p>
+                <p><v-icon icon="mdi-email"></v-icon>：huaker_hk@163.com</p>
+                <p><v-icon icon="mdi-github"></v-icon>：<a href="https://github.com/lhgo-net">https://github.com/lhgo-net</a></p>
             </v-card-text>
         </v-card>
     </div>

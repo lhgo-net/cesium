@@ -1,7 +1,7 @@
 import { FlowRoad } from "./flowRoad";
 import * as Dynamic from "./Dynamic";
 import * as cluster from "./cluster";
-import * as Line from "./line";
+import * as Polyline from "./polyline";
 import { Polygon } from "./polygon";
 
 import { getCircleGradient } from "../util/canvas/index";
@@ -80,5 +80,5 @@ export const Entity = {
   Polygon,
   ...Dynamic,
   ...cluster,
-  ...Line,
+  ...Polyline,
 };
