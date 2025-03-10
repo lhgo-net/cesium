@@ -2,10 +2,11 @@ import { FlowRoad } from "./flowRoad";
 import * as Dynamic from "./Dynamic";
 import * as cluster from "./cluster";
 import * as Line from "./line";
+import { Polygon } from "./polygon";
 
 import { getCircleGradient } from "../util/canvas/index";
 
-function polygonGradient(viewer,Feature) {
+function polygonGradient(viewer, Feature) {
   let entityIds = [];
   let initRadialGradient = getCircleGradient(
     50,
@@ -76,6 +77,7 @@ function polygonGradient(viewer,Feature) {
 export const Entity = {
   FlowRoad,
   polygonGradient,
+  Polygon,
   ...Dynamic,
   ...cluster,
   ...Line,

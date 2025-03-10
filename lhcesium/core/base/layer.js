@@ -15,11 +15,11 @@ const ImageryLayerConfig = {
       url:
         "http://{s}.tianditu.gov.cn/img_c/wmts?service=wmts&request=GetTile&version=1.0.0" +
         "&LAYER=img&tileMatrixSet=c&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}" +
-        "&style=default&format=tiles&tk=" +
+        "&style=default&format=text/xml&tk=" +
         TokenConfig.tianditu,
       layer: "tdtCva",
       style: "default",
-      format: "tiles",
+      format: "text/xml",
       tileMatrixSetID: "c",
       subdomains: ["t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7"],
       tilingScheme: new Cesium.GeographicTilingScheme(),

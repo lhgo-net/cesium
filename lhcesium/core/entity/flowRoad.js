@@ -17,8 +17,6 @@ export class FlowRoad {
       ...opt
     }
 
-    console.log(this.opt)
-
     this.dataSource
 
     this.state = 'init'

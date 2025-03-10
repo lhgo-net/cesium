@@ -51,7 +51,6 @@ export class Line {
       this.dataSources.entities.add(entity2);
     });
     viewer.dataSources.add(this.dataSources);
-    viewer.flyTo(this.dataSources);
 
     /**
      * @description: 抛物线构造函数（参考开源代码）
@@ -117,7 +116,6 @@ export class Line {
     return list;
   }
   lineFlowInit(viewer, _center, _num) {
-    console.log(this);
     const _positions = this.generateRandomPosition(_center, _num);
     _positions.forEach((item, index) => {
       // 经纬度
@@ -159,7 +157,6 @@ export class Line {
       this.dataSources.entities.add(entity);
     });
     viewer.dataSources.add(this.dataSources);
-    viewer.flyTo(this.dataSources);
   }
   mask(viewer) {
     viewer.scene.skyAtmosphere = undefined;
@@ -311,5 +308,9 @@ export class Line {
     viewer.clock.shouldAnimate = true;
     viewer.dataSources.add(dataSource);
     viewer.zoomTo(dataSource);
+  }
+  go(){
+    viewer.zoomTo(this.dataSources);
+
   }
 }

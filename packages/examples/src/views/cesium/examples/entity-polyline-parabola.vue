@@ -4,21 +4,20 @@
 
 <script setup>
 import { onMounted } from "vue";
-import { Base, Entity } from "@lh/cesium";
-const { init, modifyMap, ImageryLayerConfig, addImageryLayer } = Base;
-const { Line } = Entity;
+
+import json from "@/assets/json/geojson.json";
+
+import { Base,Entity } from "@lh/cesium";
+const { init } = Base;
+const { Line,Polygon } = Entity;
 let viewer;
 
 const line = new Line();
 onMounted(async () => {
   const v = await init("map");
   viewer = v.viewer;
-  addImageryLayer(
-    viewer,
-    ImageryLayerConfig.gaode_ver.type,
-    ImageryLayerConfig.gaode_ver.options
-  );
-  modifyMap(viewer);
+  const p = new Polygon(viewer)
+  p.gradient(json)
   line.parabola(
     viewer,
     [106.713478, 26.578343],
@@ -57,6 +56,7 @@ onMounted(async () => {
     ],
     new Cesium.Color(1.0, 1.0, 1.0, 0.8)
   );
+  line.go();
 });
 </script>
 

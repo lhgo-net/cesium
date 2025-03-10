@@ -22,6 +22,7 @@ onMounted(async () => {
   modifyMap(viewer);
 
   line.lineFlowInit(viewer, [106.713478, 26.578343], 1000);
+  line.go()
 });
 </script>
 

@@ -15,13 +15,6 @@ let viewer;
 onMounted(async () => {
   const v = await init("map");
   viewer = v.viewer;
-  var mapboxLayer = new Cesium.MapboxStyleImageryProvider({
-    username: "hklh",
-    styleId: "clpki9oma007x01px73gmc9l6",
-    accessToken:
-      "pk.eyJ1IjoiaGtsaCIsImEiOiJjbDMzdHR5bTcxcTc3M2ptaGxlODEzZnlhIn0.9ZagRtR3ZH3koVr_OUBUCA",
-  });
-  viewer.imageryLayers.addImageryProvider(mapboxLayer);
   const windy = new Windy(data, viewer);
   const timer = setInterval(function () {
     windy.animate();

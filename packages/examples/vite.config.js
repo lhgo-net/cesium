@@ -15,25 +15,30 @@ export default defineConfig({
     // https:true,
     cors: true,
     proxy: {
-      '/apiIP': {
-        target: 'https://www.ip.cn',
+      "/td": {
+        target: "https://t0.tianditu.gov.cn",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/apiIP/, ''),
+        rewrite: (path) => path.replace(/^\/td/, ""),
       },
-      '/weather': {
-        target: 'http://localhost:7000/weather',
+      "/apiIP": {
+        target: "https://www.ip.cn",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/weather/, ''),
+        rewrite: (path) => path.replace(/^\/apiIP/, ""),
       },
-      '/geoserver': {
-        target: 'http://8.134.217.110/geoserver',
+      "/weather": {
+        target: "http://localhost:7000/weather",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/geoserver/, ''),
+        rewrite: (path) => path.replace(/^\/weather/, ""),
       },
-      '/api': {
-        target: 'https://weather.cma.cn/api',
+      "/geoserver": {
+        target: "http://8.134.217.110/geoserver",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/geoserver/, ""),
+      },
+      "/api": {
+        target: "https://weather.cma.cn/api",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
