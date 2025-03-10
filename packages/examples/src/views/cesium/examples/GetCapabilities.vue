@@ -41,15 +41,15 @@ onMounted(async () => {
     "service=WFS&" +
     "version=1.1.0&" +
     "request=GetFeature&" +
-    "typename=HYDA&" +
+    "typename=LRDL&" +
     "outputFormat=application/json";
 
   fetch(wfsUrl)
     .then((response) => response.json())
     .then((geojsonData) => {
+      console.log(geojsonData)
       Cesium.GeoJsonDataSource.load(geojsonData).then((dataSource) => {
         viewer.dataSources.add(dataSource);
-        viewer.flyTo(dataSource);
       });
     })
     .catch((error) => console.error("WFS 加载失败:", error));

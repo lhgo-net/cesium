@@ -4,20 +4,15 @@
 
 <script setup>
 import { onMounted } from "vue";
-
-import json from "@/assets/json/geojson.json";
-
 import { Base,Entity } from "@lh/cesium";
 const { init } = Base;
-const { Line,Polygon } = Entity;
+const { Line } = Entity;
 let viewer;
 
 const line = new Line();
 onMounted(async () => {
   const v = await init("map");
   viewer = v.viewer;
-  const p = new Polygon(viewer)
-  p.gradient(json)
   line.parabola(
     viewer,
     [106.713478, 26.578343],
